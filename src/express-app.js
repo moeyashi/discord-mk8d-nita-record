@@ -11,8 +11,8 @@ const app = express();
 app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUBLIC_KEY || ''), (req, res) => {
   /** @type {import('discord-api-types/v10').APIInteraction} */
   const interaction = req.body;
-  console.log(`post /interactions interaction.type: ${interaction.type}, interaction.data: ${interaction.data}`);
   if (interaction.type === InteractionType.ApplicationCommand) {
+    console.log(`name: ${interaction.data?.name}, type: ${interaction.data?.type}`);
     const commandName = interaction.data.name;
     const command = commands.get(commandName);
     if (command) {
