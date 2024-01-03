@@ -8,7 +8,7 @@ const commands = await loadCommands();
 
 const app = express();
 
-app.post('/interactions', verifyKeyMiddleware(process.env.CLIENT_PUBLIC_KEY || ''), (req, res) => {
+app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUBLIC_KEY || ''), (req, res) => {
   /** @type {import('discord-api-types/v10').APIInteraction} */
   const interaction = req.body;
   if (interaction.type === InteractionType.ApplicationCommand) {
