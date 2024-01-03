@@ -8,7 +8,7 @@ const commands = await loadCommands();
 
 const app = express();
 
-app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUBLIC_KEY || ''), (req, res) => {
+app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUBLIC_KEY || ''), async (req, res) => {
   /** @type {import('discord-api-types/v10').APIInteraction} */
   const interaction = req.body;
   if (interaction.type === InteractionType.ApplicationCommand) {
@@ -16,7 +16,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUB
     const commandName = interaction.data.name;
     const command = commands.get(commandName);
     if (command) {
-      res.send(command.execute(interaction));
+      res.send(await command.execute(interaction));
     } else {
       res.status(404).end();
     }
