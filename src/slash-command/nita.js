@@ -2,6 +2,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -12,34 +13,80 @@ export default {
     .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)').setRequired(true)),
   execute: async (interaction) => {
     try {
-      const trackQuery = interaction.options.getString('track');
+      if (interaction.data.type !== ApplicationCommandType.ChatInput) {
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: 'このコマンドはスラッシュコマンドです',
+            flags: MessageFlags.Ephemeral,
+          },
+        };
+      }
+
+      const { track: trackQuery, time: inputTime } = interaction.data.options?.reduce((acc, cur) => {
+        if (cur.type === ApplicationCommandOptionType.String) {
+          acc[cur.name] = cur.value;
+        } else if (cur.type === ApplicationCommandOptionType.Integer) {
+          acc[cur.name] = cur.value;
+        }
+        return acc;
+      }, { track: undefined, time: undefined }) || { track: undefined, time: undefined };
+
       if (!trackQuery) {
-        await interaction.reply('コース名を指定してください');
-        return;
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: 'コース名を指定してください',
+            flags: MessageFlags.Ephemeral,
+          },
+        };
       }
 
       const trackCode = searchTrack(trackQuery);
       if (!trackCode) {
-        await interaction.reply('コース名が見つかりませんでした');
-        return;
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: 'コース名が見つかりませんでした',
+            flags: MessageFlags.Ephemeral,
+          },
+        };
       }
 
-      const inputTime = interaction.options.getInteger('time');
       if (!inputTime) {
-        await interaction.reply('タイムを指定してください');
-        return;
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: 'タイムを指定してください',
+            flags: MessageFlags.Ephemeral,
+          },
+        };
       }
       const newMilliseconds = toMilliseconds(inputTime);
 
-      const discordUserId = interaction.user.id;
+      const discordUserId = interaction.user?.id;
+      if (!discordUserId) {
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: 'ユーザーIDが取得できませんでした',
+            flags: MessageFlags.Ephemeral,
+          },
+        };
+      }
 
       const repository = planetScaleRepository();
 
       const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, trackCode);
 
       if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
-        await interaction.reply(`前回のタイムより遅いです。\n前回のタイム: ${displayMilliseconds(lastRecord.milliseconds)}`);
-        return;
+        return {
+          type: InteractionResponseType.ChannelMessageWithSource,
+          data: {
+            content: `前回のタイムより遅いです。\n前回のタイム: ${displayMilliseconds(lastRecord.milliseconds)}`,
+            flags: MessageFlags.Ephemeral,
+          },
+        };
       }
 
       /** @type {import('../types').Nita} */
@@ -50,10 +97,20 @@ export default {
         await repository.updateNita(newNita);
       }
 
-      await interaction.reply(`${trackCode}のタイムを登録しました。\n今回のタイム: ${displayMilliseconds(newMilliseconds)}`);
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: `${trackCode}のタイムを登録しました。\n今回のタイム: ${displayMilliseconds(newMilliseconds)}`,
+        },
+      };
     } catch (error) {
       console.error(error);
-      await interaction.reply('エラーが発生しました。');
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: 'エラーが発生しました。',
+        },
+      };
     }
   },
 };
