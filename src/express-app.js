@@ -1,7 +1,7 @@
 // @ts-check
 import { verifyKeyMiddleware } from 'discord-interactions';
 import express from 'express';
-import { InteractionType } from 'discord-api-types/v10';
+import { InteractionResponseType, InteractionType } from 'discord-api-types/v10';
 import { loadCommands } from './util/load-commands.js';
 
 const commands = await loadCommands();
@@ -19,6 +19,10 @@ app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUB
     } else {
       res.status(404).end();
     }
+  } else if (interaction.type === InteractionType.Ping) {
+    res.send({
+      type: InteractionResponseType.Pong,
+    });
   }
 });
 
