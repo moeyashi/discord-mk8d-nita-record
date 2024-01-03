@@ -2,9 +2,18 @@
 
 公開していないのでサーバー管理者にホスティングしてもらうこと。
 
-## dev
+## serve interaction webhook
 
 1. `npm install`
-2. .envを作成
-3. config.jsonを作成
-4. `npm run start`
+2. `npm run start`
+
+## deploy commands
+
+1. `npm install`
+2. config.jsonを作成
+3. `npm run deploy`
+
+## migrate database
+
+1. `atlas schema apply --url "YOUR DB URL" --file schema.hcl`
+  PlanetScaleの場合は`mysql://user:password@host/dbname?tls=true`
