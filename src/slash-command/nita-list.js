@@ -38,7 +38,7 @@ export default {
           track,
           diffWRnNita: track?.nitaVSWRMilliseconds ? nita.milliseconds - track.nitaVSWRMilliseconds : Number.MAX_SAFE_INTEGER,
         };
-      }).sort((a, b) => b.diffWRnNita - a.diffWRnNita);
+      }).sort((a, b) => a.diffWRnNita - b.diffWRnNita);
 
       /** @type {import('discord-api-types/v10').APIEmbed[]} */
       const embeds = [];
