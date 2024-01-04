@@ -15,7 +15,12 @@ app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUB
     const commandName = interaction.data.name;
     const command = commands.get(commandName);
     if (command) {
-      res.send(await command.execute(interaction));
+      try {
+        res.send(await command.execute(interaction));
+      } catch (e) {
+        console.error(e);
+        res.send({ type: InteractionResponseType.ChannelMessageWithSource, data: { content: `エラーが発生しました${e}` } });
+      }
     } else {
       res.status(404).end();
     }
