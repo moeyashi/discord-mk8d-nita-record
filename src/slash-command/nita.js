@@ -2,8 +2,9 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
-import { ApplicationCommandOptionType, ApplicationCommandType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
+import { ApplicationCommandOptionType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
 import { toMilliseconds } from '../util/time.js';
+import { validateSlashCommand } from '../util/validate-slash-command.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -14,17 +15,12 @@ export default {
     .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
   execute: async (interaction) => {
     try {
-      if (interaction.data.type !== ApplicationCommandType.ChatInput) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: 'このコマンドはスラッシュコマンドです',
-            flags: MessageFlags.Ephemeral,
-          },
-        };
+      const { data, err } = validateSlashCommand(interaction);
+      if (err) {
+        return err;
       }
 
-      const { track: trackQuery, time: inputTime } = interaction.data.options?.reduce((acc, cur) => {
+      const { track: trackQuery, time: inputTime } = data.options?.reduce((acc, cur) => {
         if (cur.type === ApplicationCommandOptionType.String) {
           acc[cur.name] = cur.value;
         } else if (cur.type === ApplicationCommandOptionType.Integer) {
