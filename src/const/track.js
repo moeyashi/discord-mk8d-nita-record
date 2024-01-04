@@ -1,6 +1,6 @@
 // @ts-check
 
-import { toMilliseconds } from '../util/time';
+import { toMilliseconds } from '../util/time.js';
 
 /**
  * @param {string} trackName
