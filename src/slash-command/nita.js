@@ -42,8 +42,8 @@ export default {
         };
       }
 
-      const trackCode = searchTrack(trackQuery);
-      if (!trackCode) {
+      const track = searchTrack(trackQuery);
+      if (!track) {
         return {
           type: InteractionResponseType.ChannelMessageWithSource,
           data: {
@@ -66,10 +66,10 @@ export default {
 
       const repository = planetScaleRepository();
 
-      const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, trackCode);
+      const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
 
       if (!inputTime) {
-        return makeResponseForGetLastRecordCommand(trackCode, lastRecord);
+        return makeResponseForGetLastRecordCommand(track.code, lastRecord);
       }
 
       const newMilliseconds = toMilliseconds(inputTime);
@@ -85,7 +85,7 @@ export default {
       }
 
       /** @type {import('../types').Nita} */
-      const newNita = { trackCode, discordUserId, milliseconds: newMilliseconds };
+      const newNita = { trackCode: track.code, discordUserId, milliseconds: newMilliseconds };
       if (lastRecord === null) {
         await repository.insertNita(newNita);
       } else {
@@ -95,7 +95,7 @@ export default {
       return {
         type: InteractionResponseType.ChannelMessageWithSource,
         data: {
-          content: `${trackCode}のタイムを登録しました。\n今回のタイム: ${displayMilliseconds(newMilliseconds)}`,
+          content: `${track.code}のタイムを登録しました。\n今回のタイム: ${displayMilliseconds(newMilliseconds)}`,
         },
       };
     } catch (error) {
