@@ -63,5 +63,17 @@ export const planetScaleRepository = () => {
         milliseconds: results.rows[0].milliseconds,
       };
     },
+    /**
+     * @param {string} discordUserId
+     * @returns {Promise<import('../../types').Nita[]>}
+     */
+    async selectNitaByUser(discordUserId) {
+      const results = await conn.execute('SELECT track_code, milliseconds FROM nita WHERE discord_user_id = ?', [discordUserId]);
+      return results.rows.map((row) => ({
+        trackCode: row.track_code,
+        discordUserId,
+        milliseconds: row.milliseconds,
+      }));
+    },
   };
 };
