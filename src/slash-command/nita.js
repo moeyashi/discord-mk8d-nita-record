@@ -53,7 +53,7 @@ export default {
         };
       }
 
-      const discordUserId = interaction.user?.id;
+      const discordUserId = interaction.member?.user?.id;
       if (!discordUserId) {
         return {
           type: InteractionResponseType.ChannelMessageWithSource,
