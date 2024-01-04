@@ -8,9 +8,9 @@ import { ApplicationCommandOptionType, ApplicationCommandType, InteractionRespon
 export default {
   data: new SlashCommandBuilder()
     .setName('nita')
-    .setDescription('set nita time')
+    .setDescription('NITAのタイムを登録・確認します。timeを指定しない場合は確認のみします。')
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
-    .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)').setRequired(true)),
+    .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
   execute: async (interaction) => {
     try {
       if (interaction.data.type !== ApplicationCommandType.ChatInput) {
@@ -53,17 +53,6 @@ export default {
         };
       }
 
-      if (!inputTime) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: 'タイムを指定してください',
-            flags: MessageFlags.Ephemeral,
-          },
-        };
-      }
-      const newMilliseconds = toMilliseconds(inputTime);
-
       const discordUserId = interaction.user?.id;
       if (!discordUserId) {
         return {
@@ -78,6 +67,12 @@ export default {
       const repository = planetScaleRepository();
 
       const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, trackCode);
+
+      if (!inputTime) {
+        return makeResponseForGetLastRecordCommand(trackCode, lastRecord);
+      }
+
+      const newMilliseconds = toMilliseconds(inputTime);
 
       if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
         return {
@@ -134,4 +129,27 @@ const toMilliseconds = (inputTime) => {
   const inputSeconds = Math.floor(inputTime / 1000) % 100;
   const inputMinutes = Math.floor(inputTime / 100000);
   return inputMilliseconds + inputSeconds * 1000 + inputMinutes * 60 * 1000;
+};
+
+/**
+ * @param {string} trackCode
+ * @param {import('../types').Nita | null} lastRecord
+ * @returns {import('discord-api-types/v10').APIInteractionResponse}
+ */
+const makeResponseForGetLastRecordCommand = (trackCode, lastRecord) => {
+  if (lastRecord === null) {
+    return {
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: {
+        content: `${trackCode}のタイムは登録されていません`,
+      },
+    };
+  } else {
+    return {
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: {
+        content: `${trackCode}のタイム: ${displayMilliseconds(lastRecord.milliseconds)}`,
+      },
+    };
+  }
 };
