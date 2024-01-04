@@ -1,5 +1,8 @@
 {
   "extends": "eslint:recommended",
+  "plugins": [
+    "import"
+  ],
   "env": {
     "node": true,
     "es6": true
@@ -39,6 +42,13 @@
       "always"
     ],
     "handle-callback-err": "off",
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "ignorePackages": true
+      }
+    ],
     "indent": [
       "error",
       2
