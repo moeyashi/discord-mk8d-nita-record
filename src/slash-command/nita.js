@@ -3,6 +3,7 @@ import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { ApplicationCommandOptionType, ApplicationCommandType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
+import { toMilliseconds } from '../util/time.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -69,7 +70,7 @@ export default {
       const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
 
       if (!inputTime) {
-        return makeResponseForGetLastRecordCommand(track.code, lastRecord);
+        return makeResponseForGetLastRecordCommand(track, lastRecord);
       }
 
       const newMilliseconds = toMilliseconds(inputTime);
@@ -78,8 +79,7 @@ export default {
         return {
           type: InteractionResponseType.ChannelMessageWithSource,
           data: {
-            content: `前回のタイムより遅いです。\n前回のタイム: ${displayMilliseconds(lastRecord.milliseconds)}`,
-            flags: MessageFlags.Ephemeral,
+            content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
           },
         };
       }
@@ -95,7 +95,7 @@ export default {
       return {
         type: InteractionResponseType.ChannelMessageWithSource,
         data: {
-          content: `${track.code}のタイムを登録しました。\n今回のタイム: ${displayMilliseconds(newMilliseconds)}`,
+          content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
         },
       };
     } catch (error) {
@@ -122,34 +122,51 @@ const displayMilliseconds = (milliseconds) => {
 };
 
 /**
- * @param {number} inputTime 1:53.053の場合は153053
- */
-const toMilliseconds = (inputTime) => {
-  const inputMilliseconds = inputTime % 1000;
-  const inputSeconds = Math.floor(inputTime / 1000) % 100;
-  const inputMinutes = Math.floor(inputTime / 100000);
-  return inputMilliseconds + inputSeconds * 1000 + inputMinutes * 60 * 1000;
-};
-
-/**
- * @param {string} trackCode
+ * @param {import('../types').Track} track
  * @param {import('../types').Nita | null} lastRecord
  * @returns {import('discord-api-types/v10').APIInteractionResponse}
  */
-const makeResponseForGetLastRecordCommand = (trackCode, lastRecord) => {
+const makeResponseForGetLastRecordCommand = (track, lastRecord) => {
   if (lastRecord === null) {
     return {
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
-        content: `${trackCode}のタイムは登録されていません`,
+        content: `タイムは登録されていません\n\n${makeMetaMessage(track, lastRecord)}`,
       },
     };
   } else {
     return {
       type: InteractionResponseType.ChannelMessageWithSource,
       data: {
-        content: `${trackCode}のタイム: ${displayMilliseconds(lastRecord.milliseconds)}`,
+        content: makeMetaMessage(track, lastRecord),
       },
     };
   }
+};
+
+/**
+ * @param {import('../types').Track} track
+ * @param {import('../types').Nita | null} lastRecord
+ * @param {number | null} newMilliseconds
+ * @returns {string}
+ */
+const makeMetaMessage = (track, lastRecord, newMilliseconds = null) => {
+  let ret = track.trackName;
+  if (newMilliseconds !== null) {
+    ret += `\n今回のタイム: ${displayMilliseconds(newMilliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds)}落ち`;
+  }
+  if (lastRecord) {
+    ret += `\n前回のタイム: ${displayMilliseconds(lastRecord.milliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, lastRecord.milliseconds)}落ち`;
+  }
+  ret += `\nWR: ${displayMilliseconds(track.nitaVSWRMilliseconds)}`;
+  return ret;
+};
+
+/**
+ * @param {number} wr milliseconds
+ * @param {number} time milliseconds
+ * @returns {number} seconds
+ */
+const ceilDiff = (wr, time) => {
+  return Math.ceil((time - wr) / 1000);
 };
