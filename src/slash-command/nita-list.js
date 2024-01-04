@@ -36,7 +36,7 @@ export default {
         return {
           nita,
           track,
-          diffWRnNita: track?.nitaVSWRMilliseconds ? track.nitaVSWRMilliseconds - nita.milliseconds : Number.MAX_SAFE_INTEGER,
+          diffWRnNita: track?.nitaVSWRMilliseconds ? nita.milliseconds - track.nitaVSWRMilliseconds : Number.MAX_SAFE_INTEGER,
         };
       }).sort((a, b) => b.diffWRnNita - a.diffWRnNita);
 
@@ -54,7 +54,7 @@ export default {
             }
             pv[pv.length - 1].fields?.push({
               name: cv.track?.trackName || cv.nita.trackCode,
-              value: `${displayMilliseconds(cv.nita.milliseconds)} ${Math.ceil(cv.diffWRnNita)}落ち`,
+              value: `${displayMilliseconds(cv.nita.milliseconds)} ${Math.ceil(cv.diffWRnNita / 1000)}落ち`,
             });
             return pv;
           }, embeds),
