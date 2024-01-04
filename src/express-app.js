@@ -4,11 +4,19 @@ import express from 'express';
 import { InteractionResponseType, InteractionType } from 'discord-api-types/v10';
 import { loadCommands } from './util/load-commands.js';
 
+console.info('[INFO] starting server...');
+
 const commands = await loadCommands();
 
 const app = express();
 
+app.get('/health', (req, res) => {
+  console.info('[INFO] GET /health');
+  res.send('ok');
+});
+
 app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUBLIC_KEY || ''), async (req, res) => {
+  console.info('[INFO] POST /interactions');
   /** @type {import('discord-api-types/v10').APIInteraction} */
   const interaction = req.body;
   if (interaction.type === InteractionType.ApplicationCommand) {
@@ -37,3 +45,5 @@ const server = app.listen(port);
 // https://github.com/render-examples/express-hello-world/blob/main/app.js
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
+
+console.info('[INFO] server started');
