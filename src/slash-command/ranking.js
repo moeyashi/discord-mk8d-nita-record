@@ -69,33 +69,39 @@ export default {
  * @param {import('../types').Track} track
  */
 const doBackgroundProcess = async (interaction, track) => {
-  const discordMembersRepo = await discordMembersRepository();
-  if (!interaction.guild_id) {
-    throw new Error('guild_id is empty');
-  }
-  const serverMembers = await discordMembersRepo.selectByGuildId(interaction.guild_id);
+  try {
+    const discordMembersRepo = await discordMembersRepository();
+    if (!interaction.guild_id) {
+      throw new Error('guild_id is empty');
+    }
+    const serverMembers = await discordMembersRepo.selectByGuildId(interaction.guild_id);
 
-  const planetScaleRepo = planetScaleRepository();
+    const planetScaleRepo = planetScaleRepository();
 
-  const ranking = await planetScaleRepo.selectRanking(track.code, serverMembers);
+    const ranking = await planetScaleRepo.selectRanking(track.code, serverMembers);
 
-  /** @type {import('discord-api-types/v10').APIEmbed[]} */
-  const embeds = [];
+    /** @type {import('discord-api-types/v10').APIEmbed[]} */
+    const embeds = [];
 
-  const discordInteractionFollowupRepo = await discordInteractionFollowupRepository();
-  return discordInteractionFollowupRepo.followup(interaction, {
-    embeds: ranking.reduce((pv, cv, i) => {
-      if (i % 25 === 0) {
-        pv.push({
-          title: `${track.trackName}のNITAランキング`,
-          fields: [],
+    const discordInteractionFollowupRepo = await discordInteractionFollowupRepository();
+    return await discordInteractionFollowupRepo.followup(interaction, {
+      embeds: ranking.reduce((pv, cv, i) => {
+        if (i % 25 === 0) {
+          pv.push({
+            title: `${track.trackName}のNITAランキング`,
+            fields: [],
+          });
+        }
+        pv[pv.length - 1].fields?.push({
+          name: cv.member.nick || cv.member.user?.username || 'unknown',
+          value: `${displayMilliseconds(cv.milliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, cv.milliseconds)}落ち`,
         });
-      }
-      pv[pv.length - 1].fields?.push({
-        name: cv.member.nick || cv.member.user?.username || 'unknown',
-        value: `${displayMilliseconds(cv.milliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, cv.milliseconds)}落ち`,
-      });
-      return pv;
-    }, embeds),
-  });
+        return pv;
+      }, embeds),
+    });
+  } catch (e) {
+    console.error(e);
+    const discordInteractionFollowupRepo = await discordInteractionFollowupRepository();
+    return await discordInteractionFollowupRepo.followup(interaction, { content: `エラーが発生しました: ${e}` });
+  }
 };
