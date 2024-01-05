@@ -3,7 +3,7 @@ import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { ApplicationCommandOptionType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
-import { toMilliseconds } from '../util/time.js';
+import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
 import { validateSlashCommand } from '../util/validate-slash-command.js';
 
 /** @type { import('../types').SlashCommand } */
@@ -44,7 +44,7 @@ export default {
         return {
           type: InteractionResponseType.ChannelMessageWithSource,
           data: {
-            content: 'コース名が見つかりませんでした',
+            content: 'コースが見つかりませんでした',
             flags: MessageFlags.Ephemeral,
           },
         };
@@ -107,17 +107,6 @@ export default {
 };
 
 /**
- * @param {number} milliseconds
- */
-const displayMilliseconds = (milliseconds) => {
-  const millisecondsStr = Math.floor(milliseconds % 1000).toString().padStart(3, '0');
-  const seconds = Math.floor(milliseconds / 1000);
-  const secondsStr = (seconds % 60).toString().padStart(2, '0');
-  const minutes = Math.floor(seconds / 60);
-  return `${minutes}:${secondsStr}.${millisecondsStr}`;
-};
-
-/**
  * @param {import('../types').Track} track
  * @param {import('../types').Nita | null} lastRecord
  * @returns {import('discord-api-types/v10').APIInteractionResponse}
@@ -156,13 +145,4 @@ const makeMetaMessage = (track, lastRecord, newMilliseconds = null) => {
   }
   ret += `\nWR: ${displayMilliseconds(track.nitaVSWRMilliseconds)}`;
   return ret;
-};
-
-/**
- * @param {number} wr milliseconds
- * @param {number} time milliseconds
- * @returns {number} seconds
- */
-const ceilDiff = (wr, time) => {
-  return Math.ceil((time - wr) / 1000);
 };
