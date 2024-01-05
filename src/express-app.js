@@ -1,9 +1,12 @@
 // @ts-check
+import dotenv from 'dotenv';
 import { verifyKeyMiddleware } from 'discord-interactions';
 import express from 'express';
 import { InteractionResponseType, InteractionType } from 'discord-api-types/v10';
 import { loadCommands } from './util/load-commands.js';
 import { rankingController } from './controller/ranking.js';
+
+dotenv.config();
 
 console.info('[INFO] starting server...');
 
@@ -40,7 +43,7 @@ app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUB
   }
 });
 
-app.post('/deffereds/ranking', rankingController);
+app.post('/deffereds/ranking', express.json(), rankingController);
 
 const port = process.env.PORT || 3001;
 const server = app.listen(port);
