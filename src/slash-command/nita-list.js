@@ -3,7 +3,7 @@ import { SlashCommandBuilder } from 'discord.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
 import { validateSlashCommand } from '../util/validate-slash-command.js';
-import { searchTrack } from '../const/track.js';
+import { getByCode } from '../const/track.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -32,7 +32,7 @@ export default {
 
       const nitaList = await repository.selectNitaByUser(discordUserId);
       const nitaAndTrackList = nitaList.map((nita) => {
-        const track = searchTrack(nita.trackCode);
+        const track = getByCode(nita.trackCode);
         return {
           nita,
           track,
