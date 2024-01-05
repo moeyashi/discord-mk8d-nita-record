@@ -8,11 +8,11 @@ export const rankingController = async (req, res) => {
   console.info('[INFO] POST /deffereds/ranking');
   const { guildId, applicationId, interactionToken, trackCode } = req.body;
   try {
+    if (!(guildId && applicationId && interactionToken && trackCode)) {
+      throw new Error(`guild_id, application_id, interaction_token, track_code is empty: ${guildId}, ${applicationId}, ${interactionToken}, ${trackCode}`);
+    }
     const track = getByCode(trackCode);
     const discordMembersRepo = await discordMembersRepository();
-    if (!guildId) {
-      throw new Error('guild_id is empty');
-    }
     const serverMembers = await discordMembersRepo.selectByGuildId(guildId);
 
     const planetScaleRepo = planetScaleRepository();
