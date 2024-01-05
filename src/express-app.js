@@ -16,7 +16,7 @@ app.get('/health', (req, res) => {
 });
 
 app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUBLIC_KEY || ''), async (req, res) => {
-  console.info('[INFO] POST /interactions');
+  console.info(`[INFO] POST /interactions ${req.body.data.name}`);
   /** @type {import('discord-api-types/v10').APIInteraction} */
   const interaction = req.body;
   if (interaction.type === InteractionType.ApplicationCommand) {

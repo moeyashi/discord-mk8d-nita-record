@@ -14,95 +14,85 @@ export default {
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
     .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
   execute: async (interaction) => {
-    try {
-      const { data, err } = validateSlashCommand(interaction);
-      if (err) {
-        return err;
+    const { data, err } = validateSlashCommand(interaction);
+    if (err) {
+      return err;
+    }
+
+    const { track: trackQuery, time: inputTime } = data.options?.reduce((acc, cur) => {
+      if (cur.type === ApplicationCommandOptionType.String) {
+        acc[cur.name] = cur.value;
+      } else if (cur.type === ApplicationCommandOptionType.Integer) {
+        acc[cur.name] = cur.value;
       }
+      return acc;
+    }, { track: undefined, time: undefined }) || { track: undefined, time: undefined };
 
-      const { track: trackQuery, time: inputTime } = data.options?.reduce((acc, cur) => {
-        if (cur.type === ApplicationCommandOptionType.String) {
-          acc[cur.name] = cur.value;
-        } else if (cur.type === ApplicationCommandOptionType.Integer) {
-          acc[cur.name] = cur.value;
-        }
-        return acc;
-      }, { track: undefined, time: undefined }) || { track: undefined, time: undefined };
-
-      if (!trackQuery) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: 'コース名を指定してください',
-            flags: MessageFlags.Ephemeral,
-          },
-        };
-      }
-
-      const track = searchTrack(trackQuery);
-      if (!track) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: 'コースが見つかりませんでした',
-            flags: MessageFlags.Ephemeral,
-          },
-        };
-      }
-
-      const discordUserId = interaction.member?.user?.id;
-      if (!discordUserId) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: 'ユーザーIDが取得できませんでした',
-            flags: MessageFlags.Ephemeral,
-          },
-        };
-      }
-
-      const repository = planetScaleRepository();
-
-      const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
-
-      if (!inputTime) {
-        return makeResponseForGetLastRecordCommand(track, lastRecord);
-      }
-
-      const newMilliseconds = toMilliseconds(inputTime);
-
-      if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
-          },
-        };
-      }
-
-      /** @type {import('../types').Nita} */
-      const newNita = { trackCode: track.code, discordUserId, milliseconds: newMilliseconds };
-      if (lastRecord === null) {
-        await repository.insertNita(newNita);
-      } else {
-        await repository.updateNita(newNita);
-      }
-
+    if (!trackQuery) {
       return {
         type: InteractionResponseType.ChannelMessageWithSource,
         data: {
-          content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
-        },
-      };
-    } catch (error) {
-      console.error(error);
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: 'エラーが発生しました。',
+          content: 'コース名を指定してください',
+          flags: MessageFlags.Ephemeral,
         },
       };
     }
+
+    const track = searchTrack(trackQuery);
+    if (!track) {
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: 'コースが見つかりませんでした',
+          flags: MessageFlags.Ephemeral,
+        },
+      };
+    }
+
+    const discordUserId = interaction.member?.user?.id;
+    if (!discordUserId) {
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: 'ユーザーIDが取得できませんでした',
+          flags: MessageFlags.Ephemeral,
+        },
+      };
+    }
+
+    const repository = planetScaleRepository();
+
+    const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
+
+    if (!inputTime) {
+      return makeResponseForGetLastRecordCommand(track, lastRecord);
+    }
+
+    const newMilliseconds = toMilliseconds(inputTime);
+
+    if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
+      return {
+        type: InteractionResponseType.ChannelMessageWithSource,
+        data: {
+          content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+        },
+      };
+    }
+
+    /** @type {import('../types').Nita} */
+    const newNita = { trackCode: track.code, discordUserId, milliseconds: newMilliseconds };
+    if (lastRecord === null) {
+      await repository.insertNita(newNita);
+    } else {
+      await repository.updateNita(newNita);
+    }
+
+    return {
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: {
+        content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+      },
+    };
   },
 };
 
