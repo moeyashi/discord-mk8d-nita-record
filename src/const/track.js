@@ -139,3 +139,11 @@ export const searchTrack = (query) => {
   }
   return null;
 };
+
+/**
+ * @param {string} code
+ * @return {import('../types').Track | null}
+ */
+export const getByCode = (code) => {
+  return trackDict[code] || null;
+};
