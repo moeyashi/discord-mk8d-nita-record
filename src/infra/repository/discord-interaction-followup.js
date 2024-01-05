@@ -6,11 +6,12 @@ export const discordInteractionFollowupRepository = async () => {
 
   return {
     /**
-     * @param {import('discord-api-types/v10').APIApplicationCommandInteraction} interaction
+     * @param {string} applicationId
+     * @param {string} interactionToken
      * @param {import('discord-api-types/v10').RESTPostAPIWebhookWithTokenJSONBody} body
      */
-    followup: async (interaction, body) => {
-      await rest.post(Routes.webhook(interaction.application_id, interaction.token), { body });
+    followup: async (applicationId, interactionToken, body) => {
+      await rest.post(Routes.webhook(applicationId, interactionToken), { body });
     },
   };
 };
