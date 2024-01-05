@@ -1,12 +1,9 @@
 // @ts-check
+import https from 'https';
 import { SlashCommandBuilder } from 'discord.js';
-import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { ApplicationCommandOptionType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
 import { validateSlashCommand } from '../util/validate-slash-command.js';
 import { searchTrack } from '../const/track.js';
-import { discordMembersRepository } from '../infra/repository/discord-members.js';
-import { ceilDiff, displayMilliseconds } from '../util/time.js';
-import { discordInteractionFollowupRepository } from '../infra/repository/discord-interaction-followup.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -56,7 +53,7 @@ export default {
       };
     }
 
-    doBackgroundProcess(interaction, track);
+    sendRequest(interaction, track);
 
     return {
       type: InteractionResponseType.DeferredChannelMessageWithSource,
@@ -68,40 +65,29 @@ export default {
  * @param {import('discord-api-types/v10').APIApplicationCommandInteraction} interaction
  * @param {import('../types').Track} track
  */
-const doBackgroundProcess = async (interaction, track) => {
-  try {
-    const discordMembersRepo = await discordMembersRepository();
-    if (!interaction.guild_id) {
-      throw new Error('guild_id is empty');
-    }
-    const serverMembers = await discordMembersRepo.selectByGuildId(interaction.guild_id);
-
-    const planetScaleRepo = planetScaleRepository();
-
-    const ranking = await planetScaleRepo.selectRanking(track.code, serverMembers);
-
-    /** @type {import('discord-api-types/v10').APIEmbed[]} */
-    const embeds = [];
-
-    const discordInteractionFollowupRepo = await discordInteractionFollowupRepository();
-    return await discordInteractionFollowupRepo.followup(interaction, {
-      embeds: ranking.reduce((pv, cv, i) => {
-        if (i % 25 === 0) {
-          pv.push({
-            title: `${track.trackName}のNITAランキング`,
-            fields: [],
-          });
-        }
-        pv[pv.length - 1].fields?.push({
-          name: cv.member.nick || cv.member.user?.username || 'unknown',
-          value: `${displayMilliseconds(cv.milliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, cv.milliseconds)}落ち`,
-        });
-        return pv;
-      }, embeds),
+const sendRequest = async (interaction, track) => {
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: process.env.INTERNAL_HOST,
+      port: 443,
+      path: '/deffereds/ranking',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }, (res) => {
+      res.on('end', () => {
+        resolve(true);
+      });
+    }).on('error', (err) => {
+      reject(err);
     });
-  } catch (e) {
-    console.error(e);
-    const discordInteractionFollowupRepo = await discordInteractionFollowupRepository();
-    return await discordInteractionFollowupRepo.followup(interaction, { content: `エラーが発生しました: ${e}` });
-  }
+    req.write(JSON.stringify({
+      guildId: interaction.guild_id,
+      applicationId: interaction.application_id,
+      interactionToken: interaction.token,
+      trackCode: track.code,
+    }));
+    req.end();
+  });
 };

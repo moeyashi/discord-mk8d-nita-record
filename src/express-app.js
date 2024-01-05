@@ -3,6 +3,7 @@ import { verifyKeyMiddleware } from 'discord-interactions';
 import express from 'express';
 import { InteractionResponseType, InteractionType } from 'discord-api-types/v10';
 import { loadCommands } from './util/load-commands.js';
+import { rankingController } from './controller/ranking.js';
 
 console.info('[INFO] starting server...');
 
@@ -38,6 +39,8 @@ app.post('/interactions', verifyKeyMiddleware(process.env.DISCORD_BOT_CLIENT_PUB
     });
   }
 });
+
+app.post('/deffereds/ranking', rankingController);
 
 const port = process.env.PORT || 3001;
 const server = app.listen(port);
