@@ -12,63 +12,53 @@ export default {
     .setName('nita-list')
     .setDescription('NITAのタイムを確認します。'),
   execute: async (interaction) => {
-    try {
-      const { err } = validateSlashCommand(interaction);
-      if (err) {
-        return err;
-      }
+    const { err } = validateSlashCommand(interaction);
+    if (err) {
+      return err;
+    }
 
-      const discordUserId = interaction.member?.user?.id;
-      if (!discordUserId) {
-        return {
-          type: InteractionResponseType.ChannelMessageWithSource,
-          data: {
-            content: 'ユーザーIDが取得できませんでした',
-            flags: MessageFlags.Ephemeral,
-          },
-        };
-      }
-
-      const repository = planetScaleRepository();
-
-      const nitaList = await repository.selectNitaByUser(discordUserId);
-      const nitaAndTrackList = nitaList.map((nita) => {
-        const track = getByCode(nita.trackCode);
-        return {
-          nita,
-          track,
-          diffWRnNita: track?.nitaVSWRMilliseconds ? nita.milliseconds - track.nitaVSWRMilliseconds : Number.MAX_SAFE_INTEGER,
-        };
-      }).sort((a, b) => a.diffWRnNita - b.diffWRnNita);
-
-      /** @type {import('discord-api-types/v10').APIEmbed[]} */
-      const embeds = [];
+    const discordUserId = interaction.member?.user?.id;
+    if (!discordUserId) {
       return {
         type: InteractionResponseType.ChannelMessageWithSource,
         data: {
-          embeds: nitaAndTrackList.reduce((pv, cv, i) => {
-            if (i % 25 === 0) {
-              pv.push({
-                title: 'NITAタイム一覧',
-                fields: [],
-              });
-            }
-            pv[pv.length - 1].fields?.push({
-              name: cv.track?.trackName || cv.nita.trackCode,
-              value: `${displayMilliseconds(cv.nita.milliseconds)} ${Math.ceil(cv.diffWRnNita / 1000)}落ち`,
-            });
-            return pv;
-          }, embeds),
-        },
-      };
-    } catch (error) {
-      console.error(error);
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: 'エラーが発生しました。',
+          content: 'ユーザーIDが取得できませんでした',
+          flags: MessageFlags.Ephemeral,
         },
       };
     }
+
+    const repository = planetScaleRepository();
+
+    const nitaList = await repository.selectNitaByUser(discordUserId);
+    const nitaAndTrackList = nitaList.map((nita) => {
+      const track = getByCode(nita.trackCode);
+      return {
+        nita,
+        track,
+        diffWRnNita: track?.nitaVSWRMilliseconds ? nita.milliseconds - track.nitaVSWRMilliseconds : Number.MAX_SAFE_INTEGER,
+      };
+    }).sort((a, b) => a.diffWRnNita - b.diffWRnNita);
+
+    /** @type {import('discord-api-types/v10').APIEmbed[]} */
+    const embeds = [];
+    return {
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: {
+        embeds: nitaAndTrackList.reduce((pv, cv, i) => {
+          if (i % 25 === 0) {
+            pv.push({
+              title: 'NITAタイム一覧',
+              fields: [],
+            });
+          }
+          pv[pv.length - 1].fields?.push({
+            name: cv.track?.trackName || cv.nita.trackCode,
+            value: `${displayMilliseconds(cv.nita.milliseconds)} ${Math.ceil(cv.diffWRnNita / 1000)}落ち`,
+          });
+          return pv;
+        }, embeds),
+      },
+    };
   },
 };
