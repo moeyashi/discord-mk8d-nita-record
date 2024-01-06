@@ -9,7 +9,7 @@ export const discordMembersRepository = async () => {
      * @param {string} guildId
      */
     selectByGuildId: async (guildId) => {
-      const data = await rest.get(Routes.guildMembers(guildId));
+      const data = await rest.get(Routes.guildMembers(guildId), { query: new URLSearchParams({ limit: '50' }) });
       return resolveTypeAs(
         /** @param {import('discord.js').RESTGetAPIGuildMembersResult} _ */
         (_) => _,
