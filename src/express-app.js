@@ -15,7 +15,7 @@ const commands = await loadCommands();
 const app = express();
 
 app.get('/health', (req, res) => {
-  console.info('[INFO] GET /health');
+  // console.info('[INFO] GET /health');
   res.send('ok');
 });
 
