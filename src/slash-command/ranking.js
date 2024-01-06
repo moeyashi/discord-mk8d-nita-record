@@ -1,9 +1,12 @@
 // @ts-check
-import https from 'https';
+// import https from 'https';
 import { SlashCommandBuilder } from 'discord.js';
 import { ApplicationCommandOptionType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
 import { validateSlashCommand } from '../util/validate-slash-command.js';
 import { searchTrack } from '../const/track.js';
+import { ceilDiff, displayMilliseconds } from '../util/time.js';
+import { planetScaleRepository } from '../infra/repository/planetscale.js';
+import { discordMembersRepository } from '../infra/repository/discord-members.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -53,10 +56,33 @@ export default {
       };
     }
 
-    sendRequest(interaction, track);
+    const discordMembersRepo = await discordMembersRepository();
+    const serverMembers = await discordMembersRepo.selectByGuildId(interaction.guild_id);
+
+    const planetScaleRepo = planetScaleRepository();
+
+    const ranking = await planetScaleRepo.selectRanking(track.code, serverMembers);
+
+    /** @type {import('discord-api-types/v10').APIEmbed[]} */
+    const embeds = [];
 
     return {
-      type: InteractionResponseType.DeferredChannelMessageWithSource,
+      type: InteractionResponseType.ChannelMessageWithSource,
+      data: {
+        embeds: ranking.reduce((pv, cv, i) => {
+          if (i % 25 === 0) {
+            pv.push({
+              title: `${track.trackName}のNITAランキング`,
+              fields: [],
+            });
+          }
+          pv[pv.length - 1].fields?.push({
+            name: cv.member.nick || cv.member.user?.username || 'unknown',
+            value: `${displayMilliseconds(cv.milliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, cv.milliseconds)}落ち`,
+          });
+          return pv;
+        }, embeds),
+      },
     };
   },
 };
@@ -65,29 +91,29 @@ export default {
  * @param {import('discord-api-types/v10').APIApplicationCommandInteraction} interaction
  * @param {import('../types').Track} track
  */
-const sendRequest = async (interaction, track) => {
-  return new Promise((resolve, reject) => {
-    const req = https.request({
-      hostname: process.env.INTERNAL_HOST,
-      port: 443,
-      path: '/deffereds/ranking',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }, (res) => {
-      res.on('end', () => {
-        resolve(true);
-      });
-    }).on('error', (err) => {
-      reject(err);
-    });
-    req.write(JSON.stringify({
-      guildId: interaction.guild_id,
-      applicationId: interaction.application_id,
-      interactionToken: interaction.token,
-      trackCode: track.code,
-    }));
-    req.end();
-  });
-};
+// const sendRequest = async (interaction, track) => {
+//   return new Promise((resolve, reject) => {
+//     const req = https.request({
+//       hostname: process.env.INTERNAL_HOST,
+//       port: 443,
+//       path: '/deffereds/ranking',
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     }, (res) => {
+//       res.on('end', () => {
+//         resolve(true);
+//       });
+//     }).on('error', (err) => {
+//       reject(err);
+//     });
+//     req.write(JSON.stringify({
+//       guildId: interaction.guild_id,
+//       applicationId: interaction.application_id,
+//       interactionToken: interaction.token,
+//       trackCode: track.code,
+//     }));
+//     req.end();
+//   });
+// };
