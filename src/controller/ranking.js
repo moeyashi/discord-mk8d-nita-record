@@ -6,6 +6,8 @@ import { ceilDiff, displayMilliseconds } from '../util/time.js';
 
 export const rankingController = async (req, res) => {
   console.info('[INFO] POST /deffereds/ranking');
+  // 試しに5秒待つ
+  await new Promise(resolve => setTimeout(resolve, 5000));
   const { guildId, applicationId, interactionToken, trackCode } = req.body;
   try {
     if (!(guildId && applicationId && interactionToken && trackCode)) {
