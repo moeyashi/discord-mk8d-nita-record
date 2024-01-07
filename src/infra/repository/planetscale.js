@@ -77,17 +77,17 @@ export const planetScaleRepository = () => {
     },
     /**
      * @param {string} trackCode
-     * @param {import('discord-api-types/v10').APIGuildMember[]} discordMembers
-     * @returns {Promise<{member: import('discord-api-types/v10').APIGuildMember, milliseconds: number}[]>}
+     * @param {import('discord.js').GuildMember[]} discordMembers
+     * @returns {Promise<{member: import('discord.js').GuildMember, milliseconds: number}[]>}
      */
     async selectRanking(trackCode, discordMembers) {
-      const discordUserIds = discordMembers.filter(member => member.user?.id).map((member) => member.user?.id);
+      const discordUserIds = discordMembers.map((member) => member.user.id);
       const results = await conn.execute(
         'SELECT discord_user_id, milliseconds FROM nita WHERE track_code = ? AND discord_user_id IN (?) ORDER BY milliseconds ASC',
         [trackCode, discordUserIds],
       );
       return results.rows.map((row) => ({
-        member: discordMembers.find(member => member.user?.id === row.discord_user_id) || discordMembers[0],
+        member: discordMembers.find(member => member.user.id === row.discord_user_id) || discordMembers[0],
         milliseconds: row.milliseconds,
       }));
     },

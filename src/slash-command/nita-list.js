@@ -1,8 +1,6 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
-import { InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
-import { validateSlashCommand } from '../util/validate-slash-command.js';
 import { getByCode } from '../const/track.js';
 import { displayMilliseconds } from '../util/time.js';
 
@@ -12,20 +10,9 @@ export default {
     .setName('nita-list')
     .setDescription('NITAのタイムを確認します。'),
   execute: async (interaction) => {
-    const { err } = validateSlashCommand(interaction);
-    if (err) {
-      return err;
-    }
-
     const discordUserId = interaction.member?.user?.id;
     if (!discordUserId) {
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: 'ユーザーIDが取得できませんでした',
-          flags: MessageFlags.Ephemeral,
-        },
-      };
+      throw new Error('ユーザーIDが取得できませんでした');
     }
 
     const repository = planetScaleRepository();
@@ -40,25 +27,21 @@ export default {
       };
     }).sort((a, b) => a.diffWRnNita - b.diffWRnNita);
 
-    /** @type {import('discord-api-types/v10').APIEmbed[]} */
     const embeds = [];
-    return {
-      type: InteractionResponseType.ChannelMessageWithSource,
-      data: {
-        embeds: nitaAndTrackList.reduce((pv, cv, i) => {
-          if (i % 25 === 0) {
-            pv.push({
-              title: 'NITAタイム一覧',
-              fields: [],
-            });
-          }
-          pv[pv.length - 1].fields?.push({
-            name: cv.track?.trackName || cv.nita.trackCode,
-            value: `${displayMilliseconds(cv.nita.milliseconds)} ${Math.ceil(cv.diffWRnNita / 1000)}落ち`,
+    await interaction.reply({
+      embeds: nitaAndTrackList.reduce((pv, cv, i) => {
+        if (i % 25 === 0) {
+          pv.push({
+            title: 'NITAタイム一覧',
+            fields: [],
           });
-          return pv;
-        }, embeds),
-      },
-    };
+        }
+        pv[pv.length - 1].fields?.push({
+          name: cv.track?.trackName || cv.nita.trackCode,
+          value: `${displayMilliseconds(cv.nita.milliseconds)} ${Math.ceil(cv.diffWRnNita / 1000)}落ち`,
+        });
+        return pv;
+      }, embeds),
+    });
   },
 };

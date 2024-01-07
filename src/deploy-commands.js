@@ -1,11 +1,15 @@
 // @ts-check
-import { readFile } from 'fs/promises';
+import dotenv from 'dotenv';
 import { REST, Routes } from 'discord.js';
 import { loadCommands } from './util/load-commands.js';
 
+dotenv.config();
+
 const main = async () => {
   const commands = await loadCommands();
-  const { clientId, guildId, token } = JSON.parse(await readFile('config.json', { encoding: 'utf-8' }));
+  const clientId = process.env.DISCORD_BOT_CLIENT_ID || '';
+  const guildId = process.env.DISCORD_BOT_GUILD_ID || '';
+  const token = process.env.DISCORD_BOT_TOKEN || '';
   // Construct and prepare an instance of the REST module
   const rest = new REST().setToken(token);
 
@@ -14,10 +18,12 @@ const main = async () => {
     console.log(`Started refreshing ${commands.size} application (/) commands.`);
 
     // The put method is used to fully refresh all commands in the guild with the current set
-    /** @type {import('discord.js').RESTPutAPIApplicationGuildCommandsResult} */
+    /**
+     * @type {import('discord.js').RESTPutAPIApplicationGuildCommandsResult | import('discord.js').RESTPutAPIApplicationCommandsResult}
+     */
     // @ts-ignore
     const data = await rest.put(
-      Routes.applicationGuildCommands(clientId, guildId),
+      guildId ? Routes.applicationGuildCommands(clientId, guildId) : Routes.applicationCommands(clientId),
       { body: Array.from(commands.values()).map(command => command.data.toJSON()) },
     );
 
