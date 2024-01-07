@@ -1,0 +1,14 @@
+app = "YOUR APP NAME"
+primary_region = "nrt"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+processes = []
+
+[build]
+  builder = "paketobuildpacks/builder:base"
+  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256
