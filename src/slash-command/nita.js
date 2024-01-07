@@ -42,7 +42,7 @@ export default {
 
     if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
       await interaction.reply({
-        content: `前回のタイムより速いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+        content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
       });
       return;
     }
