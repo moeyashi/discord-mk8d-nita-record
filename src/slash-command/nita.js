@@ -2,9 +2,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
-import { ApplicationCommandOptionType, InteractionResponseType, MessageFlags } from 'discord-api-types/v10';
 import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
-import { validateSlashCommand } from '../util/validate-slash-command.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -14,50 +12,21 @@ export default {
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
     .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
   execute: async (interaction) => {
-    const { data, err } = validateSlashCommand(interaction);
-    if (err) {
-      return err;
-    }
-
-    const { track: trackQuery, time: inputTime } = data.options?.reduce((acc, cur) => {
-      if (cur.type === ApplicationCommandOptionType.String) {
-        acc[cur.name] = cur.value;
-      } else if (cur.type === ApplicationCommandOptionType.Integer) {
-        acc[cur.name] = cur.value;
-      }
-      return acc;
-    }, { track: undefined, time: undefined }) || { track: undefined, time: undefined };
+    const trackQuery = interaction.options.getString('track');
+    const inputTime = interaction.options.getInteger('time');
 
     if (!trackQuery) {
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: 'コース名を指定してください',
-          flags: MessageFlags.Ephemeral,
-        },
-      };
+      throw new Error('コース名を指定してください');
     }
 
     const track = searchTrack(trackQuery);
     if (!track) {
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: 'コースが見つかりませんでした',
-          flags: MessageFlags.Ephemeral,
-        },
-      };
+      throw new Error('コースが見つかりませんでした');
     }
 
     const discordUserId = interaction.member?.user?.id;
     if (!discordUserId) {
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: 'ユーザーIDが取得できませんでした',
-          flags: MessageFlags.Ephemeral,
-        },
-      };
+      throw new Error('ユーザーIDが取得できませんでした');
     }
 
     const repository = planetScaleRepository();
@@ -65,18 +34,17 @@ export default {
     const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
 
     if (!inputTime) {
-      return makeResponseForGetLastRecordCommand(track, lastRecord);
+      await interaction.reply(doProcessGetLastRecordCommand(track, lastRecord));
+      return;
     }
 
     const newMilliseconds = toMilliseconds(inputTime);
 
     if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
-      return {
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
-        },
-      };
+      await interaction.reply({
+        content: `前回のタイムより速いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+      });
+      return;
     }
 
     /** @type {import('../types').Nita} */
@@ -87,34 +55,26 @@ export default {
       await repository.updateNita(newNita);
     }
 
-    return {
-      type: InteractionResponseType.ChannelMessageWithSource,
-      data: {
-        content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
-      },
-    };
+    await interaction.reply({
+      content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+    });
+    return;
   },
 };
 
 /**
  * @param {import('../types').Track} track
  * @param {import('../types').Nita | null} lastRecord
- * @returns {import('discord-api-types/v10').APIInteractionResponse}
+ * @returns {import('discord.js').InteractionReplyOptions}
  */
-const makeResponseForGetLastRecordCommand = (track, lastRecord) => {
+const doProcessGetLastRecordCommand = (track, lastRecord) => {
   if (lastRecord === null) {
     return {
-      type: InteractionResponseType.ChannelMessageWithSource,
-      data: {
-        content: `タイムは登録されていません\n\n${makeMetaMessage(track, lastRecord)}`,
-      },
+      content: `タイムは登録されていません\n\n${makeMetaMessage(track, lastRecord)}`,
     };
   } else {
     return {
-      type: InteractionResponseType.ChannelMessageWithSource,
-      data: {
-        content: makeMetaMessage(track, lastRecord),
-      },
+      content: makeMetaMessage(track, lastRecord),
     };
   }
 };
