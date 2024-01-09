@@ -18,6 +18,13 @@ export default {
     const repository = planetScaleRepository();
 
     const nitaList = await repository.selectNitaByUser(discordUserId);
+    if (nitaList.length === 0) {
+      await interaction.reply({
+        content: 'NITAのタイムが登録されていません。',
+      });
+      return;
+    }
+
     const nitaAndTrackList = nitaList.map((nita) => {
       const track = getByCode(nita.trackCode);
       return {

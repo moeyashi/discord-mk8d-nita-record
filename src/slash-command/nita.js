@@ -21,7 +21,7 @@ export default {
 
     const track = searchTrack(trackQuery);
     if (!track) {
-      throw new Error('コースが見つかりませんでした');
+      throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
     const discordUserId = interaction.member?.user?.id;
