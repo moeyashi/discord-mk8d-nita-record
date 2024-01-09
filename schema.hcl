@@ -13,11 +13,13 @@ table "nita" {
     type     = mediumint
     unsigned = true
   }
-  primary_key {
-    columns = [column.track_code, column.discord_user_id]
+  column "last_milliseconds" {
+    null     = true
+    type     = mediumint
+    unsigned = true
   }
-  index "index_nita_track_code_discord_user_id" {
-    columns = [column.track_code, column.discord_user_id]
+  primary_key {
+    columns = [column.discord_user_id, column.track_code]
   }
 }
 schema "nita" {
