@@ -3,6 +3,7 @@ import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
+import { colorByTimeRank } from '../const/color.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -42,7 +43,8 @@ export default {
 
     if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
       await interaction.reply({
-        content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+        content: '前回のタイムより遅いです。',
+        embeds: [makeEmbed(track, lastRecord, newMilliseconds)],
       });
       return;
     }
@@ -56,7 +58,8 @@ export default {
     }
 
     await interaction.reply({
-      content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+      content: 'タイムを登録しました。',
+      embeds: [makeEmbed(track, lastRecord, newMilliseconds)],
     });
     return;
   },
@@ -70,11 +73,12 @@ export default {
 const doProcessGetLastRecordCommand = (track, lastRecord) => {
   if (lastRecord === null) {
     return {
-      content: `タイムは登録されていません\n\n${makeMetaMessage(track, lastRecord)}`,
+      content: 'タイムは登録されていません。',
+      embeds: [makeEmbed(track, lastRecord)],
     };
   } else {
     return {
-      content: makeMetaMessage(track, lastRecord),
+      embeds: [makeEmbed(track, lastRecord)],
     };
   }
 };
@@ -83,16 +87,35 @@ const doProcessGetLastRecordCommand = (track, lastRecord) => {
  * @param {import('../types').Track} track
  * @param {import('../types').Nita | null} lastRecord
  * @param {number | null} newMilliseconds
- * @returns {string}
+ * @returns {import('discord.js').APIEmbed}
  */
-const makeMetaMessage = (track, lastRecord, newMilliseconds = null) => {
-  let ret = track.trackName;
+const makeEmbed = (track, lastRecord, newMilliseconds = null) => {
+  /** @type {import('discord.js').APIEmbed} */
+  const ret = {
+    title: track.trackName,
+    fields: [],
+  };
   if (newMilliseconds !== null) {
-    ret += `\n今回のタイム: ${displayMilliseconds(newMilliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds)}落ち`;
+    const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
+    ret.color = colorByTimeRank(timeRank);
+    ret.fields?.push({
+      name: `${timeRank}落ち\n今回のタイム`,
+      value: `${displayMilliseconds(newMilliseconds)} WR + ${(newMilliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+    });
   }
   if (lastRecord) {
-    ret += `\n前回のタイム: ${displayMilliseconds(lastRecord.milliseconds)} ${ceilDiff(track.nitaVSWRMilliseconds, lastRecord.milliseconds)}落ち`;
+    if (!ret.color) {
+      const timeRank = ceilDiff(track.nitaVSWRMilliseconds, lastRecord.milliseconds);
+      ret.color = colorByTimeRank(timeRank);
+    }
+    ret.fields?.push({
+      name: '前回のタイム',
+      value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+    });
   }
-  ret += `\nWR: ${displayMilliseconds(track.nitaVSWRMilliseconds)}`;
+  ret.fields?.push({
+    name: 'WR',
+    value: displayMilliseconds(track.nitaVSWRMilliseconds),
+  });
   return ret;
 };
