@@ -2,18 +2,16 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { planetScaleRepository } from '../infra/repository/planetscale.js';
-import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
+import { ceilDiff, displayMilliseconds } from '../util/time.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
   data: new SlashCommandBuilder()
-    .setName('nita')
-    .setDescription('NITAのタイムを登録・確認します。timeを指定しない場合は確認のみします。')
-    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
-    .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
+    .setName('back')
+    .setDescription('1つ前の状態に戻します。連続して実行はできません。')
+    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
   execute: async (interaction) => {
     const trackQuery = interaction.options.getString('track');
-    const inputTime = interaction.options.getInteger('time');
 
     if (!trackQuery) {
       throw new Error('コース名を指定してください');
@@ -33,50 +31,32 @@ export default {
 
     const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
 
-    if (!inputTime) {
-      await interaction.reply(doProcessGetLastRecordCommand(track, lastRecord));
-      return;
-    }
-
-    const newMilliseconds = toMilliseconds(inputTime);
-
-    if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
+    if (!lastRecord) {
       await interaction.reply({
-        content: `前回のタイムより遅いです。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
+        content: `タイムが登録されていません。\n\n${makeMetaMessage(track, lastRecord)}`,
       });
       return;
     }
 
-    /** @type {import('../types').Nita} */
-    const newNita = { trackCode: track.code, discordUserId, milliseconds: newMilliseconds, lastMilliseconds: lastRecord?.milliseconds };
-    if (lastRecord === null) {
-      await repository.insertNita(newNita);
+    const newMilliseconds = lastRecord.lastMilliseconds;
+
+    if (!newMilliseconds) {
+      // 履歴がない場合は削除する
+      await repository.deleteNita(discordUserId, track.code);
+      await interaction.reply({
+        content: `${track.trackName}のタイムを削除しました。`,
+      });
+      return;
     } else {
-      await repository.updateNita(newNita);
+      lastRecord.lastMilliseconds = undefined;
+      lastRecord.milliseconds = newMilliseconds;
+      await repository.updateNita(lastRecord);
+      await interaction.reply({
+        content: `タイムを戻しました。\n\n${makeMetaMessage(track, lastRecord)}`,
+      });
+      return;
     }
-
-    await interaction.reply({
-      content: `タイムを登録しました。\n\n${makeMetaMessage(track, lastRecord, newMilliseconds)}`,
-    });
-    return;
   },
-};
-
-/**
- * @param {import('../types').Track} track
- * @param {import('../types').Nita | null} lastRecord
- * @returns {import('discord.js').InteractionReplyOptions}
- */
-const doProcessGetLastRecordCommand = (track, lastRecord) => {
-  if (lastRecord === null) {
-    return {
-      content: `タイムは登録されていません\n\n${makeMetaMessage(track, lastRecord)}`,
-    };
-  } else {
-    return {
-      content: makeMetaMessage(track, lastRecord),
-    };
-  }
 };
 
 /**

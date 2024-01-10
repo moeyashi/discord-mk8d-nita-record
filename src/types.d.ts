@@ -48,4 +48,5 @@ export type Nita = {
   trackCode: string;
   discordUserId: string;
   milliseconds: number;
+  lastMilliseconds?: number;
 };

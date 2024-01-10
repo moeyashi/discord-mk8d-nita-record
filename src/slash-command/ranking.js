@@ -23,7 +23,7 @@ export default {
     const track = searchTrack(trackQuery);
     if (!track) {
       interaction.reply({
-        content: 'コースが見つかりませんでした',
+        content: `コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`,
       });
       return;
     }
@@ -36,9 +36,15 @@ export default {
 
     const ranking = await planetScaleRepo.selectRanking(track.code, Array.from(serverMembers.values()));
 
+    if (ranking.length === 0) {
+      await interaction.followUp({
+        content: `まだ${track.trackName}のNITAのタイムが登録されていません。`,
+      });
+      return;
+    }
+
     /** @type {import('discord.js').APIEmbed[]} */
     const embeds = [];
-
     await interaction.followUp({
       embeds: ranking.reduce((pv, cv, i) => {
         if (i % 25 === 0) {

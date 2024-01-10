@@ -19,16 +19,15 @@ export const planetScaleRepository = () => {
 
   const conn = connect(config);
 
-  // const results = await conn.execute('select 1 from dual where 1=?', [1]);
   return {
     /**
      * @param {InsertNitaParameters} params
      */
     async insertNita(params) {
-      const { trackCode, discordUserId, milliseconds } = params;
+      const { trackCode, discordUserId, milliseconds, lastMilliseconds } = params;
       const results = await conn.execute(
-        'INSERT INTO nita (track_code, discord_user_id, milliseconds) VALUES (?, ?, ?)',
-        [trackCode, discordUserId, milliseconds],
+        'INSERT INTO nita (track_code, discord_user_id, milliseconds, last_milliseconds) VALUES (?, ?, ?, ?)',
+        [trackCode, discordUserId, milliseconds, lastMilliseconds],
       );
       return results;
     },
@@ -36,10 +35,21 @@ export const planetScaleRepository = () => {
      * @param {UpdateNitaParameters} params
      */
     async updateNita(params) {
-      const { trackCode, discordUserId, milliseconds } = params;
+      const { trackCode, discordUserId, milliseconds, lastMilliseconds } = params;
       const results = await conn.execute(
-        'UPDATE nita SET milliseconds = ? WHERE track_code = ? AND discord_user_id = ?',
-        [milliseconds, trackCode, discordUserId],
+        'UPDATE nita SET milliseconds = ?, last_milliseconds = ? WHERE discord_user_id = ? AND track_code = ?',
+        [milliseconds, lastMilliseconds, discordUserId, trackCode],
+      );
+      return results;
+    },
+    /**
+     * @param {string} discordUserId
+     * @param {string} trackCode
+     */
+    async deleteNita(discordUserId, trackCode) {
+      const results = await conn.execute(
+        'DELETE FROM nita WHERE discord_user_id = ? AND track_code = ?',
+        [discordUserId, trackCode],
       );
       return results;
     },
@@ -50,7 +60,7 @@ export const planetScaleRepository = () => {
      */
     async selectNitaByUserAndTrack(discordUserId, trackCode) {
       const results = await conn.execute(
-        'SELECT milliseconds FROM nita WHERE discord_user_id = ? AND track_code = ?',
+        'SELECT milliseconds, last_milliseconds FROM nita WHERE discord_user_id = ? AND track_code = ?',
         [discordUserId, trackCode],
       );
       if (results.size === 0) {
@@ -61,6 +71,7 @@ export const planetScaleRepository = () => {
         trackCode,
         discordUserId,
         milliseconds: results.rows[0].milliseconds,
+        lastMilliseconds: results.rows[0].last_milliseconds,
       };
     },
     /**
@@ -68,11 +79,12 @@ export const planetScaleRepository = () => {
      * @returns {Promise<import('../../types').Nita[]>}
      */
     async selectNitaByUser(discordUserId) {
-      const results = await conn.execute('SELECT track_code, milliseconds FROM nita WHERE discord_user_id = ?', [discordUserId]);
+      const results = await conn.execute('SELECT track_code, milliseconds, last_milliseconds FROM nita WHERE discord_user_id = ?', [discordUserId]);
       return results.rows.map((row) => ({
         trackCode: row.track_code,
         discordUserId,
         milliseconds: row.milliseconds,
+        lastMilliseconds: row.last_milliseconds,
       }));
     },
     /**
@@ -83,8 +95,8 @@ export const planetScaleRepository = () => {
     async selectRanking(trackCode, discordMembers) {
       const discordUserIds = discordMembers.map((member) => member.user.id);
       const results = await conn.execute(
-        'SELECT discord_user_id, milliseconds FROM nita WHERE track_code = ? AND discord_user_id IN (?) ORDER BY milliseconds ASC',
-        [trackCode, discordUserIds],
+        'SELECT discord_user_id, milliseconds FROM nita WHERE discord_user_id IN (?) AND track_code = ? ORDER BY milliseconds ASC',
+        [discordUserIds, trackCode],
       );
       return results.rows.map((row) => ({
         member: discordMembers.find(member => member.user.id === row.discord_user_id) || discordMembers[0],
