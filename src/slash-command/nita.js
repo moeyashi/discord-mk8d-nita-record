@@ -99,19 +99,28 @@ const makeEmbed = (track, lastRecord, newMilliseconds = null) => {
     const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
     ret.color = colorByTimeRank(timeRank);
     ret.fields?.push({
-      name: `${timeRank}落ち\n今回のタイム`,
+      name: `${timeRank}落ち`,
+      value: lastRecord ? `${(lastRecord.milliseconds - newMilliseconds) / 1000}秒更新!` : 'new record!',
+    });
+    ret.fields?.push({
+      name: '今回のタイム',
       value: `${displayMilliseconds(newMilliseconds)} WR + ${(newMilliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
     });
   }
   if (lastRecord) {
-    if (!ret.color) {
+    if (!newMilliseconds) {
       const timeRank = ceilDiff(track.nitaVSWRMilliseconds, lastRecord.milliseconds);
       ret.color = colorByTimeRank(timeRank);
+      ret.fields?.push({
+        name: `${timeRank}落ち`,
+        value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+      });
+    } else {
+      ret.fields?.push({
+        name: '前回のタイム',
+        value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+      });
     }
-    ret.fields?.push({
-      name: '前回のタイム',
-      value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
-    });
   }
   ret.fields?.push({
     name: 'WR',
