@@ -105,6 +105,7 @@ const trackDict = Object.freeze({
   bSCS: makeTrack('シャボンロード', 'bSCS', 203804, ['シャボン']),
   bLAL: makeTrack('Tour ロサンゼルスコースト', 'bLAL', 149282, ['ロス', 'ロサンゼルス', 'ロサンゼルスコースト']),
   bSW: makeTrack('GBA サンセットこうや', 'bSW', 137096, ['サンセット', 'こうや', 'サンセットこうや']),
+  bKC: makeTrack('Wii ノコノコみさき', 'bKC', 201294, ['ノコみさ', 'ノコノコみさき']),
   bVV: makeTrack('Tour バンクーバーバレー', 'bVV', 202333, ['バンクーバー', 'バンクーバーバレー']),
   bRA: makeTrack('Tour ローマアバンティ', 'bRA', 147540, ['ローマ', 'ローマアバンティ']),
   bDKM: makeTrack('GC DKマウンテン', 'bDKM', 213412, ['DKマウンテン', 'dkm', 'DKM']),
