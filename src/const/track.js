@@ -1,4 +1,6 @@
 // @ts-check
+// 参考
+// https://docs.google.com/spreadsheets/d/e/2PACX-1vRBXBdqpurvBmR--bzj9RJmgr7HxAoWVZmlwmhaBK-LYf_BbXn8iAPdH-ogBtXiAwxlTkQgn45PkeRW/pubhtml?gid=0&single=true
 
 import { toMilliseconds } from '../util/time.js';
 
@@ -119,12 +121,24 @@ const trackDict = Object.freeze({
 
 export const trackCodeSet = new Set(Object.keys(trackDict));
 
+/**
+ * コース名を変換する
+ *
+ * - 全角カタカナをひらがなに
+ * - 全角英数を半角に
+ *
+ * @param {string} trackName
+ */
+const normalizeTrackName = (trackName) => {
+  return trackName.replace(/[ァ-ン]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0x60)).replace(/[Ａ-Ｚａ-ｚ０-９]/g, (s) => String.fromCharCode(s.charCodeAt(0) - 0xFEE0));
+};
+
 /** @type {Map<string, string>} */
 const trackCodeMap = Object.entries(trackDict).reduce((acc, [key, track]) => {
   acc.set(key, key);
-  acc.set(track.trackName, key);
+  acc.set(normalizeTrackName(track.trackName), key);
   track.aliases.forEach((v) => {
-    acc.set(v, key);
+    acc.set(normalizeTrackName(v), key);
   });
   return acc;
 }, new Map());
@@ -134,7 +148,7 @@ const trackCodeMap = Object.entries(trackDict).reduce((acc, [key, track]) => {
  * @return {import('../types').Track | null}
  */
 export const searchTrack = (query) => {
-  const code = trackCodeMap.get(query);
+  const code = trackCodeMap.get(normalizeTrackName(query));
   if (code) {
     return trackDict[code] || null;
   }
