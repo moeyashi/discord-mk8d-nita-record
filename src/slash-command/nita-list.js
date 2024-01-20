@@ -11,7 +11,7 @@ export default {
     .setName('nita-list')
     .setDescription('NITAのタイムを確認します。'),
   execute: async (interaction) => {
-    const discordUserId = interaction.member?.user?.id;
+    const discordUserId = interaction.member?.user?.id || interaction.user?.id;
     if (!discordUserId) {
       throw new Error('ユーザーIDが取得できませんでした');
     }
