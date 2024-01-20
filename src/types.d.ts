@@ -39,6 +39,10 @@ export type Track = {
    */
   nitaVSWRMilliseconds: number;
   /**
+   * AllカスタムでのNITAのWR
+   */
+  nitaAllCombinationWRMilliseconds: number;
+  /**
    * コースの別名
    */
   aliases: string[];
