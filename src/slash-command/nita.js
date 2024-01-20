@@ -25,7 +25,7 @@ export default {
       throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
-    const discordUserId = interaction.member?.user?.id;
+    const discordUserId = interaction.member?.user?.id || interaction.user?.id;
     if (!discordUserId) {
       throw new Error('ユーザーIDが取得できませんでした');
     }
