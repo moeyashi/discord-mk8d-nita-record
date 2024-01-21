@@ -36,14 +36,26 @@ export default {
     }).sort((a, b) => a.diffWRnNita - b.diffWRnNita));
 
     await interaction.reply({
-      embeds: groupedNitaAndTrackList.map(([rank, color, nitaAndTrackList]) => ({
-        title: `${rank}`,
-        color,
-        fields: nitaAndTrackList.map((nitaAndTrack) => ({
-          name: nitaAndTrack.track?.trackName || nitaAndTrack.nita.trackCode,
-          value: `${displayMilliseconds(nitaAndTrack.nita.milliseconds)} WR + ${nitaAndTrack.diffWRnNita / 1000}秒`,
-        })),
-      })),
+      // embedsは最大10個まで、fieldsは最大25個しか指定できないが、track数が98なので最悪のケースを考えても9embedsで済む
+      // `[1落ち1fields, 2落ち1fields, 3落ち1fields, 4落ち1fields, 5落ち1fields, 6落ち以上25fields, 6落ち以上25fields, 6落ち以上25fields, 6落ち以上18fields]`
+      embeds: groupedNitaAndTrackList.flatMap(([rank, color, nitaAndTrackList]) => {
+        /** @type {import('discord.js').APIEmbed[]} */
+        const embeds = [];
+        return nitaAndTrackList.reduce((pv, cv, i) => {
+          if (i % 25 === 0) {
+            pv.push({
+              title: `${rank}`,
+              color,
+              fields: [],
+            });
+          }
+          pv[pv.length - 1].fields?.push({
+            name: cv.track?.trackName || cv.nita.trackCode,
+            value: `${displayMilliseconds(cv.nita.milliseconds)} WR + ${cv.diffWRnNita / 1000}秒`,
+          });
+          return pv;
+        }, embeds);
+      }),
     });
   },
 };
