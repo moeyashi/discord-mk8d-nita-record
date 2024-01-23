@@ -96,12 +96,23 @@ const makeEmbed = (track, lastRecord, newMilliseconds = null) => {
     fields: [],
   };
   if (newMilliseconds !== null) {
-    const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
-    ret.color = colorByTimeRank(timeRank);
-    ret.fields?.push({
-      name: `${timeRank}落ち`,
-      value: lastRecord ? `${(lastRecord.milliseconds - newMilliseconds) / 1000}秒更新!` : 'new record!',
-    });
+    if (lastRecord) {
+      if (lastRecord.milliseconds > newMilliseconds) {
+        const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
+        ret.color = colorByTimeRank(timeRank);
+        ret.fields?.push({
+          name: `${timeRank}落ち`,
+          value: `${(lastRecord.milliseconds - newMilliseconds) / 1000}秒更新!`,
+        });
+      }
+    } else {
+      const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
+      ret.color = colorByTimeRank(timeRank);
+      ret.fields?.push({
+        name: `${timeRank}落ち`,
+        value: 'new record!',
+      });
+    }
     ret.fields?.push({
       name: '今回のタイム',
       value: `${displayMilliseconds(newMilliseconds)} WR + ${(newMilliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
