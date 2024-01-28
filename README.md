@@ -1,7 +1,5 @@
 # DISCORD MK8DX NITA RECORD
 
-公開していないのでサーバー管理者にホスティングしてもらうこと。
-
 ## serve interaction webhook
 
 1. `npm install`
