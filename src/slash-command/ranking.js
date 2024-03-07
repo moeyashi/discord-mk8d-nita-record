@@ -1,9 +1,9 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
-import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { displayMilliseconds } from '../util/time.js';
 import { colorByTimeRank } from '../const/color.js';
+import { postgresNitaRepository } from '../infra/repository/nita.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -36,7 +36,7 @@ export default {
 
     const serverMembers = await interaction.guild.members.fetch({ limit: 200 });
 
-    const planetScaleRepo = planetScaleRepository();
+    const planetScaleRepo = postgresNitaRepository();
 
     const ranking = await planetScaleRepo.selectRanking(track.code, Array.from(serverMembers.values()));
 

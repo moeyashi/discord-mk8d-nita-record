@@ -1,5 +1,5 @@
 table "nita" {
-  schema = schema.nita
+  schema = schema.public
   column "track_code" {
     null = false
     type = varchar(5)
@@ -10,19 +10,17 @@ table "nita" {
   }
   column "milliseconds" {
     null     = true
-    type     = mediumint
-    unsigned = true
+    type     = integer
   }
   column "last_milliseconds" {
     null     = true
-    type     = mediumint
-    unsigned = true
+    type     = integer
   }
   primary_key {
     columns = [column.discord_user_id, column.track_code]
   }
 }
-schema "nita" {
-  charset = "utf8mb4"
-  collate = "utf8mb4_0900_ai_ci"
+schema "public" {
+}
+schema "repmgr" {
 }

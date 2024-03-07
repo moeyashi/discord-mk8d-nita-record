@@ -15,6 +15,7 @@
 
 1. `atlas schema apply --url "YOUR DB URL" --file schema.hcl`
   PlanetScaleの場合は`mysql://user:password@host/dbname?tls=true`
+  Fly.ioのPostgresの場合は`flyctl proxy 5432 -a [postgres app name]`を実行してから`postgres://user:password@host?sslmode=disable`
 
 ## deploy bot
 
@@ -25,5 +26,4 @@
 
 - [discord](https://discord.com/) Membersを使うので`SERVER MEMBERS INTENT`をONにすること。
 - [Atlas](https://atlasgo.io/) DBのマイグレーションに使っています。
-- [PlanetScale](https://planetscale.com/) MySQLのホスティングに使っています。
-- [Fly.io](https://fly.io/) BOTのホスティングに使っています。
+- [Fly.io](https://fly.io/) BOT・Postgresのホスティングに使っています。
