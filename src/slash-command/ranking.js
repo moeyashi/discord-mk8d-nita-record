@@ -13,7 +13,10 @@ export default {
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
   execute: async (interaction) => {
     if (!interaction.guild) {
-      throw new Error('サーバー内で実行してください');
+      if (!interaction.inGuild()) {
+        throw new Error('サーバー内で実行してください。rankingコマンドはDMやグループDMでは実行できません。');
+      }
+      throw new Error('不明なエラー：サーバーが見つかりませんでした。スクショしてXで連絡してもらえたらありがたいです！');
     }
 
     const trackQuery = interaction.options.getString('track');
