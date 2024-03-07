@@ -1,9 +1,9 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
-import { planetScaleRepository } from '../infra/repository/planetscale.js';
 import { getByCode } from '../const/track.js';
 import { displayMilliseconds } from '../util/time.js';
 import { colorByTimeRank } from '../const/color.js';
+import { postgresNitaRepository } from '../infra/repository/nita.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -16,7 +16,7 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    const repository = planetScaleRepository();
+    const repository = postgresNitaRepository();
 
     const nitaList = await repository.selectNitaByUser(discordUserId);
     if (nitaList.length === 0) {
