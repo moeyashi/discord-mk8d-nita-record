@@ -3,22 +3,19 @@ import { SlashCommandBuilder } from 'discord.js';
 import { getByCode } from '../const/track.js';
 import { displayMilliseconds } from '../util/time.js';
 import { colorByTimeRank } from '../const/color.js';
-import { postgresNitaRepository } from '../infra/repository/nita.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
   data: new SlashCommandBuilder()
     .setName('nita-list')
     .setDescription('NITAのタイムを確認します。'),
-  execute: async (interaction) => {
+  execute: async (interaction, nitaRepository) => {
     const discordUserId = interaction.member?.user?.id || interaction.user?.id;
     if (!discordUserId) {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    const repository = postgresNitaRepository();
-
-    const nitaList = await repository.selectNitaByUser(discordUserId);
+    const nitaList = await nitaRepository.selectNitaByUser(discordUserId);
     if (nitaList.length === 0) {
       await interaction.reply({
         content: 'NITAのタイムが登録されていません。',
