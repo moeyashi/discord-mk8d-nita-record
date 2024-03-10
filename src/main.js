@@ -3,8 +3,11 @@ import dotenv from 'dotenv';
 import { readdir } from 'fs/promises';
 import { join } from 'path';
 import { Client, GatewayIntentBits } from 'discord.js';
+import { postgresNitaRepository } from './infra/repository/nita.js';
 
 dotenv.config();
+
+const nitaRepository = postgresNitaRepository();
 
 const main = async () => {
   // Create a new client instance
@@ -25,9 +28,9 @@ const main = async () => {
       continue;
     }
     if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args));
+      client.once(event.name, (...args) => event.execute(nitaRepository, ...args));
     } else {
-      client.on(event.name, (...args) => event.execute(...args));
+      client.on(event.name, (...args) => event.execute(nitaRepository, ...args));
     }
   }
   console.info('Loaded events!');

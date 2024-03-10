@@ -3,7 +3,6 @@ import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
 import { colorByTimeRank } from '../const/color.js';
-import { postgresNitaRepository } from '../infra/repository/nita.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -12,7 +11,7 @@ export default {
     .setDescription('NITAのタイムを登録・確認します。timeを指定しない場合は確認のみします。')
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
     .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
-  execute: async (interaction) => {
+  execute: async (interaction, nitaRepository) => {
     const trackQuery = interaction.options.getString('track');
     const inputTime = interaction.options.getInteger('time');
 
@@ -30,9 +29,7 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    const repository = postgresNitaRepository();
-
-    const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
+    const lastRecord = await nitaRepository.selectNitaByUserAndTrack(discordUserId, track.code);
 
     if (!inputTime) {
       await interaction.reply(doProcessGetLastRecordCommand(track, lastRecord));
@@ -52,9 +49,9 @@ export default {
     /** @type {import('../types').Nita} */
     const newNita = { trackCode: track.code, discordUserId, milliseconds: newMilliseconds, lastMilliseconds: lastRecord?.milliseconds };
     if (lastRecord === null) {
-      await repository.insertNita(newNita);
+      await nitaRepository.insertNita(newNita);
     } else {
-      await repository.updateNita(newNita);
+      await nitaRepository.updateNita(newNita);
     }
 
     await interaction.reply({

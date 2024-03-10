@@ -2,7 +2,6 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { ceilDiff, displayMilliseconds } from '../util/time.js';
-import { postgresNitaRepository } from '../infra/repository/nita.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -10,7 +9,7 @@ export default {
     .setName('back')
     .setDescription('1つ前の状態に戻します。連続して実行はできません。')
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
-  execute: async (interaction) => {
+  execute: async (interaction, nitaRepository) => {
     const trackQuery = interaction.options.getString('track');
 
     if (!trackQuery) {
@@ -27,9 +26,7 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    const repository = postgresNitaRepository();
-
-    const lastRecord = await repository.selectNitaByUserAndTrack(discordUserId, track.code);
+    const lastRecord = await nitaRepository.selectNitaByUserAndTrack(discordUserId, track.code);
 
     if (!lastRecord) {
       await interaction.reply({
@@ -42,7 +39,7 @@ export default {
 
     if (!newMilliseconds) {
       // 履歴がない場合は削除する
-      await repository.deleteNita(discordUserId, track.code);
+      await nitaRepository.deleteNita(discordUserId, track.code);
       await interaction.reply({
         content: `${track.trackName}のタイムを削除しました。`,
       });
@@ -50,7 +47,7 @@ export default {
     } else {
       lastRecord.lastMilliseconds = undefined;
       lastRecord.milliseconds = newMilliseconds;
-      await repository.updateNita(lastRecord);
+      await nitaRepository.updateNita(lastRecord);
       await interaction.reply({
         content: `タイムを戻しました。\n\n${makeMetaMessage(track, lastRecord)}`,
       });

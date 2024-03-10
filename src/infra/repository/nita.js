@@ -10,6 +10,9 @@ import postgres from 'postgres';
  * @typedef {import('../../types').Nita} UpdateNitaParameters
  */
 
+/**
+ * @returns {import('../../types').NitaRepository}
+ */
 export const postgresNitaRepository = () => {
   const config = {
     host: process.env.DATABASE_HOST,

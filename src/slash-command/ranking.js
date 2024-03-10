@@ -3,7 +3,6 @@ import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { displayMilliseconds } from '../util/time.js';
 import { colorByTimeRank } from '../const/color.js';
-import { postgresNitaRepository } from '../infra/repository/nita.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -11,7 +10,7 @@ export default {
     .setName('ranking')
     .setDescription('サーバー内のランキングを表示します。')
     .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
-  execute: async (interaction) => {
+  execute: async (interaction, nitaRepository) => {
     if (!interaction.guild) {
       if (!interaction.inGuild()) {
         throw new Error('サーバー内で実行してください。rankingコマンドはDMやグループDMでは実行できません。');
@@ -36,9 +35,7 @@ export default {
 
     const serverMembers = await interaction.guild.members.fetch({ limit: 200 });
 
-    const planetScaleRepo = postgresNitaRepository();
-
-    const ranking = await planetScaleRepo.selectRanking(track.code, Array.from(serverMembers.values()));
+    const ranking = await nitaRepository.selectRanking(track.code, Array.from(serverMembers.values()));
 
     if (ranking.length === 0) {
       await interaction.followUp({
