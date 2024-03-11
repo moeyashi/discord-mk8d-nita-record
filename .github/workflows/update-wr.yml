@@ -22,7 +22,7 @@ jobs:
         id: setup-rye
         with:
           enable-cache: true
-          working-directory: ./wr-python
+          working-directory: wr-python
       - name: Install dependencies
         if: steps.setup-rye.outputs.cache-hit != 'true'
         run: |
