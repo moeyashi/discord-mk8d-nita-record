@@ -14,7 +14,7 @@ class LeaderBoard:
         self.RRElements = self.soup.find_all("td", {"class": "s42"})
 
     def __gettime(self, elements, index):
-        return f"{elements[index].text.strip().strip("*").replace(":","").replace(".","")}"
+        return f"{elements[index].text.strip().strip('*').replace(':','').replace('.','')}"
     
     
     # VSカスタムのWRを取得
