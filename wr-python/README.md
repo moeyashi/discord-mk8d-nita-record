@@ -1,5 +1,9 @@
 # wr-python
 
-LeaderBoard.pyが本体です
+## make track.js
 
-sample.py（とdata.csv）は自分が使っていた時のサンプルです
+```bash
+cd ./wr-python
+rye sync
+rye run python ./src/wr_python/make_track_js.py
+```
