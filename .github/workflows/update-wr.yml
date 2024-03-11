@@ -1,0 +1,37 @@
+name: Update WR
+
+on:
+  schedule:
+    # 15時に実行
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: eifinger/setup-rye@v2
+        id: setup-rye
+        with:
+          enable-cache: true
+          working-directory: ./wr-python
+      - name: Install dependencies
+        if: steps.setup-rye.outputs.cache-hit != 'true'
+        run: |
+          rye sync --no-lock
+      - name: Create track.js
+        run: rye run python ./src/wr_python/make_track_js.py
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          add-paths: "src/const/track.js"
+          commit-message: "feat(track.js): update WR"
+          delete-branch: true
+          title: Update WR

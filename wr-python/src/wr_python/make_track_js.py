@@ -128,13 +128,8 @@ for i in range(1, 97):
     }
 
 
-print(template.render(wr=wr))
+track_js = template.render(wr=wr)
 
-# with open("data.csv", "w", newline="") as f:
-#     writer = csv.writer(f)
-
-#     writer.writerow(trackList)
-#     writer.writerow(WRList)
-#     writer.writerow(RRList)
-#     writer.writerow(AllWRList)
-#     writer.writerow(AllRRList)
+with open("../src/const/track.js", "w", encoding='utf-8') as f:
+    f.write(track_js)
+    f.write("\n")
