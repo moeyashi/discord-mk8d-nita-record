@@ -47,7 +47,7 @@ export default {
     const groupedRanking = groppByRank(track, ranking);
 
     await interaction.followUp({
-      content: `NITAランキング - ${track.trackName}`,
+      content: `## NITAランキング - ${track.trackName}\n※一時的に上位20名までを出力しています`,
       embeds: groupedRanking.flatMap(([rank, color, nita]) => {
         /** @type {import('discord.js').APIEmbed[]} */
         const embeds = [];
