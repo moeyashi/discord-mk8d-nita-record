@@ -51,10 +51,11 @@ export default {
       embeds: groupedRanking.flatMap(([rank, color, nita]) => {
         /** @type {import('discord.js').APIEmbed[]} */
         const embeds = [];
+        const numOfUsers = nita.length;
         return nita.reduce((pv, cv, i) => {
           if (i % 25 === 0) {
             pv.push({
-              title: `${rank}`,
+              title: `${rank} - ${numOfUsers} users`,
               color,
               fields: [],
             });
