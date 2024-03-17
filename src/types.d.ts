@@ -8,6 +8,9 @@ import type {
 
 export type EventType = keyof ClientEvents;
 
+type InsertNitaParameters = Nita;
+type UpdateNitaParameters = Nita;
+
 export type NitaRepository = {
   insertNita: (params: InsertNitaParameters) => Promise<any>;
   updateNita: (params: UpdateNitaParameters) => Promise<any>;
@@ -19,7 +22,8 @@ export type NitaRepository = {
   selectNitaByUser: (discordUserId: string) => Promise<Nita[]>;
   selectRanking: (
     trackCode: string,
-    discordMembers: GuildMember[]
+    discordMembers: GuildMember[],
+    limit?: number
   ) => Promise<{ member: GuildMember; milliseconds: number }[]>;
 };
 

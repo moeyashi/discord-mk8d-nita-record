@@ -6,6 +6,10 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
+    "db:run": "docker run --name mk8d-nita-record-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -p 25432:5432 -d postgres",
+    "db:migrate": "atlas schema apply --url \"postgres://postgres:postgres@localhost:25432?sslmode=disable\" --file schema.hcl --auto-approve",
+    "db:clean": "atlas schema clean --url \"postgres://postgres:postgres@localhost:25432?sslmode=disable\" --auto-approve",
+    "db:reset": "npm run db:clean && npm run db:migrate",
     "test": "vitest",
     "start": "node .",
     "deploy:commands": "node ./src/deploy-commands.js"

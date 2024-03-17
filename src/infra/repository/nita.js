@@ -18,7 +18,7 @@ export const postgresNitaRepository = () => {
     host: process.env.DATABASE_HOST,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    port: 5432,
+    port: Number(process.env.DATABASE_PORT || '5432'),
   };
 
   const sql = postgres(config);
@@ -88,15 +88,15 @@ export const postgresNitaRepository = () => {
         lastMilliseconds: row.last_milliseconds,
       }));
     },
-    /**
-     * @param {string} trackCode
-     * @param {import('discord.js').GuildMember[]} discordMembers
-     * @returns {Promise<{member: import('discord.js').GuildMember, milliseconds: number}[]>}
-     */
-    async selectRanking(trackCode, discordMembers) {
+    async selectRanking(trackCode, discordMembers, limit = 20) {
       const discordUserIds = discordMembers.map((member) => member.user.id);
       const results = await sql`
-        SELECT discord_user_id, milliseconds FROM nita WHERE discord_user_id IN ${sql(discordUserIds)} AND track_code = ${trackCode} ORDER BY milliseconds ASC
+        SELECT discord_user_id, milliseconds
+        FROM nita
+        WHERE discord_user_id IN ${sql(discordUserIds)}
+        AND track_code = ${trackCode}
+        ORDER BY milliseconds ASC
+        LIMIT ${limit}
       `;
       return results.map((row) => ({
         member: discordMembers.find(member => member.user.id === row.discord_user_id) || discordMembers[0],
