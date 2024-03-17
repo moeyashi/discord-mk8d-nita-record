@@ -18,6 +18,7 @@ jobs:
           - 25432:5432
     steps:
       - uses: actions/checkout@v4
+      - uses: ariga/setup-atlas@master
       - uses: actions/setup-node@v4
         with:
           cache: "npm"
