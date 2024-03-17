@@ -9,7 +9,8 @@ export default {
   data: new SlashCommandBuilder()
     .setName('ranking')
     .setDescription('サーバー内のランキングを表示します。')
-    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
+    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
+    .addIntegerOption(option => option.setName('page').setDescription('1の場合1位から20位を、2の場合21位から40位を出力します')),
   execute: async (interaction, nitaRepository) => {
     if (!interaction.guild) {
       if (!interaction.inGuild()) {
@@ -23,6 +24,8 @@ export default {
       throw new Error('コース名を指定してください');
     }
 
+    const page = interaction.options.getInteger('page') || 1;
+
     const track = searchTrack(trackQuery);
     if (!track) {
       interaction.reply({
@@ -35,7 +38,7 @@ export default {
 
     const serverMembers = await interaction.guild.members.fetch({ limit: 200 });
 
-    const ranking = await nitaRepository.selectRanking(track.code, Array.from(serverMembers.values()));
+    const ranking = await nitaRepository.selectRanking(track.code, Array.from(serverMembers.values()), 20, (page - 1) * 20);
 
     if (ranking.length === 0) {
       await interaction.followUp({
@@ -44,17 +47,18 @@ export default {
       return;
     }
 
-    const groupedRanking = groppByRank(track, ranking);
+    const groupedRanking = groupByRank(track, ranking);
 
     await interaction.followUp({
-      content: `## NITAランキング - ${track.trackName}\n※一時的に上位20名までを出力しています`,
+      content: `## NITAランキング - ${track.trackName}\n${(page - 1) * 20 + 1}位から${Math.min(page * 20, ranking.length)}位まで`,
       embeds: groupedRanking.flatMap(([rank, color, nita]) => {
         /** @type {import('discord.js').APIEmbed[]} */
         const embeds = [];
+        const numOfUsers = nita.length;
         return nita.reduce((pv, cv, i) => {
           if (i % 25 === 0) {
             pv.push({
-              title: `${rank}`,
+              title: `${rank} - ${numOfUsers} users`,
               color,
               fields: [],
             });
@@ -76,7 +80,7 @@ export default {
  * @param {Array<{ member: import('discord.js').GuildMember, milliseconds: number }>} ranking
  * @returns {Array<[string, number|undefined, Array<{ member: import('discord.js').GuildMember, milliseconds: number }>]>}
  */
-const groppByRank = (track, ranking) => {
+const groupByRank = (track, ranking) => {
   /** @type {Array<[string, number|undefined, Array<{ member: import('discord.js').GuildMember, milliseconds: number }>]>} */
   const ret = [
     ['1落ち', colorByTimeRank(1), []],

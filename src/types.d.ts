@@ -23,7 +23,8 @@ export type NitaRepository = {
   selectRanking: (
     trackCode: string,
     discordMembers: GuildMember[],
-    limit?: number
+    limit?: number,
+    offset?: number
   ) => Promise<{ member: GuildMember; milliseconds: number }[]>;
 };
 
