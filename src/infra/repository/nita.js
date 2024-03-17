@@ -88,7 +88,7 @@ export const postgresNitaRepository = () => {
         lastMilliseconds: row.last_milliseconds,
       }));
     },
-    async selectRanking(trackCode, discordMembers, limit = 20) {
+    async selectRanking(trackCode, discordMembers, limit = 20, offset = 0) {
       const discordUserIds = discordMembers.map((member) => member.user.id);
       const results = await sql`
         SELECT discord_user_id, milliseconds
@@ -96,6 +96,7 @@ export const postgresNitaRepository = () => {
         WHERE discord_user_id IN ${sql(discordUserIds)}
         AND track_code = ${trackCode}
         ORDER BY milliseconds ASC
+        OFFSET ${offset}
         LIMIT ${limit}
       `;
       return results.map((row) => ({
