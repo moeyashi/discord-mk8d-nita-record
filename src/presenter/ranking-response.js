@@ -17,7 +17,7 @@ export const rankingResponse = (track, page, ranking) => {
 
   const groupedRanking = groupByRank(track, ranking);
   return {
-    content: `## NITAランキング - ${track.trackName}\n${(page - 1) * 20 + 1}位から${Math.min(page * 20, (page - 1) * 20 + ranking.length)}位まで`,
+    content: `## NITAランキング - ${track.trackName}\n${(page - 1) * 20 + 1}位から${(page - 1) * 20 + ranking.length}位まで`,
     embeds: groupedRanking.flatMap(([rank, color, nita]) => {
       /** @type {import('discord.js').APIEmbed[]} */
       const embeds = [];
@@ -58,15 +58,15 @@ const groupByRank = (track, ranking) => {
   ];
   ranking.forEach((nita) => {
     const diffWRnNita = nita.milliseconds - track.nitaVSWRMilliseconds;
-    if (diffWRnNita < 1000) {
+    if (diffWRnNita <= 1000) {
       ret[0][2].push(nita);
-    } else if (diffWRnNita < 2000) {
+    } else if (diffWRnNita <= 2000) {
       ret[1][2].push(nita);
-    } else if (diffWRnNita < 3000) {
+    } else if (diffWRnNita <= 3000) {
       ret[2][2].push(nita);
-    } else if (diffWRnNita < 4000) {
+    } else if (diffWRnNita <= 4000) {
       ret[3][2].push(nita);
-    } else if (diffWRnNita < 5000) {
+    } else if (diffWRnNita <= 5000) {
       ret[4][2].push(nita);
     } else {
       ret[5][2].push(nita);
