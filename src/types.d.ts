@@ -6,6 +6,8 @@ import type {
   SlashCommandBuilder,
 } from "discord.js";
 
+export type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+
 export type EventType = keyof ClientEvents;
 
 type InsertNitaParameters = Nita;
