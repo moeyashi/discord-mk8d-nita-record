@@ -8,8 +8,8 @@ class LeaderBoard:
     # スプレッドシートのURL
     url = r"https://docs.google.com/spreadsheets/d/e/2PACX-1vRBXBdqpurvBmR--bzj9RJmgr7HxAoWVZmlwmhaBK-LYf_BbXn8iAPdH-ogBtXiAwxlTkQgn45PkeRW/pubhtml?gid=0&single=true"
 
-    # hrefからyoutubeリンクを抽出するための正規表現
-    pattern = r'(https://www\.youtube\.com/watch\?v%3D[^&]*|https://youtu\.be/[^\?&]*)'
+    # hrefから動画リンクを抽出するための正規表現
+    pattern = r'(https://(www\.)?youtube\.com/watch\?v%3D[^&]*|https://youtu\.be/[^\?&]*|https://vt\.tiktok\.com/[^/\?&]*)'
 
     def __init__(self):
         response = requests.get(self.url)
