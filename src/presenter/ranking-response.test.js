@@ -8,6 +8,7 @@ describe(rankingResponse, () => {
     trackName: 'マリオカートスタジアム',
     // 値は適当
     nitaVSWRMilliseconds: 60 * 1000 + 48 * 1000 + 256,
+    nitaVSWRUrl: 'https://example.com',
     nitaAllCombinationWRMilliseconds: 60 * 1000 + 47 * 1000 + 825,
     aliases: [],
   };

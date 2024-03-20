@@ -34,6 +34,7 @@ export default {
             value: displayMilliseconds(track.nitaAllCombinationWRMilliseconds),
           },
         ],
+        url: track.nitaVSWRUrl,
       }],
     });
     return;

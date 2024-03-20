@@ -91,6 +91,7 @@ const makeEmbed = (track, lastRecord, newMilliseconds = null) => {
   const ret = {
     title: track.trackName,
     fields: [],
+    url: track.nitaVSWRUrl,
   };
   if (newMilliseconds !== null) {
     if (lastRecord) {
