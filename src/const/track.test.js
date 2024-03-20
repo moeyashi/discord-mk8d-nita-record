@@ -298,11 +298,20 @@ describe('trackCodeSet', () => {
 });
 
 describe('getByCode', () => {
-  test.each(Array.from(trackCodeSet))('getByCode(%s)がWRを0以上の値をもつ', (code) => {
+  describe.each(Array.from(trackCodeSet))('%sを取得した場合', (code) => {
     const track = getByCode(code);
-    expect(track).not.toBeNull();
-    expect(track.code).toEqual(code);
-    expect(track.nitaVSWRMilliseconds).toBeGreaterThan(0);
-    expect(track.nitaAllCombinationWRMilliseconds).toBeGreaterThan(0);
+    test('nullでない', () => {
+      expect(track).not.toBeNull();
+    });
+    test('codeが一致する', () => {
+      expect(track.code).toEqual(code);
+    });
+    test('WRが0以上の値をもつ', () => {
+      expect(track.nitaVSWRMilliseconds).toBeGreaterThan(0);
+      expect(track.nitaAllCombinationWRMilliseconds).toBeGreaterThan(0);
+    });
+    test('nitaVSWRUrlがhttpから始まる', () => {
+      expect(track.nitaVSWRUrl).toMatch(/^http/);
+    });
   });
 });
