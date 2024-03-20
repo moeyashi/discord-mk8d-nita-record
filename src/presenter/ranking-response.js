@@ -6,9 +6,10 @@ import { displayMilliseconds } from '../util/time.js';
  * @param {import('../types').Track} track
  * @param {number} page
  * @param {import('../types').UnwrapPromise<ReturnType<import('../types').NitaRepository['selectRanking']>>} ranking
+ * @param {number | null} myRank
  * @return {import('discord.js').InteractionReplyOptions}
  */
-export const rankingResponse = (track, page, ranking) => {
+export const rankingResponse = (track, page, ranking, myRank) => {
   if (ranking.length === 0) {
     return {
       content: `まだ${track.trackName}のNITAのタイムが登録されていません。`,
@@ -17,7 +18,7 @@ export const rankingResponse = (track, page, ranking) => {
 
   const groupedRanking = groupByRank(track, ranking);
   return {
-    content: `## NITAランキング - ${track.trackName}\n${(page - 1) * 20 + 1}位から${(page - 1) * 20 + ranking.length}位まで`,
+    content: `### NITAランキング - ${track.trackName}\n${(page - 1) * 20 + 1}位から${(page - 1) * 20 + ranking.length}位まで${myRank ? `\n\nあなたの順位: ${myRank}位` : ''}`,
     embeds: groupedRanking.flatMap(([rank, color, nita]) => {
       /** @type {import('discord.js').APIEmbed[]} */
       const embeds = [];

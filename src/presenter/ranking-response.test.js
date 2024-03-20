@@ -18,15 +18,15 @@ describe(rankingResponse, () => {
         milliseconds: sampleTrack.nitaVSWRMilliseconds + i,
       }));
       describe('1ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 1, ranking);
+        const actual = rankingResponse(sampleTrack, 1, ranking, null);
         test('1位から20位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('## NITAランキング - マリオカートスタジアム\n1位から20位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から20位まで');
         });
       });
       describe('2ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 2, ranking);
+        const actual = rankingResponse(sampleTrack, 2, ranking, null);
         test('21位から40位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('## NITAランキング - マリオカートスタジアム\n21位から40位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n21位から40位まで');
         });
       });
     });
@@ -36,16 +36,34 @@ describe(rankingResponse, () => {
         milliseconds: sampleTrack.nitaVSWRMilliseconds + i,
       }));
       describe('1ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 1, ranking);
+        const actual = rankingResponse(sampleTrack, 1, ranking, null);
         test('1位から19位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('## NITAランキング - マリオカートスタジアム\n1位から19位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から19位まで');
         });
       });
       describe('2ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 2, ranking);
+        const actual = rankingResponse(sampleTrack, 2, ranking, null);
         test('21位から39位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('## NITAランキング - マリオカートスタジアム\n21位から39位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n21位から39位まで');
         });
+      });
+    });
+  });
+  describe('contentに自分の順位が含まれる', () => {
+    const ranking = [{
+      member: makeGuildMember({ nickname: 'user' }),
+      milliseconds: sampleTrack.nitaVSWRMilliseconds,
+    }];
+    describe('自分の順位が1位の場合', () => {
+      const actual = rankingResponse(sampleTrack, 1, ranking, 1);
+      test('自分の順位が含まれるメッセージが返却されること', () => {
+        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から1位まで\n\nあなたの順位: 1位');
+      });
+    });
+    describe('自分の記録が未登録の場合', () => {
+      const actual = rankingResponse(sampleTrack, 1, ranking, null);
+      test('自分の順位が含まれないメッセージが返却されること', () => {
+        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から1位まで');
       });
     });
   });
@@ -81,6 +99,7 @@ describe(rankingResponse, () => {
           { member: makeGuildMember({ nickname: 'user23' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 7000 },
           { member: makeGuildMember({ nickname: 'user24' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 7001 },
         ],
+        null,
       );
       test('1落ちのembedが返却されること', () => {
         expect(actual.embeds?.[0]).toEqual({
@@ -165,6 +184,7 @@ describe(rankingResponse, () => {
               member: makeGuildMember({ nickname: `user${i + 1}` }),
               milliseconds: sampleTrack.nitaVSWRMilliseconds,
             })),
+            null,
           );
           expect(actual.embeds?.length).toEqual(1);
         });
@@ -176,40 +196,16 @@ describe(rankingResponse, () => {
               member: makeGuildMember({ nickname: `user${i + 1}` }),
               milliseconds: sampleTrack.nitaVSWRMilliseconds,
             })),
+            null,
           );
           expect(actual.embeds?.length).toEqual(2);
         });
       });
     });
   });
-  test('正常系', () => {
-    const actual = rankingResponse(
-      sampleTrack,
-      1,
-      [
-        { member: makeGuildMember({ nickname: 'user1' }), milliseconds: 60 * 1000 + 48 * 1000 + 356 },
-      ],
-    );
-    const expected = {
-      content: '## NITAランキング - マリオカートスタジアム\n1位から1位まで',
-      embeds: [
-        {
-          title: '1落ち - 1 users',
-          color: 13632027,
-          fields: [
-            {
-              name: 'user1',
-              value: '1:48.356 WR + 0.1秒',
-            },
-          ],
-        },
-      ],
-    };
-    expect(actual).toEqual(expected);
-  });
 
   describe('ランキングが空の場合', () => {
-    const actual = rankingResponse(sampleTrack, 1, []);
+    const actual = rankingResponse(sampleTrack, 1, [], null);
     test('タイムが登録されていないメッセージが返却されること', () => {
       const expected = {
         content: 'まだマリオカートスタジアムのNITAのタイムが登録されていません。',
