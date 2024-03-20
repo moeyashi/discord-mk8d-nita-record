@@ -104,5 +104,21 @@ export const postgresNitaRepository = () => {
         milliseconds: row.milliseconds,
       }));
     },
+    async selectRankByUser(trackCode, discordUserId, discordMembers) {
+      const discordUserIds = discordMembers.map((member) => member.user.id);
+      const results = await sql`
+        SELECT COUNT(n1.discord_user_id) as rank
+        FROM nita as n1
+        INNER JOIN nita as n2 on n2.discord_user_id = ${discordUserId} AND n1.track_code = n2.track_code
+        WHERE n1.discord_user_id IN ${sql(discordUserIds)}
+        AND n1.track_code = ${trackCode}
+        AND (
+          n1.milliseconds < n2.milliseconds
+          OR n1.discord_user_id = ${discordUserId}
+        )
+      `;
+      const rank = Number(results[0].rank);
+      return rank || null;
+    },
   };
 };

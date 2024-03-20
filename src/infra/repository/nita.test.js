@@ -72,4 +72,39 @@ describe('postgresNitaRepository', () => {
       ]);
     });
   });
+
+  describe('selectRankByUser', async () => {
+    const trackCode = 'MKS';
+    const users = Array.from({ length: 21 }).map((_, i) => ({
+      user: { id: `${i + 1}` },
+    }));
+    const userId = '1';
+    beforeAll(async () => {
+      execSync('npm run db:reset');
+      for (const i of users) {
+        await repo.insertNita({
+          discordUserId: i.user.id,
+          trackCode,
+          milliseconds: i.user.id === '2' ? 99999 : 1000 + Number(i.user.id),
+        });
+      }
+    });
+
+    test('1位のユーザーを指定した場合1が返却されること', async () => {
+      const actual = await repo.selectRankByUser(trackCode, userId, users);
+      expect(actual).toEqual(1);
+    });
+    test('2位のユーザーを指定した場合2が返却されること', async () => {
+      const actual = await repo.selectRankByUser(trackCode, '3', users);
+      expect(actual).toEqual(2);
+    });
+    test('21位のユーザーを指定した場合21が返却されること', async () => {
+      const actual = await repo.selectRankByUser(trackCode, '2', users);
+      expect(actual).toEqual(21);
+    });
+    test('記録なしユーザーを指定した場合nullが返却されること', async () => {
+      const actual = await repo.selectRankByUser(trackCode, '22', users);
+      expect(actual).toBeNull();
+    });
+  });
 });

@@ -124,5 +124,15 @@
     "space-unary-ops": "error",
     "spaced-comment": "error",
     "yoda": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.test.js"
+      ],
+      "rules": {
+        "max-nested-callbacks": "off"
+      }
+    }
+  ]
 }
