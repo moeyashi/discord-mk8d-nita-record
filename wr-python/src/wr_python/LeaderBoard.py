@@ -9,7 +9,7 @@ class LeaderBoard:
     url = r"https://docs.google.com/spreadsheets/d/e/2PACX-1vRBXBdqpurvBmR--bzj9RJmgr7HxAoWVZmlwmhaBK-LYf_BbXn8iAPdH-ogBtXiAwxlTkQgn45PkeRW/pubhtml?gid=0&single=true"
 
     # hrefからyoutubeリンクを抽出するための正規表現
-    pattern = r'(https://www\.youtube\.com/watch\?v%3D[^&]*)'
+    pattern = r'(https://www\.youtube\.com/watch\?v%3D[^&]*|https://youtu\.be/[^\?&]*)'
 
     def __init__(self):
         response = requests.get(self.url)
@@ -25,11 +25,12 @@ class LeaderBoard:
         # hrefの中身の例
         # 'https://www.google.com/url?q=https://www.youtube.com/watch?v%3DlQH-iX37plc&sa=D&source=editors&ust=1710917293879353&usg=AOvVaw3PqvmWOrefTz9JYKUFBSBV'
         href = f"{elements[index].a.get('href')}"
+        print(href)
         match = re.search(self.pattern, href)
         if match:
             return unquote(match.group(1))
         else:
-            return None
+            return ''
 
     # VSカスタムのWRを取得
     def getVSWR(self, trackID): # trackIDはMKS=1からbRRw=96までの整数

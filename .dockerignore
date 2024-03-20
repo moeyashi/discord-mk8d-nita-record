@@ -1,5 +1,7 @@
 .github/
+.vscode/
 node_modules/
+pscale_dump*/
 wr-python/
 **/.env*
 .eslint*
@@ -8,3 +10,4 @@ fly.toml
 **/*.md
 schema.hcl
 **/*.test.*
+vite.config.js
