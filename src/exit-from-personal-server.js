@@ -25,12 +25,12 @@ const main = async () => {
       if (excludeGuildIds.includes(guild.id)) {
         continue;
       }
-      if (guild.approximate_member_count > 30) {
+      if (guild.approximate_member_count > 40) {
         continue;
       }
       /** @type {import('discord.js').RESTGetAPIGuildMembersQuery} */
       const guildMembersQuery = {
-        limit: 30,
+        limit: 40,
       };
       /** @type {import('discord.js').RESTGetAPIGuildMembersResult} */
       const members = await rest.get(Routes.guildMembers(guild.id), { query: new URLSearchParams(guildMembersQuery) });
