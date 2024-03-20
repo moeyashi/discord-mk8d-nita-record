@@ -72,6 +72,10 @@ export type Track = {
    */
   nitaVSWRMilliseconds: number;
   /**
+   * VSカスタムでのNITAのWRのURL
+   */
+  nitaVSWRUrl: string;
+  /**
    * AllカスタムでのNITAのWR
    */
   nitaAllCombinationWRMilliseconds: number;

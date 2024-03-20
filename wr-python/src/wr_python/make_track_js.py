@@ -107,7 +107,7 @@ trackList = [
     "bRRw",
 ]
 
-MyLB = LeaderBoard()
+lb = LeaderBoard()
 
 trackList.insert(0, "")
 # WRList = ["VSWR"]
@@ -117,14 +117,16 @@ trackList.insert(0, "")
 
 wr = dict()
 for i in range(1, 97):
-    trackID = i
+    track_id = i
 
-    WRTime = MyLB.getVSWR(trackID)
-    AllWRTime = MyLB.getAllWR(trackID)
+    vs = lb.getVSWR(track_id)
+    vs_url = lb.get_vswr_url(track_id)
+    all = lb.getAllWR(track_id)
 
     wr[trackList[i]] = {
-        "vs": WRTime,
-        "all": AllWRTime,
+        "vs": vs,
+        "vs_url": vs_url,
+        "all": all,
     }
 
 
