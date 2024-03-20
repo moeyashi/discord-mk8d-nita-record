@@ -17,6 +17,7 @@ export type NitaRepository = {
   insertNita: (params: InsertNitaParameters) => Promise<any>;
   updateNita: (params: UpdateNitaParameters) => Promise<any>;
   deleteNita: (discordUserId: string, trackCode: string) => Promise<any>;
+  deleteAllNita: (discordUserId: string) => Promise<any>;
   selectNitaByUserAndTrack: (
     discordUserId: string,
     trackCode: string
