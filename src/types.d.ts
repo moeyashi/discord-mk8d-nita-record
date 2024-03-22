@@ -34,6 +34,10 @@ export type NitaRepository = {
     discordUserId: string,
     discordMembers: GuildMember[]
   ) => Promise<number | null>;
+  countExistsNita: (
+    trackCode: string,
+    discordMembers: GuildMember[]
+  ) => Promise<number>;
 };
 
 // 参考 https://typescriptbook.jp/reference/functions/overload-functions#%E3%82%A2%E3%83%AD%E3%83%BC%E9%96%A2%E6%95%B0%E3%81%A8%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89

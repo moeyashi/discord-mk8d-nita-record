@@ -99,5 +99,15 @@ export const postgresNitaRepository = () => {
       const rank = Number(results[0].rank);
       return rank || null;
     },
+    async countExistsNita(trackCode, discordMembers) {
+      const discordUserIds = discordMembers.map((member) => member.user.id);
+      const results = await sql`
+        SELECT COUNT(*) as count
+        FROM nita
+        WHERE discord_user_id IN ${sql(discordUserIds)}
+        AND track_code = ${trackCode}
+      `;
+      return Number(results[0].count);
+    },
   };
 };
