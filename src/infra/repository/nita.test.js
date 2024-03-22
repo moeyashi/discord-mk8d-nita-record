@@ -107,4 +107,52 @@ describe('postgresNitaRepository', () => {
       expect(actual).toBeNull();
     });
   });
+  describe('countExistsNita', async () => {
+    const trackCode = 'MKS';
+    beforeAll(async () => {
+      execSync('npm run db:reset');
+    });
+
+    test('0件の場合0を返却する', async () => {
+      const users = Array.from({ length: 21 }).map((_, i) => ({
+        user: { id: `${i + 1}` },
+      }));
+      const actual = await repo.countExistsNita(trackCode, users);
+      expect(actual).toEqual(0);
+    });
+
+    test('1件の場合1を返却する', async () => {
+      const users = Array.from({ length: 21 }).map((_, i) => ({
+        user: { id: `${i + 1}` },
+      }));
+      await repo.insertNita({
+        discordUserId: '1',
+        trackCode,
+        milliseconds: 1000,
+      });
+      const actual = await repo.countExistsNita(trackCode, users);
+      expect(actual).toEqual(1);
+      await repo.deleteNita('1', trackCode);
+    });
+
+    test('2件の場合2を返却する', async () => {
+      const users = Array.from({ length: 21 }).map((_, i) => ({
+        user: { id: `${i + 1}` },
+      }));
+      await repo.insertNita({
+        discordUserId: '1',
+        trackCode,
+        milliseconds: 1000,
+      });
+      await repo.insertNita({
+        discordUserId: '2',
+        trackCode,
+        milliseconds: 1000,
+      });
+      const actual = await repo.countExistsNita(trackCode, users);
+      expect(actual).toEqual(2);
+      await repo.deleteNita('1', trackCode);
+      await repo.deleteNita('2', trackCode);
+    });
+  });
 });

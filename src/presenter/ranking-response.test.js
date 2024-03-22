@@ -19,15 +19,15 @@ describe(rankingResponse, () => {
         milliseconds: sampleTrack.nitaVSWRMilliseconds + i,
       }));
       describe('1ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 1, ranking, null);
+        const actual = rankingResponse(sampleTrack, 1, ranking, null, 50);
         test('1位から20位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から20位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全50位のうち 1位から20位まで');
         });
       });
       describe('2ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 2, ranking, null);
+        const actual = rankingResponse(sampleTrack, 2, ranking, null, 50);
         test('21位から40位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n21位から40位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全50位のうち 21位から40位まで');
         });
       });
     });
@@ -37,15 +37,15 @@ describe(rankingResponse, () => {
         milliseconds: sampleTrack.nitaVSWRMilliseconds + i,
       }));
       describe('1ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 1, ranking, null);
+        const actual = rankingResponse(sampleTrack, 1, ranking, null, 19);
         test('1位から19位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から19位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全19位のうち 1位から19位まで');
         });
       });
       describe('2ページ目の場合', () => {
-        const actual = rankingResponse(sampleTrack, 2, ranking, null);
+        const actual = rankingResponse(sampleTrack, 2, ranking, null, 39);
         test('21位から39位までのメッセージが返却されること', () => {
-          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n21位から39位まで');
+          expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全39位のうち 21位から39位まで');
         });
       });
     });
@@ -56,15 +56,15 @@ describe(rankingResponse, () => {
       milliseconds: sampleTrack.nitaVSWRMilliseconds,
     }];
     describe('自分の順位が1位の場合', () => {
-      const actual = rankingResponse(sampleTrack, 1, ranking, 1);
+      const actual = rankingResponse(sampleTrack, 1, ranking, 1, 1);
       test('自分の順位が含まれるメッセージが返却されること', () => {
-        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から1位まで\n\nあなたの順位: 1位');
+        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全1位のうち 1位から1位まで\n\nあなたの順位: 1位');
       });
     });
     describe('自分の記録が未登録の場合', () => {
-      const actual = rankingResponse(sampleTrack, 1, ranking, null);
+      const actual = rankingResponse(sampleTrack, 1, ranking, null, 1);
       test('自分の順位が含まれないメッセージが返却されること', () => {
-        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n1位から1位まで');
+        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全1位のうち 1位から1位まで');
       });
     });
   });
@@ -101,6 +101,7 @@ describe(rankingResponse, () => {
           { member: makeGuildMember({ nickname: 'user24' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 7001 },
         ],
         null,
+        24,
       );
       test('1落ちのembedが返却されること', () => {
         expect(actual.embeds?.[0]).toEqual({
@@ -186,6 +187,7 @@ describe(rankingResponse, () => {
               milliseconds: sampleTrack.nitaVSWRMilliseconds,
             })),
             null,
+            25,
           );
           expect(actual.embeds?.length).toEqual(1);
         });
@@ -198,6 +200,7 @@ describe(rankingResponse, () => {
               milliseconds: sampleTrack.nitaVSWRMilliseconds,
             })),
             null,
+            26,
           );
           expect(actual.embeds?.length).toEqual(2);
         });
@@ -206,7 +209,7 @@ describe(rankingResponse, () => {
   });
 
   describe('ランキングが空の場合', () => {
-    const actual = rankingResponse(sampleTrack, 1, [], null);
+    const actual = rankingResponse(sampleTrack, 1, [], null, 0);
     test('タイムが登録されていないメッセージが返却されること', () => {
       const expected = {
         content: 'まだマリオカートスタジアムのNITAのタイムが登録されていません。',
