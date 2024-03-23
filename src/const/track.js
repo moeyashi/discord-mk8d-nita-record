@@ -99,7 +99,7 @@ const trackDict = Object.freeze({
   bRR7: makeTrack('3DS レインボーロード', 'bRR7', 138844, 'https://youtu.be/CSLAUflVl6Y', 138844, ['3DSレインボーロード', '7虹', '7にじ', '7レインボー', '3DSレインボー', '3DS虹', '3DSにじ', 'RR7']),
   bAD: makeTrack('Tour アムステルダムブルーム', 'bAD', 138142, 'https://www.youtube.com/watch?v=g36YC-z-LNQ', 138046, ['アムス', 'アムステルダム', 'アムステルダムブルーム', 'AD']),
   bRP: makeTrack('GBA リバーサイドパーク', 'bRP', 131733, 'https://youtu.be/d0Bk9KPwOvc', 131452, ['リバパ', 'リバーサイドパーク', 'リバーサイド', 'リバサ', 'RP']),
-  bDKS: makeTrack('Wii DKスノーボードクロス', 'bDKS', 158415, 'https://youtu.be/p8Jz9si8c7g', 158415, ['スノボ', 'DKスノーボードクロス', 'スノーボードクロス', 'DKS']),
+  bDKS: makeTrack('Wii DKスノーボードクロス', 'bDKS', 158244, 'https://youtu.be/Cn0mq7OdWCs', 158244, ['スノボ', 'DKスノーボードクロス', 'スノーボードクロス', 'DKS']),
   bYI: makeTrack('ヨッシーアイランド', 'bYI', 201157, 'https://youtu.be/QJgv0APxfTk', 201157, ['ヨシアイ', 'YI']),
   bBR: makeTrack('Tour バンコクラッシュ', 'bBR', 144451, 'https://www.youtube.com/watch?v=oYzdRq492-k', 144451, ['バンコク', 'バンコクラッシュ', 'BR']),
   bMC: makeTrack('DS マリオサーキット', 'bMC', 141878, 'https://youtu.be/QN0oK_u2ETk', 141878, ['DSマリサ']),
@@ -120,7 +120,7 @@ const trackDict = Object.freeze({
   bMD: makeTrack('Tour マドリードグランデ', 'bMD', 159924, 'https://youtu.be/QzzP53exnqo', 159924, ['マドリード', 'マドリードグランデ', 'MD']),
   bRIW: makeTrack('3DS ロゼッタプラネット', 'bRIW', 159970, 'https://www.youtube.com/watch?v=QbdeIpuHCEc', 159970, ['ロゼプラ', 'ロゼッタプラネット', 'RIW']),
   bBC3: makeTrack('SFC クッパじょう3', 'bBC3', 143278, 'https://youtu.be/3D76rvRx7j4', 143278, ['クッパじょう', 'クッパ城', 'クッパ城3', 'クッパじょう3', 'BC3']),
-  bRRw: makeTrack('Wii レインボーロード', 'bRRw', 234877, 'https://youtu.be/pClQqAkhNQI', 233931, ['Wiiレインボーロード', 'Wii虹', 'Wiiにじ', 'Wiiレインボー', 'RRw']),
+  bRRw: makeTrack('Wii レインボーロード', 'bRRw', 234834, 'https://www.youtube.com/watch?v=5i2H4fu-0ZA', 233931, ['Wiiレインボーロード', 'Wii虹', 'Wiiにじ', 'Wiiレインボー', 'RRw']),
 });
 
 export const trackCodeSet = new Set(Object.keys(trackDict));
