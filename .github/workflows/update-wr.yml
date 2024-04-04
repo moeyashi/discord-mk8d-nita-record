@@ -20,7 +20,7 @@ jobs:
           ref: main
       # GITHUB_TOKENを使ってPull Requestを作成するとtest-track.jsのworkflowが動かないので、GitHub Appのトークンを使うように。
       # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#push-pull-request-branches-to-a-fork
-      - uses: tibdex/github-app-token@v1
+      - uses: tibdex/github-app-token@v2
         id: generate-token
         with:
           app_id: ${{ secrets.WR_UPDATE_GITHUB_APP_ID }}
