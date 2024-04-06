@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@planetscale/database": "^1.13.0",
+    "@planetscale/database": "^1.16.0",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "postgres": "^3.4.4"
