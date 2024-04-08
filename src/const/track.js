@@ -53,7 +53,7 @@ const trackDict = Object.freeze({
   rSL: makeTrack('GC シャーベットランド', 'rSL', 150329, 'https://youtu.be/jEoY2huGjgk', 149804, ['シャベラン', 'シャーベットランド', 'SL']),
   rMP: makeTrack('3DS ミュージックパーク', 'rMP', 153013, 'https://youtu.be/ixVfhaGFKR8', 152998, ['ミューパ', 'ミュージックパーク', 'MP']),
   rYV: makeTrack('N64 ヨッシーバレー', 'rYV', 203216, 'https://youtu.be/SFFvCpPkweM', 202975, ['ヨシバ', 'ヨッシーバレー', 'YV']),
-  rTTC: makeTrack('DS チクタクロック', 'rTTC', 144130, 'https://www.youtube.com/watch?v=xHR8akw17os', 143377, ['チクタク', 'チクタクロック', 'TTC']),
+  rTTC: makeTrack('DS チクタクロック', 'rTTC', 143681, 'https://www.youtube.com/watch?v=NG57bGBBnfM', 143377, ['チクタク', 'チクタクロック', 'TTC']),
   rPPS: makeTrack('3DS パックンスライダー', 'rPPS', 203268, 'https://youtu.be/W0vohnC5nEo', 202681, ['パクスラ', 'パックンスライダー', 'PPS']),
   rGV: makeTrack('Wii グラグラかざん', 'rGV', 155341, 'https://www.youtube.com/watch?v=YIM0BrZL01I', 155341, ['火山', 'かざん', 'グラグラ', 'グラグラ火山', 'グラグラかざん', 'GV']),
   rRRd: makeTrack('N64 レインボーロード', 'rRRd', 121195, 'https://www.youtube.com/watch?v=QF0o9vMVRb0', 120766, ['N64レインボーロード', '64レインボーロード', 'N64レインボー', 'N64虹', 'N64にじ', '64虹', '64にじ', '64レインボー', 'RRd']),
