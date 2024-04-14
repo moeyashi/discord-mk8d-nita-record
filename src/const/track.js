@@ -54,7 +54,7 @@ const trackDict = Object.freeze({
   rMP: makeTrack('3DS ミュージックパーク', 'rMP', 153013, 'https://youtu.be/ixVfhaGFKR8', 152998, ['ミューパ', 'ミュージックパーク', 'MP']),
   rYV: makeTrack('N64 ヨッシーバレー', 'rYV', 202926, 'https://youtu.be/lmF5SO-JqKg', 202926, ['ヨシバ', 'ヨッシーバレー', 'YV']),
   rTTC: makeTrack('DS チクタクロック', 'rTTC', 143681, 'https://www.youtube.com/watch?v=NG57bGBBnfM', 143377, ['チクタク', 'チクタクロック', 'TTC']),
-  rPPS: makeTrack('3DS パックンスライダー', 'rPPS', 203268, 'https://youtu.be/W0vohnC5nEo', 202681, ['パクスラ', 'パックンスライダー', 'PPS']),
+  rPPS: makeTrack('3DS パックンスライダー', 'rPPS', 203237, 'https://youtu.be/Yov_bvZ0scA', 202676, ['パクスラ', 'パックンスライダー', 'PPS']),
   rGV: makeTrack('Wii グラグラかざん', 'rGV', 155341, 'https://www.youtube.com/watch?v=YIM0BrZL01I', 155341, ['火山', 'かざん', 'グラグラ', 'グラグラ火山', 'グラグラかざん', 'GV']),
   rRRd: makeTrack('N64 レインボーロード', 'rRRd', 121195, 'https://www.youtube.com/watch?v=QF0o9vMVRb0', 120766, ['N64レインボーロード', '64レインボーロード', 'N64レインボー', 'N64虹', 'N64にじ', '64虹', '64にじ', '64レインボー', 'RRd']),
   dYC: makeTrack('GC ヨッシーサーキット', 'dYC', 146171, 'https://youtu.be/88OkOf_PXjQ', 146171, ['ヨシサ', 'ヨッシーサーキット', 'YC']),
