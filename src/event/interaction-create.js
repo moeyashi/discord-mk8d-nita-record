@@ -17,6 +17,7 @@ const getCommands = async () => {
 export default {
   name: Events.InteractionCreate,
   async execute(nitaRepository, interaction) {
+    console.info('InteractionCreate event triggered!');
     if (!interaction.isChatInputCommand()) return;
 
     const commands = await getCommands();
