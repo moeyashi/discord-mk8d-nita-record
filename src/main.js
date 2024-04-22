@@ -35,8 +35,13 @@ const main = async () => {
   }
   console.info('Loaded events!');
 
-  // Log in to Discord with your client's token
-  await client.login(process.env.DISCORD_BOT_TOKEN);
+  try {
+    // Log in to Discord with your client's token
+    await client.login(process.env.DISCORD_BOT_TOKEN);
+    console.info('Logged in to Discord!');
+  } catch (error) {
+    console.error(`Failed to log in to Discord. ${error}`);
+  }
 };
 
 main();

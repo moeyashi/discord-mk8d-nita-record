@@ -6,7 +6,10 @@ export default {
   name: Events.ClientReady,
   once: true,
   execute: (_, client) => {
-    if (!client.isReady()) return;
+    if (!client.isReady()) {
+      console.error('The client is not ready!');
+      return;
+    }
     console.log(`Ready! Logged in as ${client.user.tag}`);
   },
 };
