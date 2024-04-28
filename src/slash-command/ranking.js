@@ -42,7 +42,7 @@ export default {
 
     await interaction.deferReply();
 
-    const serverMembers = Array.from((await interaction.guild.members.fetch({ limit: 200 })).values());
+    const serverMembers = Array.from((await interaction.guild.members.fetch()).values());
     const ranking = await nitaRepository.selectRanking(track.code, serverMembers, 20, (page - 1) * 20);
     const myRank = await nitaRepository.selectRankByUser(track.code, interaction.user.id, serverMembers);
     const rankingSize = await nitaRepository.countExistsNita(track.code, serverMembers);
