@@ -26,7 +26,7 @@ const makeTrack = (trackName, code, nitaVSWR, nitaVSWRUrl, nitaAllCombinationWR,
 
 const trackDict = Object.freeze({
   MKS: makeTrack('マリオカートスタジアム', 'MKS', 139745, 'https://www.youtube.com/watch?v=lQH-iX37plc', 138637, ['マリカス']),
-  WP: makeTrack('ウォーターパーク', 'WP', 141575, 'https://youtu.be/ekGa6RD0N2c?si=LBjihd5-stidW8iW', 141163, ['ウォタパ']),
+  WP: makeTrack('ウォーターパーク', 'WP', 141443, 'https://youtu.be/pFPvN8M0rEo', 141163, ['ウォタパ']),
   SSC: makeTrack('スイーツキャニオン', 'SSC', 153874, 'https://youtu.be/Egiq2yPXcZ8?feature=shared', 153874, ['スイキャニ']),
   TR: makeTrack('ドッスンいせき', 'TR', 152714, 'https://www.youtube.com/watch?v=ph_5uW1RNwY', 151942, ['遺跡', 'ドッスン', 'いせき', 'ドッスン遺跡']),
   MC: makeTrack('マリオサーキット', 'MC', 148005, 'https://youtu.be/38PFGM94xfo?si=Ip9Vo_Ht-Ez-aDzV', 148005, ['新マリサ', 'しんマリサ']),
