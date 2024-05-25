@@ -109,5 +109,22 @@ export const postgresNitaRepository = () => {
       `;
       return Number(results[0].count);
     },
+    async selectRival(executorDiscordId, rivalDiscordId) {
+      const results = await sql`
+        SELECT
+          nita1.track_code,
+          nita1.milliseconds AS executor_milliseconds,
+          nita2.milliseconds AS rival_milliseconds
+        FROM (SELECT * FROM nita WHERE discord_user_id = ${executorDiscordId}) AS nita1
+        INNER JOIN (SELECT * FROM nita WHERE discord_user_id = ${rivalDiscordId}) AS nita2
+          ON nita1.track_code = nita2.track_code
+        ORDER BY nita1.milliseconds - nita2.milliseconds
+      `;
+      return results.map((row) => ({
+        trackCode: row.track_code,
+        executorMilliseconds: row.executor_milliseconds,
+        rivalMilliseconds: row.rival_milliseconds,
+      }));
+    },
   };
 };
