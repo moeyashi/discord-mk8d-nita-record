@@ -4,6 +4,7 @@ import type {
   ClientEvents,
   GuildMember,
   SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
 } from "discord.js";
 
 export type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
@@ -53,7 +54,7 @@ export type Event<EventName extends EventType> = {
 export type SlashCommand = {
   data:
     | SlashCommandBuilder
-    | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
+    | SlashCommandOptionsOnlyBuilder;
   execute: (
     interaction: ChatInputCommandInteraction<CacheType>,
     nitaRepository: NitaRepository
