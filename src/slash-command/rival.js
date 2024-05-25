@@ -2,6 +2,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
 import { displayMilliseconds } from '../util/time.js';
+import { BLUE, RED } from '../const/color.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
@@ -50,23 +51,29 @@ export default {
     } else {
       /** @type {import('discord.js').APIEmbed[]} */
       const embeds = [];
-      res.embeds = tracks.reduce(
-        (pv, { trackCode, executorMilliseconds, rivalMilliseconds }, i) => {
-          const track = searchTrack(trackCode);
-          if (i % 25 === 0) {
-            pv.push({
-              fields: [],
-            });
-          }
-          const diffRival = executorMilliseconds - rivalMilliseconds;
-          pv[pv.length - 1].fields?.push({
-            name: track?.trackName || '',
-            value: `${displayMilliseconds(executorMilliseconds)} VS ${displayMilliseconds(rivalMilliseconds)} ${diffRival / 1000}秒`,
+      let createLose = false;
+      for (let i = 0; i < tracks.length; i++) {
+        const { trackCode, executorMilliseconds, rivalMilliseconds } = tracks[i];
+        const track = searchTrack(trackCode);
+        const win = executorMilliseconds < rivalMilliseconds;
+        // 25コースごと、または勝ちから負けに変わった場合に新しいembedを作成
+        if (i % 25 === 0 || (!win && !createLose)) {
+          embeds.push({
+            title: win ? '勝ち' : '負け',
+            fields: [],
+            color: win ? BLUE : RED,
           });
-          return pv;
-        },
-        embeds,
-      );
+          if (!win) {
+            createLose = true;
+          }
+        }
+        const diffRival = executorMilliseconds - rivalMilliseconds;
+        embeds[embeds.length - 1].fields?.push({
+          name: track?.trackName || '',
+          value: `**${diffRival / 1000}秒** (${displayMilliseconds(executorMilliseconds)} VS ${displayMilliseconds(rivalMilliseconds)})`,
+        });
+      }
+      res.embeds = embeds;
     }
     await interaction.followUp(res);
   },
