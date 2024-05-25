@@ -44,7 +44,7 @@ export default {
     );
     /** @type {import('discord.js').InteractionReplyOptions} */
     const res = {
-      content: `VS ${userQuery.displayName || userQuery.username}`,
+      content: `VS ${userQuery.username || userQuery.globalName}`,
     };
     if (tracks.length === 0) {
       res.content = res.content + '\n\n記録がありません';
@@ -70,7 +70,7 @@ export default {
         const diffRival = executorMilliseconds - rivalMilliseconds;
         embeds[embeds.length - 1].fields?.push({
           name: track?.trackName || '',
-          value: `**${diffRival / 1000}秒** (${displayMilliseconds(executorMilliseconds)} VS ${displayMilliseconds(rivalMilliseconds)})`,
+          value: `**${Math.abs(diffRival) / 1000}秒** (${displayMilliseconds(executorMilliseconds)} VS ${displayMilliseconds(rivalMilliseconds)})`,
         });
       }
       res.embeds = embeds;
