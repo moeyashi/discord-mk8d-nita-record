@@ -98,7 +98,7 @@ const trackDict = Object.freeze({
   bMM: makeTrack('Tour メリーメリーマウンテン', 'bMM', 157519, 'https://youtu.be/3KyMcoty3lg', 157519, ['メリマ', 'メリーメリーマウンテン', 'メリマン', 'MM']),
   bRR7: makeTrack('3DS レインボーロード', 'bRR7', 138844, 'https://youtu.be/CSLAUflVl6Y?si=yQypkchCF9m_B_FC', 138844, ['3DSレインボーロード', '7虹', '7にじ', '7レインボー', '3DSレインボー', '3DS虹', '3DSにじ', 'RR7']),
   bAD: makeTrack('Tour アムステルダムブルーム', 'bAD', 137736, 'https://www.youtube.com/watch?v=MAB1flR2vHc', 137736, ['アムス', 'アムステルダム', 'アムステルダムブルーム', 'AD']),
-  bRP: makeTrack('GBA リバーサイドパーク', 'bRP', 131733, 'https://youtu.be/d0Bk9KPwOvc', 131452, ['リバパ', 'リバーサイドパーク', 'リバーサイド', 'リバサ', 'RP']),
+  bRP: makeTrack('GBA リバーサイドパーク', 'bRP', 131479, 'https://youtu.be/5B69EONP1q4?feature=shared', 131452, ['リバパ', 'リバーサイドパーク', 'リバーサイド', 'リバサ', 'RP']),
   bDKS: makeTrack('Wii DKスノーボードクロス', 'bDKS', 158415, 'https://youtu.be/p8Jz9si8c7g?si=9_Qig4CoyRuIoFY_', 158415, ['スノボ', 'DKスノーボードクロス', 'スノーボードクロス', 'DKS']),
   bYI: makeTrack('ヨッシーアイランド', 'bYI', 200510, 'https://www.youtube.com/watch?v=zeglg4__3c4', 200510, ['ヨシアイ', 'YI']),
   bBR: makeTrack('Tour バンコクラッシュ', 'bBR', 144451, 'https://www.youtube.com/watch?v=oYzdRq492-k', 144451, ['バンコク', 'バンコクラッシュ', 'BR']),
