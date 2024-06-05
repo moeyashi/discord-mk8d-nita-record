@@ -40,7 +40,7 @@ const trackDict = Object.freeze({
   CC: makeTrack('スカイガーデン', 'CC', 201587, 'https://youtu.be/IKdqhZV-cdA', 201587, ['スカガ', '新スカガ']),
   BDD: makeTrack('ホネホネさばく', 'BDD', 151705, 'https://youtu.be/H4_tuUeAg3I', 151705, ['ホネサバ', 'ホネホネ', 'ホネホネ砂漠']),
   BC: makeTrack('クッパキャッスル', 'BC', 202474, 'https://youtu.be/iNaDIFFYaEM', 202250, ['クパキャ']),
-  RR: makeTrack('レインボーロード', 'RR', 201161, 'https://youtu.be/CQTN8CS5v28', 201161, ['新虹', 'しんにじ', 'しん虹', '新にじ']),
+  RR: makeTrack('レインボーロード', 'RR', 201161, 'https://youtu.be/CQTN8CS5v28', 200865, ['新虹', 'しんにじ', 'しん虹', '新にじ']),
   rMMM: makeTrack('Wii モーモーカントリー', 'rMMM', 127004, 'https://youtu.be/EQsHAZsiqd0?si=aB8_9DggBYA0uOi1', 127004, ['Wiiモーモーカントリー', 'モモカン', 'モーモーカントリー', 'MMM']),
   rMC: makeTrack('GBA マリオサーキット', 'rMC', 127146, 'https://www.youtube.com/watch?v=BzB5PrrhhTE', 127146, ['GBAマリオサーキット', 'グバマリ', 'GBAマリサ']),
   rCCB: makeTrack('DS プクプクビーチ', 'rCCB', 149469, 'https://youtu.be/j8ZCJwzlXjQ?si=fyRZUe7fReC5Tv1Z', 149469, ['プクプクビーチ', 'プクビ', 'プクプク', 'CCB']),
