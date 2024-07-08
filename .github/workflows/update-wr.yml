@@ -25,7 +25,7 @@ jobs:
         with:
           app_id: ${{ secrets.WR_UPDATE_GITHUB_APP_ID }}
           private_key: ${{ secrets.WR_UPDATE_GITHUB_APP_PRIVATE_KEY }}
-      - uses: eifinger/setup-rye@v3
+      - uses: eifinger/setup-rye@v4
         id: setup-rye
         with:
           enable-cache: true
