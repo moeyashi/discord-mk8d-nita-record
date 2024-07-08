@@ -74,7 +74,7 @@ const trackDict = Object.freeze({
   dSBS: makeTrack('リンリンメトロ', 'dSBS', 144599, 'https://www.youtube.com/watch?v=Y7_nJLQsTyY', 144599, ['リンメト', 'SBS']),
   dBB: makeTrack('ビッグブルー', 'dBB', 126146, 'https://youtu.be/LF9VanxJo2k?si=J1MIZqposH444_vk', 123323, ['BB', 'ビックブルー']),
   bPP: makeTrack('Tour パリプロムナード', 'bPP', 151756, 'https://www.youtube.com/watch?v=KWsuSpC-VMA', 151539, ['パリ', 'パリプロムナード', 'PP']),
-  bTC: makeTrack('3DS キノピオサーキット', 'bTC', 124337, 'https://vt.tiktok.com/ZSNTHB93V/', 124307, ['キノサ', 'キノピオサーキット', 'TC']),
+  bTC: makeTrack('3DS キノピオサーキット', 'bTC', 124337, 'https://vt.tiktok.com/ZSNTHB93V/', 124290, ['キノサ', 'キノピオサーキット', 'TC']),
   bCMo: makeTrack('N64 チョコマウンテン', 'bCMo', 153834, 'https://youtu.be/_WdGba1EAJ0?si=UBpHd6SKPzE5BWg4', 153834, ['チョコマ', 'チョコマウンテン', 'CMo']),
   bCMa: makeTrack('Wii ココナッツモール', 'bCMa', 143808, 'https://www.youtube.com/watch?v=_YpSoBnSl7w', 143808, ['ココモ', 'ココナッツモール', 'CMa']),
   bTB: makeTrack('Tour トーキョースクランブル', 'bTB', 127657, 'https://youtu.be/WaQi7EeBkj4?si=4xTxTXjxIb10nvvH', 127454, ['東京', 'トウキョウ', 'トウキョウスクランブル', 'トーキョー', 'トーキョースクランブル', 'TB']),
