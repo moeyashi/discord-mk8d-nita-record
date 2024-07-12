@@ -91,7 +91,7 @@ const trackDict = Object.freeze({
   bSHS: makeTrack('アイスビルディング', 'bSHS', 156640, 'https://youtu.be/ue-iQ1QeWSg?si=hPRi8I3USnGYT521', 155364, ['アイス', 'アイビル', 'SHS']),
   bLL: makeTrack('Tour ロンドンアベニュー', 'bLL', 212362, 'https://www.youtube.com/watch?v=3-VSBBc-nM8&list=PLaKa6JcPOZu6MHCu7A51RvFvcZwh8TdUB&index=32&pp=iAQB', 211833, ['ロンドン', 'ロンドンアベニュー', 'アベニュー', 'LL']),
   bBL: makeTrack('GBA テレサレイク', 'bBL', 123381, 'https://youtu.be/a2JBzzqF5dg?si', 123381, ['テレレ', 'テレサレイク', 'レイク', 'BL']),
-  bRRM: makeTrack('3DS ロックロックマウンテン', 'bRRM', 215863, 'https://youtu.be/ISeXZIc4vpk?feature=shared', 214664, ['ロクマ', 'ロックロックマウンテン', 'RRM']),
+  bRRM: makeTrack('3DS ロックロックマウンテン', 'bRRM', 215863, 'https://youtu.be/ISeXZIc4vpk?feature=shared', 213916, ['ロクマ', 'ロックロックマウンテン', 'RRM']),
   bMT: makeTrack('Wii メイプルツリーハウス', 'bMT', 225937, 'https://youtu.be/RvYHwSBSpmg?si=_oZ1eHOlajz0N-K5', 225654, ['メイプル', 'メイプルツリーハウス', 'MT']),
   bBB: makeTrack('Tour ベルリンシュトラーセ', 'bBB', 159394, 'https://youtu.be/4EqrJRRWkTQ?feature=shared', 159328, ['ベルリン', 'ベルリンシュトラーセ']),
   bPG: makeTrack('DS ピーチガーデン', 'bPG', 207733, 'https://youtu.be/SaLiBuQ41os?si=JDZYiBkrRFoW_qBV', 207733, ['ピチガ', 'ピーチガーデン', 'PG']),
