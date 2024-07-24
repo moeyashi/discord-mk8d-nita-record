@@ -68,7 +68,7 @@ const trackDict = Object.freeze({
   dBP: makeTrack('GC ベビィパーク', 'dBP', 104043, 'https://youtu.be/KMdWxRubzpA?si=eqtuqkmyJvsBxSpX', 103764, ['ベビィパーク', 'ベビーパーク', 'ベビパ', 'BP']),
   dCL: makeTrack('GBA チーズランド', 'dCL', 148094, 'https://www.youtube.com/watch?v=I4w6Z5CmsO8', 148094, ['チーズ', 'チーズランド', 'CL']),
   dWW: makeTrack('ネイチャーロード', 'dWW', 147908, 'https://youtu.be/aRFuoiB4nnI', 147789, ['ネイチャー', 'ネイチャ', 'WW']),
-  dAC: makeTrack('どうぶつの森', 'dAC', 141291, 'https://www.youtube.com/watch?v=beoIri5c2Dw&ab_channel=PlayMK8', 140935, ['どうぶつのもり', 'どうもり', 'どう森', 'AC']),
+  dAC: makeTrack('どうぶつの森', 'dAC', 141144, 'https://youtu.be/xtMU9k42o-A?si=z3GyvzIz8DyuXQYt', 140935, ['どうぶつのもり', 'どうもり', 'どう森', 'AC']),
   dNBC: makeTrack('3DS ネオクッパシティ', 'dNBC', 146187, 'https://www.youtube.com/watch?v=J2JJ2p6qjy8', 146187, ['ネオパ', 'ネオクッパ', 'ネオクッパシティ', 'NBC']),
   dRiR: makeTrack('GBA リボンロード', 'dRiR', 150801, 'https://youtu.be/eTH0VGPbJDI?si=ZHOYOJDjR_55T7Fm', 150681, ['リボン', 'リボロ', 'リボンロード', 'RiR']),
   dSBS: makeTrack('リンリンメトロ', 'dSBS', 144599, 'https://www.youtube.com/watch?v=Y7_nJLQsTyY', 144599, ['リンメト', 'SBS']),
