@@ -37,14 +37,7 @@ export default {
 
     const newMilliseconds = lastRecord.lastMilliseconds;
 
-    if (!newMilliseconds) {
-      // 履歴がない場合は削除する
-      await nitaRepository.deleteNita(discordUserId, track.code);
-      await interaction.reply({
-        content: `${track.trackName}のタイムを削除しました。`,
-      });
-      return;
-    } else {
+    if (newMilliseconds) {
       lastRecord.lastMilliseconds = undefined;
       lastRecord.milliseconds = newMilliseconds;
       await nitaRepository.updateNita(lastRecord);
@@ -53,6 +46,12 @@ export default {
       });
       return;
     }
+    // 履歴がない場合は削除する
+    await nitaRepository.deleteNita(discordUserId, track.code);
+    await interaction.reply({
+      content: `${track.trackName}のタイムを削除しました。`,
+    });
+    return;
   },
 };
 

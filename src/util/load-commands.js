@@ -1,7 +1,7 @@
+import { readdir } from 'node:fs/promises';
 // @ts-check
-import { join } from 'path';
+import { join } from 'node:path';
 import { Collection } from 'discord.js';
-import { readdir } from 'fs/promises';
 
 export const loadCommands = async () => {
   /** @type {Collection<string, import('../types').SlashCommand>} */
@@ -11,7 +11,7 @@ export const loadCommands = async () => {
   const commandFiles = (await readdir(foldersPath)).filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
     const filePath = join(foldersPath, file);
-    const module = await import('../../' + filePath);
+    const module = await import(`../../${filePath}`);
     /** @type {import('../types').SlashCommand}*/
     const command = module.default;
     // console.log(command);
@@ -19,7 +19,7 @@ export const loadCommands = async () => {
     if ('data' in command && 'execute' in command) {
       commands.set(command.data.name, command);
     } else {
-      console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+      console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
     }
   }
   console.info('Loaded commands!');

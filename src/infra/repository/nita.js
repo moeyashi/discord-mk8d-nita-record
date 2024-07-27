@@ -1,6 +1,6 @@
 // @ts-check
-import 'dotenv/config';
-import postgres from 'postgres';
+import "dotenv/config";
+import postgres from "postgres";
 
 /**
  * @returns {import('../../types').NitaRepository}
@@ -10,37 +10,39 @@ export const postgresNitaRepository = () => {
     host: process.env.DATABASE_HOST,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
-    port: Number(process.env.DATABASE_PORT || '5432'),
+    port: Number(process.env.DATABASE_PORT || "5432"),
   };
 
   const sql = postgres(config);
 
   return {
     async insertNita(params) {
-      const { trackCode, discordUserId, milliseconds, lastMilliseconds } = params;
-      const results = await sql`
+      const { trackCode, discordUserId, milliseconds, lastMilliseconds } =
+        params;
+      await sql`
         INSERT INTO nita (track_code, discord_user_id, milliseconds, last_milliseconds) VALUES (${trackCode}, ${discordUserId}, ${milliseconds}, ${lastMilliseconds || null})
       `;
-      return results;
+      return;
     },
     async updateNita(params) {
-      const { trackCode, discordUserId, milliseconds, lastMilliseconds } = params;
-      const results = await sql`
+      const { trackCode, discordUserId, milliseconds, lastMilliseconds } =
+        params;
+      await sql`
         UPDATE nita SET milliseconds = ${milliseconds}, last_milliseconds = ${lastMilliseconds || null} WHERE discord_user_id = ${discordUserId} AND track_code = ${trackCode}
       `;
-      return results;
+      return;
     },
     async deleteNita(discordUserId, trackCode) {
-      const results = await sql`
+      await sql`
         DELETE FROM nita WHERE discord_user_id = ${discordUserId} AND track_code = ${trackCode}
       `;
-      return results;
+      return;
     },
     async deleteAllNita(discordUserId) {
-      const results = await sql`
+      await sql`
         DELETE FROM nita WHERE discord_user_id = ${discordUserId}
       `;
-      return results;
+      return;
     },
     async selectNitaByUserAndTrack(discordUserId, trackCode) {
       const results = await sql`
@@ -79,7 +81,10 @@ export const postgresNitaRepository = () => {
         LIMIT ${limit}
       `;
       return results.map((row) => ({
-        member: discordMembers.find((member) => member.user.id === row.discord_user_id) || discordMembers[0],
+        member:
+          discordMembers.find(
+            (member) => member.user.id === row.discord_user_id,
+          ) || discordMembers[0],
         milliseconds: row.milliseconds,
       }));
     },

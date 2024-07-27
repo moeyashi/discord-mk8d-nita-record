@@ -2,6 +2,7 @@ import { REST, Routes } from 'discord.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 const main = async () => {
   const token = process.env.DISCORD_BOT_TOKEN || '';
   const excludeGuildIds = process.env.EXCLUDE_GUILD_IDS?.split(',') || [];
@@ -13,6 +14,7 @@ const main = async () => {
     /** @type {import('discord.js').RESTGetAPICurrentUserGuildsQuery} */
     const userGuildsQuery = {
       limit: 100,
+      // biome-ignore lint/style/useNamingConvention: <explanation>
       with_counts: true,
     };
     if (after) {
@@ -23,7 +25,7 @@ const main = async () => {
       query: new URLSearchParams(userGuildsQuery),
     });
     for (const guild of guilds) {
-      console.log(guild.id, guild.name, guild.approximate_member_count, '\n');
+      console.info(guild.id, guild.name, guild.approximate_member_count, '\n');
       if (excludeGuildIds.includes(guild.id)) {
         continue;
       }
@@ -39,7 +41,7 @@ const main = async () => {
         query: new URLSearchParams(guildMembersQuery),
       });
       if (members.filter((member) => !member.user?.bot).length < 5) {
-        console.log('Leaving guild\n');
+        console.info('Leaving guild\n');
         await rest.delete(Routes.userGuild(guild.id));
       }
     }
@@ -49,7 +51,7 @@ const main = async () => {
 
 main()
   .then(() => {
-    console.log('Exited successfully.');
+    console.info('Exited successfully.');
   })
   .catch((error) => {
     console.error('Error while exiting:', error);

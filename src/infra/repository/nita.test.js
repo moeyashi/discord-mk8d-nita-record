@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execSync } from 'node:child_process';
 import { beforeAll, describe, expect, test } from 'vitest';
 import { postgresNitaRepository } from './nita.js';
 
@@ -109,7 +109,7 @@ describe('postgresNitaRepository', () => {
   });
   describe('countExistsNita', async () => {
     const trackCode = 'MKS';
-    beforeAll(async () => {
+    beforeAll(() => {
       execSync('npm run db:reset');
     });
 

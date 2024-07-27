@@ -1,8 +1,8 @@
+import { readdir } from 'node:fs/promises';
 // @ts-check
-import { join } from 'path';
+import { join } from 'node:path';
 import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
-import { readdir } from 'fs/promises';
 import { postgresNitaRepository } from './infra/repository/nita.js';
 
 dotenv.config();
@@ -22,9 +22,9 @@ const main = async () => {
     const module = await import(`../${filePath}`);
     /** @type {import('./types').Event<import('./types').EventType>} */
     const event = module.default;
-    console.log(event);
+    console.info(event);
     if (!(event.name && event.execute)) {
-      console.log(`[WARNING] The event at ${filePath} is missing a required "name" and "execute" property.`);
+      console.warn(`[WARNING] The event at ${filePath} is missing a required "name" and "execute" property.`);
       continue;
     }
     if (event.once) {

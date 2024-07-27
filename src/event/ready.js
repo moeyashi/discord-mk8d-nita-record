@@ -10,6 +10,6 @@ export default {
       console.error('The client is not ready!');
       return;
     }
-    console.log(`Ready! Logged in as ${client.user.tag}`);
+    console.info(`Ready! Logged in as ${client.user.tag}`);
   },
 };

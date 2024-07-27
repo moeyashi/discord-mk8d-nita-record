@@ -15,10 +15,10 @@ type InsertNitaParameters = Nita;
 type UpdateNitaParameters = Nita;
 
 export type NitaRepository = {
-  insertNita: (params: InsertNitaParameters) => Promise<any>;
-  updateNita: (params: UpdateNitaParameters) => Promise<any>;
-  deleteNita: (discordUserId: string, trackCode: string) => Promise<any>;
-  deleteAllNita: (discordUserId: string) => Promise<any>;
+  insertNita: (params: InsertNitaParameters) => Promise<void>;
+  updateNita: (params: UpdateNitaParameters) => Promise<void>;
+  deleteNita: (discordUserId: string, trackCode: string) => Promise<void>;
+  deleteAllNita: (discordUserId: string) => Promise<void>;
   selectNitaByUserAndTrack: (discordUserId: string, trackCode: string) => Promise<Nita | null>;
   selectNitaByUser: (discordUserId: string) => Promise<Nita[]>;
   selectRanking: (
