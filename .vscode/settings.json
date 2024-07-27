@@ -1,9 +1,7 @@
 {
   "[python]": {
-    "editor.indentSize": 4,
+    "editor.indentSize": 4
   },
   "python.defaultInterpreterPath": "../wr-python/.venv/Scripts/python.exe",
-  "python.analysis.extraPaths": [
-    "./wr-python"
-  ],
+  "python.analysis.extraPaths": ["./wr-python"]
 }

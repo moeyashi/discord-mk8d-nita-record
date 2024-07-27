@@ -1,4 +1,5 @@
-import { expect, test, describe } from 'vitest';
+// @ts-check
+import { describe, expect, test } from 'vitest';
 import { getByCode, trackCodeSet } from './track.js';
 
 describe('trackCodeSet', () => {
@@ -304,14 +305,14 @@ describe('getByCode', () => {
       expect(track).not.toBeNull();
     });
     test('codeが一致する', () => {
-      expect(track.code).toEqual(code);
+      expect(track?.code).toEqual(code);
     });
     test('WRが0以上の値をもつ', () => {
-      expect(track.nitaVSWRMilliseconds).toBeGreaterThan(0);
-      expect(track.nitaAllCombinationWRMilliseconds).toBeGreaterThan(0);
+      expect(track?.nitaVSWRMilliseconds).toBeGreaterThan(0);
+      expect(track?.nitaAllCombinationWRMilliseconds).toBeGreaterThan(0);
     });
     test('nitaVSWRUrlがhttpから始まる', () => {
-      expect(track.nitaVSWRUrl).toMatch(/^http/);
+      expect(track?.nitaVSWRUrl).toMatch(/^http/);
     });
   });
 });

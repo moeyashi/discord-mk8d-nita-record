@@ -1,7 +1,7 @@
 // @ts-check
 import { describe, expect, test } from 'vitest';
-import { nitaListResponse } from './nita-list-response.js';
 import { getByCode, trackCodeSet } from '../const/track.js';
+import { nitaListResponse } from './nita-list-response.js';
 
 describe(nitaListResponse, () => {
   describe('nitaListが空の場合', () => {
@@ -26,7 +26,14 @@ describe(nitaListResponse, () => {
           const milliseconds = 2 * 60 * 1000;
           return {
             nita: { trackCode, discordUserId, milliseconds },
-            track: { trackName: trackCode, code: trackCode, nitaVSWRMilliseconds: milliseconds - diff, nitaAllCombinationWRMilliseconds: 0, nitaVSWRUrl: '', aliases: [] },
+            track: {
+              trackName: trackCode,
+              code: trackCode,
+              nitaVSWRMilliseconds: milliseconds - diff,
+              nitaAllCombinationWRMilliseconds: 0,
+              nitaVSWRUrl: '',
+              aliases: [],
+            },
           };
         };
         const nitaList = [
@@ -61,10 +68,19 @@ describe(nitaListResponse, () => {
             title: '1落ち',
             color: 13632027,
             fields: [
-              { name: nitaList[0].track.trackName, value: '2:00.000 WR + -0.001秒' },
+              {
+                name: nitaList[0].track.trackName,
+                value: '2:00.000 WR + -0.001秒',
+              },
               { name: nitaList[1].track.trackName, value: '2:00.000 WR + 0秒' },
-              { name: nitaList[2].track.trackName, value: '2:00.000 WR + 0.001秒' },
-              { name: nitaList[3].track.trackName, value: '2:00.000 WR + 0.999秒' },
+              {
+                name: nitaList[2].track.trackName,
+                value: '2:00.000 WR + 0.001秒',
+              },
+              {
+                name: nitaList[3].track.trackName,
+                value: '2:00.000 WR + 0.999秒',
+              },
               { name: nitaList[4].track.trackName, value: '2:00.000 WR + 1秒' },
             ],
           });
@@ -74,8 +90,14 @@ describe(nitaListResponse, () => {
             title: '2落ち',
             color: 16312092,
             fields: [
-              { name: nitaList[5].track.trackName, value: '2:00.000 WR + 1.001秒' },
-              { name: nitaList[6].track.trackName, value: '2:00.000 WR + 1.999秒' },
+              {
+                name: nitaList[5].track.trackName,
+                value: '2:00.000 WR + 1.001秒',
+              },
+              {
+                name: nitaList[6].track.trackName,
+                value: '2:00.000 WR + 1.999秒',
+              },
               { name: nitaList[7].track.trackName, value: '2:00.000 WR + 2秒' },
             ],
           });
@@ -85,9 +107,18 @@ describe(nitaListResponse, () => {
             title: '3落ち',
             color: 8311585,
             fields: [
-              { name: nitaList[8].track.trackName, value: '2:00.000 WR + 2.001秒' },
-              { name: nitaList[9].track.trackName, value: '2:00.000 WR + 2.999秒' },
-              { name: nitaList[10].track.trackName, value: '2:00.000 WR + 3秒' },
+              {
+                name: nitaList[8].track.trackName,
+                value: '2:00.000 WR + 2.001秒',
+              },
+              {
+                name: nitaList[9].track.trackName,
+                value: '2:00.000 WR + 2.999秒',
+              },
+              {
+                name: nitaList[10].track.trackName,
+                value: '2:00.000 WR + 3秒',
+              },
             ],
           });
         });
@@ -96,9 +127,18 @@ describe(nitaListResponse, () => {
             title: '4落ち',
             color: 4886754,
             fields: [
-              { name: nitaList[11].track.trackName, value: '2:00.000 WR + 3.001秒' },
-              { name: nitaList[12].track.trackName, value: '2:00.000 WR + 3.999秒' },
-              { name: nitaList[13].track.trackName, value: '2:00.000 WR + 4秒' },
+              {
+                name: nitaList[11].track.trackName,
+                value: '2:00.000 WR + 3.001秒',
+              },
+              {
+                name: nitaList[12].track.trackName,
+                value: '2:00.000 WR + 3.999秒',
+              },
+              {
+                name: nitaList[13].track.trackName,
+                value: '2:00.000 WR + 4秒',
+              },
             ],
           });
         });
@@ -107,9 +147,18 @@ describe(nitaListResponse, () => {
             title: '5落ち',
             color: 12390624,
             fields: [
-              { name: nitaList[14].track.trackName, value: '2:00.000 WR + 4.001秒' },
-              { name: nitaList[15].track.trackName, value: '2:00.000 WR + 4.999秒' },
-              { name: nitaList[16].track.trackName, value: '2:00.000 WR + 5秒' },
+              {
+                name: nitaList[14].track.trackName,
+                value: '2:00.000 WR + 4.001秒',
+              },
+              {
+                name: nitaList[15].track.trackName,
+                value: '2:00.000 WR + 4.999秒',
+              },
+              {
+                name: nitaList[16].track.trackName,
+                value: '2:00.000 WR + 5秒',
+              },
             ],
           });
         });
@@ -118,13 +167,34 @@ describe(nitaListResponse, () => {
             title: '6落ち以上',
             color: undefined,
             fields: [
-              { name: nitaList[17].track.trackName, value: '2:00.000 WR + 5.001秒' },
-              { name: nitaList[18].track.trackName, value: '2:00.000 WR + 5.999秒' },
-              { name: nitaList[19].track.trackName, value: '2:00.000 WR + 6秒' },
-              { name: nitaList[20].track.trackName, value: '2:00.000 WR + 6.001秒' },
-              { name: nitaList[21].track.trackName, value: '2:00.000 WR + 6.999秒' },
-              { name: nitaList[22].track.trackName, value: '2:00.000 WR + 7秒' },
-              { name: nitaList[23].track.trackName, value: '2:00.000 WR + 7.001秒' },
+              {
+                name: nitaList[17].track.trackName,
+                value: '2:00.000 WR + 5.001秒',
+              },
+              {
+                name: nitaList[18].track.trackName,
+                value: '2:00.000 WR + 5.999秒',
+              },
+              {
+                name: nitaList[19].track.trackName,
+                value: '2:00.000 WR + 6秒',
+              },
+              {
+                name: nitaList[20].track.trackName,
+                value: '2:00.000 WR + 6.001秒',
+              },
+              {
+                name: nitaList[21].track.trackName,
+                value: '2:00.000 WR + 6.999秒',
+              },
+              {
+                name: nitaList[22].track.trackName,
+                value: '2:00.000 WR + 7秒',
+              },
+              {
+                name: nitaList[23].track.trackName,
+                value: '2:00.000 WR + 7.001秒',
+              },
             ],
           });
         });
@@ -136,18 +206,20 @@ describe(nitaListResponse, () => {
       describe.skip('51コースの場合');
       describe.skip('76コースの場合');
       describe('96コースの場合', () => {
-        const actual = nitaListResponse(trackList.map((trackCode) => {
-          const track = getByCode(trackCode);
-          if (!track) {
-            throw new Error(`track not found: ${trackCode}`);
-          }
-          const nita = {
-            trackCode,
-            discordUserId,
-            milliseconds: track?.nitaVSWRMilliseconds || 0,
-          };
-          return { nita, track };
-        }));
+        const actual = nitaListResponse(
+          trackList.map((trackCode) => {
+            const track = getByCode(trackCode);
+            if (!track) {
+              throw new Error(`track not found: ${trackCode}`);
+            }
+            const nita = {
+              trackCode,
+              discordUserId,
+              milliseconds: track?.nitaVSWRMilliseconds || 0,
+            };
+            return { nita, track };
+          }),
+        );
         describe('25コース毎に4embedsが返却されること', () => {
           test('4embedsが返却されること', () => {
             expect(actual.embeds).toHaveLength(4);

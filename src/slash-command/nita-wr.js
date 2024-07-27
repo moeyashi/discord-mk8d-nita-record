@@ -8,7 +8,7 @@ export default {
   data: new SlashCommandBuilder()
     .setName('nita-wr')
     .setDescription('NITAのWRタイムを確認します。')
-    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
+    .addStringOption((option) => option.setName('track').setDescription('コース名').setRequired(true)),
   execute: async (interaction) => {
     const trackQuery = interaction.options.getString('track');
 
@@ -22,20 +22,22 @@ export default {
     }
 
     await interaction.reply({
-      embeds: [{
-        title: `${track.trackName}のWR`,
-        fields: [
-          {
-            name: 'VSカスタム',
-            value: displayMilliseconds(track.nitaVSWRMilliseconds),
-          },
-          {
-            name: '全カスタム',
-            value: displayMilliseconds(track.nitaAllCombinationWRMilliseconds),
-          },
-        ],
-        url: track.nitaVSWRUrl,
-      }],
+      embeds: [
+        {
+          title: `${track.trackName}のWR`,
+          fields: [
+            {
+              name: 'VSカスタム',
+              value: displayMilliseconds(track.nitaVSWRMilliseconds),
+            },
+            {
+              name: '全カスタム',
+              value: displayMilliseconds(track.nitaAllCombinationWRMilliseconds),
+            },
+          ],
+          url: track.nitaVSWRUrl,
+        },
+      ],
     });
     return;
   },

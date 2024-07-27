@@ -79,7 +79,7 @@ export const postgresNitaRepository = () => {
         LIMIT ${limit}
       `;
       return results.map((row) => ({
-        member: discordMembers.find(member => member.user.id === row.discord_user_id) || discordMembers[0],
+        member: discordMembers.find((member) => member.user.id === row.discord_user_id) || discordMembers[0],
         milliseconds: row.milliseconds,
       }));
     },

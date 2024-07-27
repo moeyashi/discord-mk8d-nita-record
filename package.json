@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "npx @biomejs/biome check",
     "db:run": "docker run --name mk8d-nita-record-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=postgres -p 25432:5432 -d postgres",
     "db:migrate": "atlas schema apply --url \"postgres://postgres:postgres@localhost:25432?sslmode=disable\" --file schema.hcl --auto-approve",
     "db:clean": "atlas schema clean --url \"postgres://postgres:postgres@localhost:25432?sslmode=disable\" --auto-approve",
@@ -23,8 +23,7 @@
     "postgres": "^3.4.4"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
-    "eslint-plugin-import": "^2.29.1",
+    "@biomejs/biome": "1.8.3",
     "vitest": "^2.0.4"
   }
 }

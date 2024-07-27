@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
 import { REST, Routes } from 'discord.js';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const main = async () => {
@@ -19,7 +19,9 @@ const main = async () => {
       userGuildsQuery.after = after;
     }
     /** @type {import('discord.js').RESTGetAPICurrentUserGuildsResult} */
-    const guilds = await rest.get(Routes.userGuilds(), { query: new URLSearchParams(userGuildsQuery) });
+    const guilds = await rest.get(Routes.userGuilds(), {
+      query: new URLSearchParams(userGuildsQuery),
+    });
     for (const guild of guilds) {
       console.log(guild.id, guild.name, guild.approximate_member_count, '\n');
       if (excludeGuildIds.includes(guild.id)) {
@@ -33,8 +35,10 @@ const main = async () => {
         limit: 40,
       };
       /** @type {import('discord.js').RESTGetAPIGuildMembersResult} */
-      const members = await rest.get(Routes.guildMembers(guild.id), { query: new URLSearchParams(guildMembersQuery) });
-      if (members.filter(member => !member.user?.bot).length < 5) {
+      const members = await rest.get(Routes.guildMembers(guild.id), {
+        query: new URLSearchParams(guildMembersQuery),
+      });
+      if (members.filter((member) => !member.user?.bot).length < 5) {
         console.log('Leaving guild\n');
         await rest.delete(Routes.userGuild(guild.id));
       }
@@ -43,9 +47,11 @@ const main = async () => {
   }
 };
 
-main().then(() => {
-  console.log('Exited successfully.');
-}).catch((error) => {
-  console.error('Error while exiting:', error);
-  process.exit(1);
-});
+main()
+  .then(() => {
+    console.log('Exited successfully.');
+  })
+  .catch((error) => {
+    console.error('Error while exiting:', error);
+    process.exit(1);
+  });

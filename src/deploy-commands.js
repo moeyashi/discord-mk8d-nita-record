@@ -1,6 +1,6 @@
 // @ts-check
-import dotenv from 'dotenv';
 import { REST, Routes } from 'discord.js';
+import dotenv from 'dotenv';
 import { loadCommands } from './util/load-commands.js';
 
 dotenv.config();
@@ -24,7 +24,9 @@ const main = async () => {
     // @ts-ignore
     const data = await rest.put(
       guildId ? Routes.applicationGuildCommands(clientId, guildId) : Routes.applicationCommands(clientId),
-      { body: Array.from(commands.values()).map(command => command.data.toJSON()) },
+      {
+        body: Array.from(commands.values()).map((command) => command.data.toJSON()),
+      },
     );
 
     console.log(`Successfully reloaded ${data.length} application (/) commands.`);

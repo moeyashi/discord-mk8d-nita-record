@@ -8,7 +8,7 @@ export default {
   data: new SlashCommandBuilder()
     .setName('back')
     .setDescription('1つ前の状態に戻します。連続して実行はできません。')
-    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true)),
+    .addStringOption((option) => option.setName('track').setDescription('コース名').setRequired(true)),
   execute: async (interaction, nitaRepository) => {
     const trackQuery = interaction.options.getString('track');
 

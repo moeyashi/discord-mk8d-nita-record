@@ -1,14 +1,14 @@
 // @ts-check
-import { readdir } from 'fs/promises';
 import { join } from 'path';
 import { Collection } from 'discord.js';
+import { readdir } from 'fs/promises';
 
 export const loadCommands = async () => {
   /** @type {Collection<string, import('../types').SlashCommand>} */
   const commands = new Collection();
   console.info('Loading commands...');
   const foldersPath = join('src', 'slash-command');
-  const commandFiles = (await readdir(foldersPath)).filter(file => file.endsWith('.js'));
+  const commandFiles = (await readdir(foldersPath)).filter((file) => file.endsWith('.js'));
   for (const file of commandFiles) {
     const filePath = join(foldersPath, file);
     const module = await import('../../' + filePath);

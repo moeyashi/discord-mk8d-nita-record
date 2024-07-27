@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { expect, test, describe, beforeAll } from 'vitest';
+import { beforeAll, describe, expect, test } from 'vitest';
 import { postgresNitaRepository } from './nita.js';
 
 describe('postgresNitaRepository', () => {

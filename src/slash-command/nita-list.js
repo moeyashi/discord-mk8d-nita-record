@@ -1,13 +1,11 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
-import { nitaListResponse } from '../presenter/nita-list-response.js';
 import { getByCode } from '../const/track.js';
+import { nitaListResponse } from '../presenter/nita-list-response.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
-  data: new SlashCommandBuilder()
-    .setName('nita-list')
-    .setDescription('NITAのタイムを確認します。'),
+  data: new SlashCommandBuilder().setName('nita-list').setDescription('NITAのタイムを確認します。'),
   execute: async (interaction, nitaRepository) => {
     const discordUserId = interaction.member?.user?.id || interaction.user?.id;
     if (!discordUserId) {

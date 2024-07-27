@@ -1,3 +1,4 @@
+// @ts-check
 export const RED = 13632027;
 export const ORANGE = 16098851;
 export const YELLOW = 16312092;
