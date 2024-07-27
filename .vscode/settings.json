@@ -1,9 +1,25 @@
 {
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "editor.codeActionsOnSave": {
+    "quickfix.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
   "[python]": {
-    "editor.indentSize": 4,
+    "editor.indentSize": 4
   },
   "python.defaultInterpreterPath": "../wr-python/.venv/Scripts/python.exe",
-  "python.analysis.extraPaths": [
-    "./wr-python"
-  ],
+  "python.analysis.extraPaths": ["./wr-python"]
 }

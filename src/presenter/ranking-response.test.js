@@ -51,14 +51,18 @@ describe(rankingResponse, () => {
     });
   });
   describe('contentに自分の順位が含まれる', () => {
-    const ranking = [{
-      member: makeGuildMember({ nickname: 'user' }),
-      milliseconds: sampleTrack.nitaVSWRMilliseconds,
-    }];
+    const ranking = [
+      {
+        member: makeGuildMember({ nickname: 'user' }),
+        milliseconds: sampleTrack.nitaVSWRMilliseconds,
+      },
+    ];
     describe('自分の順位が1位の場合', () => {
       const actual = rankingResponse(sampleTrack, 1, ranking, 1, 1);
       test('自分の順位が含まれるメッセージが返却されること', () => {
-        expect(actual.content).toEqual('### NITAランキング - マリオカートスタジアム\n全1位のうち 1位から1位まで\n\nあなたの順位: 1位');
+        expect(actual.content).toEqual(
+          '### NITAランキング - マリオカートスタジアム\n全1位のうち 1位から1位まで\n\nあなたの順位: 1位',
+        );
       });
     });
     describe('自分の記録が未登録の場合', () => {
@@ -70,35 +74,106 @@ describe(rankingResponse, () => {
   });
   describe('rank毎に色分けされたembedsが返却される', () => {
     describe('秒数の境界値テスト', () => {
-
       const actual = rankingResponse(
         sampleTrack,
         1,
         [
-          { member: makeGuildMember({ nickname: 'user1' }), milliseconds: sampleTrack.nitaVSWRMilliseconds - 1 },
-          { member: makeGuildMember({ nickname: 'user2' }), milliseconds: sampleTrack.nitaVSWRMilliseconds },
-          { member: makeGuildMember({ nickname: 'user3' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 1 },
-          { member: makeGuildMember({ nickname: 'user4' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 999 },
-          { member: makeGuildMember({ nickname: 'user5' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 1000 },
-          { member: makeGuildMember({ nickname: 'user6' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 1001 },
-          { member: makeGuildMember({ nickname: 'user7' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 1999 },
-          { member: makeGuildMember({ nickname: 'user8' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 2000 },
-          { member: makeGuildMember({ nickname: 'user9' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 2001 },
-          { member: makeGuildMember({ nickname: 'user10' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 2999 },
-          { member: makeGuildMember({ nickname: 'user11' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 3000 },
-          { member: makeGuildMember({ nickname: 'user12' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 3001 },
-          { member: makeGuildMember({ nickname: 'user13' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 3999 },
-          { member: makeGuildMember({ nickname: 'user14' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 4000 },
-          { member: makeGuildMember({ nickname: 'user15' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 4001 },
-          { member: makeGuildMember({ nickname: 'user16' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 4999 },
-          { member: makeGuildMember({ nickname: 'user17' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 5000 },
-          { member: makeGuildMember({ nickname: 'user18' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 5001 },
-          { member: makeGuildMember({ nickname: 'user19' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 5999 },
-          { member: makeGuildMember({ nickname: 'user20' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 6000 },
-          { member: makeGuildMember({ nickname: 'user21' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 6001 },
-          { member: makeGuildMember({ nickname: 'user22' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 6999 },
-          { member: makeGuildMember({ nickname: 'user23' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 7000 },
-          { member: makeGuildMember({ nickname: 'user24' }), milliseconds: sampleTrack.nitaVSWRMilliseconds + 7001 },
+          {
+            member: makeGuildMember({ nickname: 'user1' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds - 1,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user2' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user3' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 1,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user4' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user5' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 1000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user6' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 1001,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user7' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 1999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user8' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 2000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user9' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 2001,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user10' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 2999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user11' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 3000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user12' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 3001,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user13' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 3999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user14' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 4000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user15' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 4001,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user16' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 4999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user17' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 5000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user18' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 5001,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user19' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 5999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user20' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 6000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user21' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 6001,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user22' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 6999,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user23' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 7000,
+          },
+          {
+            member: makeGuildMember({ nickname: 'user24' }),
+            milliseconds: sampleTrack.nitaVSWRMilliseconds + 7001,
+          },
         ],
         null,
         24,

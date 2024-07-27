@@ -1,16 +1,16 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
+import { colorByTimeRank } from '../const/color.js';
 import { searchTrack } from '../const/track.js';
 import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
-import { colorByTimeRank } from '../const/color.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
   data: new SlashCommandBuilder()
     .setName('nita')
     .setDescription('NITAのタイムを登録・確認します。timeを指定しない場合は確認のみします。')
-    .addStringOption(option => option.setName('track').setDescription('コース名').setRequired(true))
-    .addIntegerOption(option => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
+    .addStringOption((option) => option.setName('track').setDescription('コース名').setRequired(true))
+    .addIntegerOption((option) => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
   execute: async (interaction, nitaRepository) => {
     const trackQuery = interaction.options.getString('track');
     const inputTime = interaction.options.getInteger('time');
@@ -47,7 +47,12 @@ export default {
     }
 
     /** @type {import('../types').Nita} */
-    const newNita = { trackCode: track.code, discordUserId, milliseconds: newMilliseconds, lastMilliseconds: lastRecord?.milliseconds };
+    const newNita = {
+      trackCode: track.code,
+      discordUserId,
+      milliseconds: newMilliseconds,
+      lastMilliseconds: lastRecord?.milliseconds,
+    };
     if (lastRecord === null) {
       await nitaRepository.insertNita(newNita);
     } else {
@@ -73,11 +78,10 @@ const doProcessGetLastRecordCommand = (track, lastRecord) => {
       content: 'タイムは登録されていません。',
       embeds: [makeEmbed(track, lastRecord)],
     };
-  } else {
-    return {
-      embeds: [makeEmbed(track, lastRecord)],
-    };
   }
+  return {
+    embeds: [makeEmbed(track, lastRecord)],
+  };
 };
 
 /**
@@ -117,16 +121,16 @@ const makeEmbed = (track, lastRecord, newMilliseconds = null) => {
     });
   }
   if (lastRecord) {
-    if (!newMilliseconds) {
+    if (newMilliseconds) {
+      ret.fields?.push({
+        name: '前回のタイム',
+        value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+      });
+    } else {
       const timeRank = ceilDiff(track.nitaVSWRMilliseconds, lastRecord.milliseconds);
       ret.color = colorByTimeRank(timeRank);
       ret.fields?.push({
         name: `${timeRank}落ち`,
-        value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
-      });
-    } else {
-      ret.fields?.push({
-        name: '前回のタイム',
         value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
       });
     }

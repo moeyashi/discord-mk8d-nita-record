@@ -7,7 +7,9 @@ let cachedCommands = false;
 let _commands;
 
 const getCommands = async () => {
-  if (cachedCommands) return _commands;
+  if (cachedCommands) {
+    return _commands;
+  }
   _commands = await loadCommands();
   cachedCommands = true;
   return _commands;
@@ -18,7 +20,9 @@ export default {
   name: Events.InteractionCreate,
   async execute(nitaRepository, interaction) {
     console.info('InteractionCreate event triggered!');
-    if (!interaction.isChatInputCommand()) return;
+    if (!interaction.isChatInputCommand()) {
+      return;
+    }
 
     const commands = await getCommands();
     // console.log(commands);
@@ -35,9 +39,15 @@ export default {
       console.error(error);
       try {
         if (interaction.replied || interaction.deferred) {
-          await interaction.followUp({ content: `エラーが発生しました。${error}`, ephemeral: true });
+          await interaction.followUp({
+            content: `エラーが発生しました。${error}`,
+            ephemeral: true,
+          });
         } else {
-          await interaction.reply({ content: `エラーが発生しました。${error}`, ephemeral: true });
+          await interaction.reply({
+            content: `エラーが発生しました。${error}`,
+            ephemeral: true,
+          });
         }
       } catch (e) {
         console.error('Failed to send error message:', e);

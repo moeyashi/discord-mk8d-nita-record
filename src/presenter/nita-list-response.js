@@ -13,13 +13,17 @@ export const nitaListResponse = (nitaTrackList) => {
     };
   }
 
-  const groupedNitaAndTrackList = groupByRank(nitaTrackList.map(({ nita, track }) => {
-    return {
-      nita,
-      track,
-      diffWRnNita: nita.milliseconds - track.nitaVSWRMilliseconds,
-    };
-  }).sort((a, b) => a.diffWRnNita - b.diffWRnNita));
+  const groupedNitaAndTrackList = groupByRank(
+    nitaTrackList
+      .map(({ nita, track }) => {
+        return {
+          nita,
+          track,
+          diffWRnNita: nita.milliseconds - track.nitaVSWRMilliseconds,
+        };
+      })
+      .sort((a, b) => a.diffWRnNita - b.diffWRnNita),
+  );
   return {
     // embedsは最大10個まで、fieldsは最大25個しか指定できないが、track数が96なので最悪のケースを考えても9embedsで済む
     // `[1落ち1fields, 2落ち1fields, 3落ち1fields, 4落ち1fields, 5落ち1fields, 6落ち以上25fields, 6落ち以上25fields, 6落ち以上25fields, 6落ち以上16fields]`

@@ -23,7 +23,9 @@ export const ceilDiff = (wr, time) => {
  * @returns {string} 1:53.053
  */
 export const displayMilliseconds = (milliseconds) => {
-  const millisecondsStr = Math.floor(milliseconds % 1000).toString().padStart(3, '0');
+  const millisecondsStr = Math.floor(milliseconds % 1000)
+    .toString()
+    .padStart(3, '0');
   const seconds = Math.floor(milliseconds / 1000);
   const secondsStr = (seconds % 60).toString().padStart(2, '0');
   const minutes = Math.floor(seconds / 60);

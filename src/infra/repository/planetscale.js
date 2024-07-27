@@ -47,10 +47,10 @@ export const planetScaleRepository = () => {
      * @param {string} trackCode
      */
     async deleteNita(discordUserId, trackCode) {
-      const results = await conn.execute(
-        'DELETE FROM nita WHERE discord_user_id = ? AND track_code = ?',
-        [discordUserId, trackCode],
-      );
+      const results = await conn.execute('DELETE FROM nita WHERE discord_user_id = ? AND track_code = ?', [
+        discordUserId,
+        trackCode,
+      ]);
       return results;
     },
     /**
@@ -79,7 +79,10 @@ export const planetScaleRepository = () => {
      * @returns {Promise<import('../../types').Nita[]>}
      */
     async selectNitaByUser(discordUserId) {
-      const results = await conn.execute('SELECT track_code, milliseconds, last_milliseconds FROM nita WHERE discord_user_id = ?', [discordUserId]);
+      const results = await conn.execute(
+        'SELECT track_code, milliseconds, last_milliseconds FROM nita WHERE discord_user_id = ?',
+        [discordUserId],
+      );
       return results.rows.map((row) => ({
         trackCode: row.track_code,
         discordUserId,
@@ -99,7 +102,7 @@ export const planetScaleRepository = () => {
         [discordUserIds, trackCode],
       );
       return results.rows.map((row) => ({
-        member: discordMembers.find(member => member.user.id === row.discord_user_id) || discordMembers[0],
+        member: discordMembers.find((member) => member.user.id === row.discord_user_id) || discordMembers[0],
         milliseconds: row.milliseconds,
       }));
     },

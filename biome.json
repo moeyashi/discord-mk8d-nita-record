@@ -1,0 +1,43 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "files": {
+    "ignore": ["wr-python/**/*", "src/const/track.js"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "ignore": ["vite.config.ts"],
+    "rules": {
+      "all": true,
+      "complexity": {
+        "noForEach": "off",
+        "useSimplifiedLogicExpression": "off"
+      },
+      "correctness": {
+        "noNodejsModules": "off"
+      },
+      "style": {
+        "noDefaultExport": "off",
+        "useNamingConvention": {
+          "options": {
+            "strictCase": false
+          },
+          "level": "error"
+        }
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  }
+}

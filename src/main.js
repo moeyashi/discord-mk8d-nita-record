@@ -1,8 +1,8 @@
+import { readdir } from 'node:fs/promises';
 // @ts-check
-import dotenv from 'dotenv';
-import { readdir } from 'fs/promises';
-import { join } from 'path';
+import { join } from 'node:path';
 import { Client, GatewayIntentBits } from 'discord.js';
+import dotenv from 'dotenv';
 import { postgresNitaRepository } from './infra/repository/nita.js';
 
 dotenv.config();
@@ -16,15 +16,15 @@ const main = async () => {
   // Handle Events
   console.info('Loading events...');
   const eventsPath = join('src', 'event');
-  const eventFiles = (await readdir(eventsPath)).filter(file => file.endsWith('.js'));
+  const eventFiles = (await readdir(eventsPath)).filter((file) => file.endsWith('.js'));
   for (const file of eventFiles) {
     const filePath = join(eventsPath, file);
-    const module = await import('../' + filePath);
+    const module = await import(`../${filePath}`);
     /** @type {import('./types').Event<import('./types').EventType>} */
     const event = module.default;
-    console.log(event);
+    console.info(event);
     if (!(event.name && event.execute)) {
-      console.log(`[WARNING] The event at ${filePath} is missing a required "name" and "execute" property.`);
+      console.warn(`[WARNING] The event at ${filePath} is missing a required "name" and "execute" property.`);
       continue;
     }
     if (event.once) {
