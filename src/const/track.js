@@ -58,7 +58,7 @@ const trackDict = Object.freeze({
   rGV: makeTrack('Wii グラグラかざん', 'rGV', 155341, 'https://www.youtube.com/watch?v=YIM0BrZL01I', 155341, ['火山', 'かざん', 'グラグラ', 'グラグラ火山', 'グラグラかざん', 'GV']),
   rRRd: makeTrack('N64 レインボーロード', 'rRRd', 121195, 'https://www.youtube.com/watch?v=QF0o9vMVRb0', 120766, ['N64レインボーロード', '64レインボーロード', 'N64レインボー', 'N64虹', 'N64にじ', '64虹', '64にじ', '64レインボー', 'RRd']),
   dYC: makeTrack('GC ヨッシーサーキット', 'dYC', 146171, 'https://youtu.be/88OkOf_PXjQ?si=8g5ZO2jfmNj6mq85', 145992, ['ヨシサ', 'ヨッシーサーキット', 'YC']),
-  dEA: makeTrack('エキサイトバイク', 'dEA', 142947, 'https://www.youtube.com/watch?v=gcOB_QeUS_g', 142914, ['エキバ', 'EA']),
+  dEA: makeTrack('エキサイトバイク', 'dEA', 142747, 'https://youtu.be/rOPobkqoFag?si=-7-y9SkkFXGZvHnF', 142747, ['エキバ', 'EA']),
   dDD: makeTrack('ドラゴンロード', 'dDD', 145718, 'https://youtu.be/vjKqty9Wa6k?feature=shared', 145354, ['ドラロ', 'DD']),
   dMC: makeTrack('ミュートシティ', 'dMC', 155281, 'https://youtu.be/efNP7B73uNU', 154919, ['ミュート', 'ミュートシティー']),
   dWGM: makeTrack('Wii ワリオこうざん', 'dWGM', 203551, 'https://www.youtube.com/watch?v=KQtMUnHG9jg', 203132, ['ワリこう', 'ワリオこうざん', 'WGM', 'ワリ鉱', 'ワリオ鉱山']),
