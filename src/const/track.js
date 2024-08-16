@@ -108,7 +108,7 @@ const trackDict = Object.freeze({
   bAtD: makeTrack('Tour アテネポリス', 'bAtD', 140813, 'https://www.youtube.com/watch?v=zqVVRQ37bxc', 140813, ['アテネ', 'アテネポリス', 'AtD']),
   bDC: makeTrack('GC デイジークルーザー', 'bDC', 135686, 'https://youtu.be/_-HypEbIVyI', 135686, ['デイクル', 'デイジークルーザー', 'DC']),
   bMH: makeTrack('Wii ムーンリッジ＆ハイウェイ', 'bMH', 144539, 'https://youtu.be/zHX_Tb29zRA?si=hIr-jwvg7NRkkzDe', 144539, ['ムーンリッジ＆ハイウェイ', 'ムーンリッジ', 'ムーンリッジハイウェイ', 'ムンリ', 'MH', '月']),
-  bSCS: makeTrack('シャボンロード', 'bSCS', 203804, 'https://youtu.be/Ag-7d0W4dME?si=OwbtWyJuBByqabOG', 203719, ['シャボン', 'SCS']),
+  bSCS: makeTrack('シャボンロード', 'bSCS', 203706, 'https://youtu.be/uMafzNFUtxI', 203706, ['シャボン', 'SCS']),
   bLAL: makeTrack('Tour ロサンゼルスコースト', 'bLAL', 149170, 'https://youtu.be/gTbOaUJhPYg?si=swPV0p5f_8vkDMlQ', 149170, ['ロス', 'ロサンゼルス', 'LA', 'ロサンゼルスコースト', 'LAL']),
   bSW: makeTrack('GBA サンセットこうや', 'bSW', 137096, 'https://youtu.be/gaxyww0xDGw?si=5e20Rgd1YCmgCoku', 137096, ['サンセット', 'こうや', 'サンセット荒野', 'サンセットこうや', 'SW']),
   bKC: makeTrack('Wii ノコノコみさき', 'bKC', 200914, 'https://youtu.be/J3v61p6_nzA?feature=shared', 200914, ['ノコみさ', 'ノコノコみさき', 'ノコノコ', 'のこみ', 'KC']),
