@@ -43,7 +43,7 @@ const trackDict = Object.freeze({
   RR: makeTrack('レインボーロード', 'RR', 201161, 'https://youtu.be/CQTN8CS5v28', 200865, ['新虹', 'しんにじ', 'しん虹', '新にじ']),
   rMMM: makeTrack('Wii モーモーカントリー', 'rMMM', 126780, 'https://youtu.be/g7bVEkfHZmc?si=9IvV5iN6AntQwKZH', 116898, ['Wiiモーモーカントリー', 'モモカン', 'モーモーカントリー', 'MMM']),
   rMC: makeTrack('GBA マリオサーキット', 'rMC', 127146, 'https://www.youtube.com/watch?v=BzB5PrrhhTE', 127146, ['GBAマリオサーキット', 'グバマリ', 'GBAマリサ']),
-  rCCB: makeTrack('DS プクプクビーチ', 'rCCB', 149409, 'https://youtu.be/wdKmn9kwZbg?si=rnRXEFGYsZ-TEYe3', 149409, ['プクプクビーチ', 'プクビ', 'プクプク', 'CCB']),
+  rCCB: makeTrack('DS プクプクビーチ', 'rCCB', 149335, 'https://youtu.be/JitQKJc2giU?si=Yqp0Ug2niGQ7Tgoe', 149335, ['プクプクビーチ', 'プクビ', 'プクプク', 'CCB']),
   rTT: makeTrack('N64 キノピオハイウェイ', 'rTT', 147703, 'https://youtu.be/v0hnBMK_g6Q?si=YMo4YtwQ2agZru1p', 147102, ['ハイウェイ', 'キノピオハイウェイ', 'TT']),
   rDDD: makeTrack('GC カラカラさばく', 'rDDD', 200486, 'https://www.youtube.com/watch?v=zel3p5VK1jA', 200486, ['GCカラカラさばく', 'カラカラさばく', 'カラカラ砂漠', 'カラサバ']),
   rDP3: makeTrack('SFC ドーナツへいや3', 'rDP3', 117180, 'https://www.youtube.com/watch?v=ncj3YGdrD_Y', 117180, ['ドーナツへいや3', '平野', 'へいや', 'SFCドーナツへいや3', 'ドーナツへいや', 'ドーナツ平野', 'DP3']),
