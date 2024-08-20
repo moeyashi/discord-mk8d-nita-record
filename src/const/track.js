@@ -31,7 +31,7 @@ const trackDict = Object.freeze({
   TR: makeTrack('ドッスンいせき', 'TR', 151820, 'https://youtu.be/_ekFsiz841I?si=lUGFeZlUfUR79Htd', 151820, ['遺跡', 'ドッスン', 'いせき', 'ドッスン遺跡']),
   MC: makeTrack('マリオサーキット', 'MC', 147911, 'https://youtu.be/GtzbC25DPKg?si=AFxXQ0NsX6MFkc-p', 147911, ['新マリサ', 'しんマリサ']),
   TH: makeTrack('キノピオハーバー', 'TH', 204858, 'https://youtu.be/qM_V9xneC0g', 204858, ['ハーバー']),
-  TM: makeTrack('ねじれマンション', 'TM', 158644, 'https://youtu.be/uZ-2vRgeDZI?si=7GYGKwhDVYnNVcbF', 158447, ['ねじマン', 'ねじれ']),
+  TM: makeTrack('ねじれマンション', 'TM', 158644, 'https://youtu.be/uZ-2vRgeDZI?si=7GYGKwhDVYnNVcbF', 158425, ['ねじマン', 'ねじれ']),
   SGF: makeTrack('ヘイホーこうざん', 'SGF', 158043, 'https://www.youtube.com/watch?v=0sA-Kugpqxg', 158043, ['ヘイホー鉱山', 'ヘイこう', 'こうざん']),
   SA: makeTrack('サンシャインくうこう', 'SA', 200357, 'https://youtu.be/wqJecs3OU6M?feature=shared', 200357, ['サンシャイン空港', '空港', 'くうこう', 'サンシャイン']),
   DS: makeTrack('ドルフィンみさき', 'DS', 157029, 'https://youtu.be/XV-RK_H-J0s', 156408, ['ドルミ']),
