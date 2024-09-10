@@ -99,7 +99,7 @@ const trackDict = Object.freeze({
   bRR7: makeTrack('3DS レインボーロード', 'bRR7', {{wr['bRR7']['vs']}}, '{{wr['bRR7']['vs_url']}}', {{wr['bRR7']['all']}}, ['3DSレインボーロード', '7虹', '7にじ', '7レインボー', '3DSレインボー', '3DS虹', '3DSにじ', 'RR7']),
   bAD: makeTrack('Tour アムステルダムブルーム', 'bAD', {{wr['bAD']['vs']}}, '{{wr['bAD']['vs_url']}}', {{wr['bAD']['all']}}, ['アムス', 'アムステルダム', 'アムステルダムブルーム', 'AD']),
   bRP: makeTrack('GBA リバーサイドパーク', 'bRP', {{wr['bRP']['vs']}}, '{{wr['bRP']['vs_url']}}', {{wr['bRP']['all']}}, ['リバパ', 'リバーサイドパーク', 'リバーサイド', 'リバサ', 'RP']),
-  bDKS: makeTrack('Wii DKスノーボードクロス', 'bDKS', {{wr['bDKS']['vs']}}, '{{wr['bDKS']['vs_url']}}', {{wr['bDKS']['all']}}, ['スノボ', 'DKスノーボードクロス', 'スノーボードクロス', 'DKS']),
+  bDKS: makeTrack('Wii DKスノーボードクロス', 'bDKS', {{wr['bDKS']['vs']}}, '{{wr['bDKS']['vs_url']}}', {{wr['bDKS']['all']}}, ['スノボ', 'DKスノーボードクロス', 'スノーボードクロス', 'DKS', 'DKS01', '01']),
   bYI: makeTrack('ヨッシーアイランド', 'bYI', {{wr['bYI']['vs']}}, '{{wr['bYI']['vs_url']}}', {{wr['bYI']['all']}}, ['ヨシアイ', 'YI']),
   bBR: makeTrack('Tour バンコクラッシュ', 'bBR', {{wr['bBR']['vs']}}, '{{wr['bBR']['vs_url']}}', {{wr['bBR']['all']}}, ['バンコク', 'バンコクラッシュ', 'BR']),
   bMC: makeTrack('DS マリオサーキット', 'bMC', {{wr['bMCd']['vs']}}, '{{wr['bMCd']['vs_url']}}', {{wr['bMCd']['all']}}, ['DSマリサ', 'DSマリオサーキット']),
