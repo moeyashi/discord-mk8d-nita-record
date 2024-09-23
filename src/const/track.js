@@ -79,7 +79,7 @@ const trackDict = Object.freeze({
   bCMa: makeTrack('Wii ココナッツモール', 'bCMa', 143808, 'https://www.youtube.com/watch?v=_YpSoBnSl7w', 143808, ['ココモ', 'ココナッツモール', 'CMa']),
   bTB: makeTrack('Tour トーキョースクランブル', 'bTB', 127486, 'https://youtu.be/M4eGjW_cUnk?si=MeNu13ezwwQ7AZ1l', 127454, ['東京', 'トウキョウ', 'トウキョウスクランブル', 'トーキョー', 'トーキョースクランブル', 'TB']),
   bSR: makeTrack('DS キノコリッジウェイ', 'bSR', 147922, 'https://youtu.be/4stwmH-wxpg?si=JiDhbLcePw182-1Z', 147922, ['リッジウェイ', 'キノコリッジウェイ', 'キノコリッジ', 'リッジ', 'SR']),
-  bSG: makeTrack('GBA スカイガーデン', 'bSG', 130611, 'https://youtu.be/J4WoGCmgtnA?si=WIPKLoD03OdscFcq', 130611, ['GBAスカイガーデン', 'グバスカ', 'GBAスカガ', 'SG']),
+  bSG: makeTrack('GBA スカイガーデン', 'bSG', 130434, 'https://youtu.be/YAWOACKnYpk', 130434, ['GBAスカイガーデン', 'グバスカ', 'GBAスカガ', 'SG']),
   bNH: makeTrack('Tour ニンニンドージョー', 'bNH', 153949, 'https://youtu.be/2rAdExPtt1w?si=dLU0EoDjoNU2Z2Z4', 153645, ['ニンニン', 'ニンニンドージョー', 'NH']),
   bNYM: makeTrack('Tour ニューヨークドリーム', 'bNYM', 124597, 'https://youtu.be/S2h54_Sl9jM?si=M5kheBh-1jpRdaTr', 124597, ['ニューヨーク', 'ニューヨークドリーム', 'NYM', 'NY']),
   bMC3: makeTrack('SFC マリオサーキット3', 'bMC3', 135794, 'https://youtu.be/TWnbD54vew8?si=er35cWckglMzMKM2', 135794, ['SFCマリオサーキット3', 'SFCマリオサーキット', 'マリオサーキット3', 'マリサ3', 'SFCマリサ', 'SFCマリサ3', 'MC3']),
