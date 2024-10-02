@@ -77,7 +77,7 @@ const trackDict = Object.freeze({
   bTC: makeTrack('3DS キノピオサーキット', 'bTC', 124337, 'https://vt.tiktok.com/ZSNTHB93V/', 124200, ['キノサ', 'キノピオサーキット', 'TC']),
   bCMo: makeTrack('N64 チョコマウンテン', 'bCMo', 153834, 'https://youtu.be/_WdGba1EAJ0?si=UBpHd6SKPzE5BWg4', 153834, ['チョコマ', 'チョコマウンテン', 'CMo']),
   bCMa: makeTrack('Wii ココナッツモール', 'bCMa', 143756, 'https://youtu.be/IeCCtzLnukk?si=0RaJ0WveAMA09TLl', 143756, ['ココモ', 'ココナッツモール', 'CMa']),
-  bTB: makeTrack('Tour トーキョースクランブル', 'bTB', 127486, 'https://youtu.be/M4eGjW_cUnk?si=MeNu13ezwwQ7AZ1l', 127454, ['東京', 'トウキョウ', 'トウキョウスクランブル', 'トーキョー', 'トーキョースクランブル', 'TB']),
+  bTB: makeTrack('Tour トーキョースクランブル', 'bTB', 127486, 'https://youtu.be/M4eGjW_cUnk?si=MeNu13ezwwQ7AZ1l', 127354, ['東京', 'トウキョウ', 'トウキョウスクランブル', 'トーキョー', 'トーキョースクランブル', 'TB']),
   bSR: makeTrack('DS キノコリッジウェイ', 'bSR', 147922, 'https://youtu.be/4stwmH-wxpg?si=JiDhbLcePw182-1Z', 147922, ['リッジウェイ', 'キノコリッジウェイ', 'キノコリッジ', 'リッジ', 'SR']),
   bSG: makeTrack('GBA スカイガーデン', 'bSG', 130434, 'https://youtu.be/YAWOACKnYpk', 130434, ['GBAスカイガーデン', 'グバスカ', 'GBAスカガ', 'SG']),
   bNH: makeTrack('Tour ニンニンドージョー', 'bNH', 153949, 'https://youtu.be/2rAdExPtt1w?si=dLU0EoDjoNU2Z2Z4', 153645, ['ニンニン', 'ニンニンドージョー', 'NH']),
