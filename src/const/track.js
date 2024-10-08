@@ -115,7 +115,7 @@ const trackDict = Object.freeze({
   bVV: makeTrack('Tour バンクーバーバレー', 'bVV', 201612, 'https://www.youtube.com/watch?v=ITlkV7BnO74', 201612, ['バンクーバー', 'バンクーバーバレー', 'VV']),
   bRA: makeTrack('Tour ローマアバンティ', 'bRA', 147174, 'https://youtu.be/0FD76oWpvvQ?si=Z2fl70x5YypRIsMu', 147174, ['ローマ', 'ローマアバンティ', 'RA']),
   bDKM: makeTrack('GC DKマウンテン', 'bDKM', 210859, 'https://x.com/kuzerox_/status/1781224866592796702?s=46&t=n_XfioWCbx56plliCg1BSA', 210859, ['DKマウンテン', 'DK山', 'DKM']),
-  bDCt: makeTrack('Wii デイジーサーキット', 'bDCt', 150865, 'https://youtu.be/Ma0g61nhXw4?si=fDYMju2sPIvUF9jS', 150791, ['デイサ', 'デイジーサーキット', 'デジサ', 'DCt']),
+  bDCt: makeTrack('Wii デイジーサーキット', 'bDCt', 150865, 'https://youtu.be/Ma0g61nhXw4?si=fDYMju2sPIvUF9jS', 150638, ['デイサ', 'デイジーサーキット', 'デジサ', 'DCt']),
   bPPC: makeTrack('Tour パックンしんでん', 'bPPC', 202812, 'https://www.youtube.com/watch?v=BrufrzVYiRM', 202812, ['パクしん', 'パックンしんでん', 'パックン神殿', 'パク神', 'PPC']),
   bMD: makeTrack('Tour マドリードグランデ', 'bMD', 159924, 'https://youtu.be/QzzP53exnqo?si=MJUoBJNtFgiTDUlW', 159924, ['マドリード', 'マドリードグランデ', 'MD']),
   bRIW: makeTrack('3DS ロゼッタプラネット', 'bRIW', 159866, 'https://youtu.be/ENIvSOTo9iY?si=IR2YqvCs8QALqmlk', 159866, ['ロゼプラ', 'ロゼッタプラネット', 'RIW']),
