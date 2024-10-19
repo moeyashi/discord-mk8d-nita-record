@@ -103,7 +103,7 @@ const trackDict = Object.freeze({
   bYI: makeTrack('ヨッシーアイランド', 'bYI', 200250, 'https://youtu.be/5PNeVm30QsE?si=8VhyxFVB2oT2a3Q1', 200250, ['ヨシアイ', 'YI']),
   bBR: makeTrack('Tour バンコクラッシュ', 'bBR', 144451, 'https://www.youtube.com/watch?v=oYzdRq492-k', 144451, ['バンコク', 'バンコクラッシュ', 'BR']),
   bMC: makeTrack('DS マリオサーキット', 'bMC', 141878, 'https://youtu.be/QN0oK_u2ETk?si=c9kk9I1LFTd-fYNg', 141878, ['DSマリサ', 'DSマリオサーキット']),
-  bWS: makeTrack('GC ワルイージスタジアム', 'bWS', 157784, 'https://youtu.be/RBXCiqOXCmk?si=BHp8sy40j2rtbdpO', 157708, ['ワルスタ', 'ワルイージスタジアム']),
+  bWS: makeTrack('GC ワルイージスタジアム', 'bWS', 157607, 'https://youtu.be/9_8HOl0ds-8?si=HcXA7qJiNxro4A_X', 157607, ['ワルスタ', 'ワルイージスタジアム']),
   bSSy: makeTrack('Tour シンガポールスプラッシュ', 'bSSy', 157759, 'https://www.youtube.com/watch?v=HSYCPxmnIiA', 157759, ['シンガポール', 'シンガポールスプラッシュ', 'SSy']),
   bAtD: makeTrack('Tour アテネポリス', 'bAtD', 140813, 'https://www.youtube.com/watch?v=zqVVRQ37bxc', 140813, ['アテネ', 'アテネポリス', 'AtD']),
   bDC: makeTrack('GC デイジークルーザー', 'bDC', 135686, 'https://youtu.be/_-HypEbIVyI', 135686, ['デイクル', 'デイジークルーザー', 'DC']),
