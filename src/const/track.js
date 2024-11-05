@@ -32,7 +32,7 @@ const trackDict = Object.freeze({
   MC: makeTrack('マリオサーキット', 'MC', 147911, 'https://youtu.be/GtzbC25DPKg?si=AFxXQ0NsX6MFkc-p', 147911, ['新マリサ', 'しんマリサ']),
   TH: makeTrack('キノピオハーバー', 'TH', 204858, 'https://youtu.be/qM_V9xneC0g', 204858, ['ハーバー']),
   TM: makeTrack('ねじれマンション', 'TM', 158644, 'https://youtu.be/uZ-2vRgeDZI?si=7GYGKwhDVYnNVcbF', 158425, ['ねじマン', 'ねじれ']),
-  SGF: makeTrack('ヘイホーこうざん', 'SGF', 157970, 'https://www.youtube.com/watch?v=f44zN-8Jzmc', 157970, ['ヘイホー鉱山', 'ヘイこう', 'こうざん']),
+  SGF: makeTrack('ヘイホーこうざん', 'SGF', 157956, 'https://www.youtube.com/watch?v=bYNQNHqjs_c', 157956, ['ヘイホー鉱山', 'ヘイこう', 'こうざん']),
   SA: makeTrack('サンシャインくうこう', 'SA', 200357, 'https://youtu.be/wqJecs3OU6M?feature=shared', 200357, ['サンシャイン空港', '空港', 'くうこう', 'サンシャイン']),
   DS: makeTrack('ドルフィンみさき', 'DS', 156975, 'https://youtu.be/3D4awky_PKk', 156408, ['ドルミ']),
   Ed: makeTrack('エレクトロドリーム', 'Ed', 200429, 'https://youtu.be/umy1WwRb28g?feature=shared', 200429, ['エレドリ']),
