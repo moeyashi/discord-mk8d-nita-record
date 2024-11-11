@@ -92,7 +92,7 @@ const trackDict = Object.freeze({
   bLL: makeTrack('Tour ロンドンアベニュー', 'bLL', 211544, 'https://youtu.be/LriFQ4bJBrA?si=IS7O-UhDMzdCYAXG', 211544, ['ロンドン', 'ロンドンアベニュー', 'アベニュー', 'LL']),
   bBL: makeTrack('GBA テレサレイク', 'bBL', 123381, 'https://youtu.be/a2JBzzqF5dg?si', 123381, ['テレレ', 'テレサレイク', 'レイク', 'BL']),
   bRRM: makeTrack('3DS ロックロックマウンテン', 'bRRM', 215863, 'https://youtu.be/ISeXZIc4vpk?feature=shared', 213916, ['ロクマ', 'ロックロックマウンテン', 'RRM']),
-  bMT: makeTrack('Wii メイプルツリーハウス', 'bMT', 225937, 'https://youtu.be/RvYHwSBSpmg?si=_oZ1eHOlajz0N-K5', 225654, ['メイプル', 'メイプルツリーハウス', 'MT']),
+  bMT: makeTrack('Wii メイプルツリーハウス', 'bMT', 225512, 'https://youtu.be/hssGI2m_AOc?si=YUsuY1iQ_kGj89ff', 225512, ['メイプル', 'メイプルツリーハウス', 'MT']),
   bBB: makeTrack('Tour ベルリンシュトラーセ', 'bBB', 159394, 'https://youtu.be/4EqrJRRWkTQ?feature=shared', 159328, ['ベルリン', 'ベルリンシュトラーセ']),
   bPG: makeTrack('DS ピーチガーデン', 'bPG', 207733, 'https://youtu.be/SaLiBuQ41os?si=JDZYiBkrRFoW_qBV', 207733, ['ピチガ', 'ピーチガーデン', 'PG']),
   bMM: makeTrack('Tour メリーメリーマウンテン', 'bMM', 157204, 'https://youtu.be/nttQd-ly4jo?si=exZOgQa47yXXtnSY', 157204, ['メリマ', 'メリーメリーマウンテン', 'メリマン', 'MM']),
