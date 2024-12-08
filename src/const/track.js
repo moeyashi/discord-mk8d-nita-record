@@ -25,7 +25,7 @@ const makeTrack = (trackName, code, nitaVSWR, nitaVSWRUrl, nitaAllCombinationWR,
 };
 
 const trackDict = Object.freeze({
-  MKS: makeTrack('マリオカートスタジアム', 'MKS', 139725, 'https://youtu.be/sRMQ2coPzcg', 138637, ['マリカス']),
+  MKS: makeTrack('マリオカートスタジアム', 'MKS', 139332, 'https://youtu.be/uTPigvK0RBU?si=1VrBQ76dL4VPjO6l', 138637, ['マリカス']),
   WP: makeTrack('ウォーターパーク', 'WP', 141327, 'https://youtu.be/EBg0Zw73qak?si=hkdsMaJ9677jteIl', 141062, ['ウォタパ']),
   SSC: makeTrack('スイーツキャニオン', 'SSC', 153826, 'https://youtu.be/o1tcOkob-1Q?si=OP8qqn-G2cZdkzlo', 153812, ['スイキャニ']),
   TR: makeTrack('ドッスンいせき', 'TR', 151820, 'https://youtu.be/_ekFsiz841I?si=lUGFeZlUfUR79Htd', 151820, ['遺跡', 'ドッスン', 'いせき', 'ドッスン遺跡']),
@@ -59,7 +59,7 @@ const trackDict = Object.freeze({
   rRRd: makeTrack('N64 レインボーロード', 'rRRd', 121092, 'https://youtu.be/is2XTMio7aE?si=ky5YqNCqnUuhI7qW', 120099, ['N64レインボーロード', '64レインボーロード', 'N64レインボー', 'N64虹', 'N64にじ', '64虹', '64にじ', '64レインボー', 'RRd']),
   dYC: makeTrack('GC ヨッシーサーキット', 'dYC', 146171, 'https://youtu.be/88OkOf_PXjQ?si=8g5ZO2jfmNj6mq85', 145992, ['ヨシサ', 'ヨッシーサーキット', 'YC']),
   dEA: makeTrack('エキサイトバイク', 'dEA', 142747, 'https://youtu.be/rOPobkqoFag?si=-7-y9SkkFXGZvHnF', 142747, ['エキバ', 'EA']),
-  dDD: makeTrack('ドラゴンロード', 'dDD', 145718, 'https://youtu.be/vjKqty9Wa6k?feature=shared', 145354, ['ドラロ', 'DD']),
+  dDD: makeTrack('ドラゴンロード', 'dDD', 145718, 'https://youtu.be/vjKqty9Wa6k?feature=shared', 145316, ['ドラロ', 'DD']),
   dMC: makeTrack('ミュートシティ', 'dMC', 155115, 'https://youtu.be/7asKQGLchyk', 154919, ['ミュート', 'ミュートシティー']),
   dWGM: makeTrack('Wii ワリオこうざん', 'dWGM', 203551, 'https://www.youtube.com/watch?v=KQtMUnHG9jg', 203132, ['ワリこう', 'ワリオこうざん', 'WGM', 'ワリ鉱', 'ワリオ鉱山']),
   dRR: makeTrack('SFC レインボーロード', 'dRR', 128456, 'https://youtu.be/eYRy1iKpxSg', 128456, ['SFCレインボーロード', 'SFC虹', 'SFCにじ', 'SFCレインボー']),
@@ -90,7 +90,7 @@ const trackDict = Object.freeze({
   bMG: makeTrack('Wii キノコキャニオン', 'bMG', 135837, 'https://www.youtube.com/watch?v=OnyzC_FlWAA', 135837, ['キノキャニ', 'キノコキャニオン', 'MG']),
   bSHS: makeTrack('アイスビルディング', 'bSHS', 156398, 'https://youtu.be/vgavH1wnxaE', 155364, ['アイス', 'アイビル', 'SHS']),
   bLL: makeTrack('Tour ロンドンアベニュー', 'bLL', 211544, 'https://youtu.be/LriFQ4bJBrA?si=IS7O-UhDMzdCYAXG', 211544, ['ロンドン', 'ロンドンアベニュー', 'アベニュー', 'LL']),
-  bBL: makeTrack('GBA テレサレイク', 'bBL', 123357, 'https://youtu.be/gk0d7rIu5cU?si=VVgC7uVz6tShDQLx', 123357, ['テレレ', 'テレサレイク', 'レイク', 'BL']),
+  bBL: makeTrack('GBA テレサレイク', 'bBL', 123357, 'https://youtu.be/gk0d7rIu5cU?si=VVgC7uVz6tShDQLx', 123304, ['テレレ', 'テレサレイク', 'レイク', 'BL']),
   bRRM: makeTrack('3DS ロックロックマウンテン', 'bRRM', 215863, 'https://youtu.be/ISeXZIc4vpk?feature=shared', 213916, ['ロクマ', 'ロックロックマウンテン', 'RRM']),
   bMT: makeTrack('Wii メイプルツリーハウス', 'bMT', 225512, 'https://youtu.be/hssGI2m_AOc?si=YUsuY1iQ_kGj89ff', 225512, ['メイプル', 'メイプルツリーハウス', 'MT']),
   bBB: makeTrack('Tour ベルリンシュトラーセ', 'bBB', 159394, 'https://youtu.be/4EqrJRRWkTQ?feature=shared', 159328, ['ベルリン', 'ベルリンシュトラーセ']),
