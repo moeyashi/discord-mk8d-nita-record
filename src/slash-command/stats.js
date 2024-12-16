@@ -22,6 +22,7 @@ export default {
     }
 
     const stats = await nitaRepository.selectStats(track.code, toMilliseconds(track.nitaVSWRMilliseconds));
+    console.info(stats);
 
     await interaction.reply({
       embeds: [
@@ -30,27 +31,27 @@ export default {
           fields: [
             {
               name: '1落ち',
-              value: `${(stats.rank1 / stats.total) * 100}%`,
+              value: `${Math.round((stats.rank1 / stats.total) * 100 * 10) / 10}%`,
             },
             {
               name: '2落ち',
-              value: `${(stats.rank2 / stats.total) * 100}%`,
+              value: `${Math.round((stats.rank2 / stats.total) * 100 * 10) / 10}%`,
             },
             {
               name: '3落ち',
-              value: `${(stats.rank3 / stats.total) * 100}%`,
+              value: `${Math.round((stats.rank3 / stats.total) * 100 * 10) / 10}%`,
             },
             {
               name: '4落ち',
-              value: `${(stats.rank4 / stats.total) * 100}%`,
+              value: `${Math.round((stats.rank4 / stats.total) * 100 * 10) / 10}%`,
             },
             {
               name: '5落ち',
-              value: `${(stats.rank5 / stats.total) * 100}%`,
+              value: `${Math.round((stats.rank5 / stats.total) * 100 * 10) / 10}%`,
             },
             {
               name: '6落以上',
-              value: `${(stats.over / stats.total) * 100}%`,
+              value: `${Math.round((stats.over / stats.total) * 100 * 10) / 10}%`,
             },
           ],
         },
