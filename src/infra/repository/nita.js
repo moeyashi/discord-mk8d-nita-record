@@ -127,6 +127,7 @@ export const postgresNitaRepository = () => {
       }));
     },
     async selectStats(trackCode, wrMilliseconds) {
+      console.info(trackCode, wrMilliseconds);
       const results = await sql`
         SELECT
           count(*) as total,
@@ -139,6 +140,18 @@ export const postgresNitaRepository = () => {
         FROM nita
         WHERE track_code = ${trackCode}
       `;
+      console.info(`
+        SELECT
+          count(*) as total,
+          SUM(CASE WHEN milliseconds < ${wrMilliseconds + 1000} THEN 1 ELSE 0 END) as rank1,
+          SUM(CASE WHEN milliseconds >= ${wrMilliseconds + 1000} AND milliseconds < ${wrMilliseconds + 2000} THEN 1 ELSE 0 END) as rank2,
+          SUM(CASE WHEN milliseconds >= ${wrMilliseconds + 2000} AND milliseconds < ${wrMilliseconds + 3000} THEN 1 ELSE 0 END) as rank3,
+          SUM(CASE WHEN milliseconds >= ${wrMilliseconds + 3000} AND milliseconds < ${wrMilliseconds + 4000} THEN 1 ELSE 0 END) as rank4,
+          SUM(CASE WHEN milliseconds >= ${wrMilliseconds + 4000} AND milliseconds < ${wrMilliseconds + 5000} THEN 1 ELSE 0 END) as rank5,
+          SUM(CASE WHEN milliseconds >= ${wrMilliseconds + 5000} THEN 1 ELSE 0 END) as over
+        FROM nita
+        WHERE track_code = ${trackCode}
+      `);
       return {
         total: Number(results[0].total),
         rank1: Number(results[0].rank1),
