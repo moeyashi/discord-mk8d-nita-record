@@ -1,7 +1,6 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
 import { searchTrack } from '../const/track.js';
-import { toMilliseconds } from '../util/time.js';
 
 /** @type { import('../types.js').SlashCommand } */
 export default {
@@ -21,7 +20,7 @@ export default {
       throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
-    const stats = await nitaRepository.selectStats(track.code, toMilliseconds(track.nitaVSWRMilliseconds));
+    const stats = await nitaRepository.selectStats(track.code, track.nitaVSWRMilliseconds);
     console.info(stats);
 
     await interaction.reply({
