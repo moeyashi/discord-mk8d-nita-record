@@ -39,6 +39,18 @@ export type NitaRepository = {
       rivalMilliseconds: number;
     }[]
   >;
+  selectStats: (
+    trackCode: string,
+    wrMilliseconds: number,
+  ) => Promise<{
+    total: number;
+    rank1: number;
+    rank2: number;
+    rank3: number;
+    rank4: number;
+    rank5: number;
+    over: number;
+  }>;
 };
 
 // 参考 https://typescriptbook.jp/reference/functions/overload-functions#%E3%82%A2%E3%83%AD%E3%83%BC%E9%96%A2%E6%95%B0%E3%81%A8%E3%82%AA%E3%83%BC%E3%83%90%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%89
