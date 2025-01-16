@@ -36,7 +36,7 @@ const trackDict = Object.freeze({
   SA: makeTrack('サンシャインくうこう', 'SA', 200357, 'https://youtu.be/wqJecs3OU6M?feature=shared', 200357, ['サンシャイン空港', '空港', 'くうこう', 'サンシャイン']),
   DS: makeTrack('ドルフィンみさき', 'DS', 156975, 'https://youtu.be/3D4awky_PKk', 156408, ['ドルミ']),
   Ed: makeTrack('エレクトロドリーム', 'Ed', 200429, 'https://youtu.be/umy1WwRb28g?feature=shared', 200429, ['エレドリ']),
-  MW: makeTrack('ワリオスノーマウンテン', 'MW', 143553, 'https://youtu.be/0eNt-KRGyik?si=pqvpUJur7d7PWGSU', 143543, ['ワリスノ', '雪山']),
+  MW: makeTrack('ワリオスノーマウンテン', 'MW', 143553, 'https://youtu.be/0eNt-KRGyik?si=pqvpUJur7d7PWGSU', 143373, ['ワリスノ', '雪山']),
   CC: makeTrack('スカイガーデン', 'CC', 201587, 'https://youtu.be/IKdqhZV-cdA', 201587, ['スカガ', '新スカガ']),
   BDD: makeTrack('ホネホネさばく', 'BDD', 151413, 'https://youtu.be/431YVpaHOao?si=12yb2Wl6KVmcTRuj', 151413, ['ホネサバ', 'ホネホネ', 'ホネホネ砂漠']),
   BC: makeTrack('クッパキャッスル', 'BC', 202470, 'https://youtu.be/W0Pf86x2ELo?si=a0iMb3h7hmey8kiv', 202250, ['クパキャ']),
