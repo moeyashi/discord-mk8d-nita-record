@@ -89,7 +89,7 @@ const trackDict = Object.freeze({
   bSL: makeTrack('GBA スノーランド', 'bSL', 136247, 'https://youtu.be/WJAnQ1WUZBI?si=5kipTEfeonUY4bFk', 136247, ['スノラン', 'スノーランド']),
   bMG: makeTrack('Wii キノコキャニオン', 'bMG', 135837, 'https://www.youtube.com/watch?v=OnyzC_FlWAA', 135837, ['キノキャニ', 'キノコキャニオン', 'MG']),
   bSHS: makeTrack('アイスビルディング', 'bSHS', 156398, 'https://youtu.be/vgavH1wnxaE', 155364, ['アイス', 'アイビル', 'SHS']),
-  bLL: makeTrack('Tour ロンドンアベニュー', 'bLL', 211544, 'https://youtu.be/LriFQ4bJBrA?si=IS7O-UhDMzdCYAXG', 211538, ['ロンドン', 'ロンドンアベニュー', 'アベニュー', 'LL']),
+  bLL: makeTrack('Tour ロンドンアベニュー', 'bLL', 211544, 'https://youtu.be/LriFQ4bJBrA?si=IS7O-UhDMzdCYAXG', 211521, ['ロンドン', 'ロンドンアベニュー', 'アベニュー', 'LL']),
   bBL: makeTrack('GBA テレサレイク', 'bBL', 123357, 'https://youtu.be/gk0d7rIu5cU?si=VVgC7uVz6tShDQLx', 123170, ['テレレ', 'テレサレイク', 'レイク', 'BL']),
   bRRM: makeTrack('3DS ロックロックマウンテン', 'bRRM', 215863, 'https://youtu.be/ISeXZIc4vpk?feature=shared', 213916, ['ロクマ', 'ロックロックマウンテン', 'RRM']),
   bMT: makeTrack('Wii メイプルツリーハウス', 'bMT', 225512, 'https://youtu.be/hssGI2m_AOc?si=YUsuY1iQ_kGj89ff', 225512, ['メイプル', 'メイプルツリーハウス', 'MT']),
