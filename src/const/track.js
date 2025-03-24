@@ -87,7 +87,7 @@ const trackDict = Object.freeze({
   bWP: makeTrack('DS ワルイージピンボール', 'bWP', 220341, 'https://youtu.be/r6y1qY0Z-F0?feature=shared', 220341, ['ワルピン', 'ワルイージピンボール']),
   bSS: makeTrack('Tour シドニーサンシャイン', 'bSS', 202827, 'https://youtu.be/pSkfnteexcs?si=UKygTIw3FkMaw4jt', 202827, ['シドニー', 'シドニーサンシャイン', 'SS']),
   bSL: makeTrack('GBA スノーランド', 'bSL', 136247, 'https://youtu.be/WJAnQ1WUZBI?si=5kipTEfeonUY4bFk', 136247, ['スノラン', 'スノーランド']),
-  bMG: makeTrack('Wii キノコキャニオン', 'bMG', 135837, 'https://www.youtube.com/watch?v=OnyzC_FlWAA', 135837, ['キノキャニ', 'キノコキャニオン', 'MG']),
+  bMG: makeTrack('Wii キノコキャニオン', 'bMG', 135837, 'https://www.youtube.com/watch?v=OnyzC_FlWAA', 135829, ['キノキャニ', 'キノコキャニオン', 'MG']),
   bSHS: makeTrack('アイスビルディング', 'bSHS', 156398, 'https://youtu.be/vgavH1wnxaE', 155364, ['アイス', 'アイビル', 'SHS']),
   bLL: makeTrack('Tour ロンドンアベニュー', 'bLL', 211544, 'https://youtu.be/LriFQ4bJBrA?si=IS7O-UhDMzdCYAXG', 211521, ['ロンドン', 'ロンドンアベニュー', 'アベニュー', 'LL']),
   bBL: makeTrack('GBA テレサレイク', 'bBL', 123357, 'https://youtu.be/gk0d7rIu5cU?si=VVgC7uVz6tShDQLx', 123170, ['テレレ', 'テレサレイク', 'レイク', 'BL']),
