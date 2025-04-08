@@ -119,7 +119,7 @@ const trackDict = Object.freeze({
   bPPC: makeTrack('Tour パックンしんでん', 'bPPC', 202812, 'https://www.youtube.com/watch?v=BrufrzVYiRM', 202570, ['パクしん', 'パックンしんでん', 'パックン神殿', 'パク神', 'PPC']),
   bMD: makeTrack('Tour マドリードグランデ', 'bMD', 159913, 'https://youtu.be/5Bn6Tyit3a4?feature=shared', 159913, ['マドリード', 'マドリードグランデ', 'MD']),
   bRIW: makeTrack('3DS ロゼッタプラネット', 'bRIW', 159866, 'https://youtu.be/ENIvSOTo9iY?si=IR2YqvCs8QALqmlk', 159866, ['ロゼプラ', 'ロゼッタプラネット', 'RIW']),
-  bBC3: makeTrack('SFC クッパじょう3', 'bBC3', 143114, 'https://www.youtube.com/watch?v=d5ydfEfO55Y', 143114, ['クッパじょう', 'クッパ城', 'クッパ城3', 'クッパじょう3', 'BC3']),
+  bBC3: makeTrack('SFC クッパじょう3', 'bBC3', 143114, 'https://www.youtube.com/watch?v=d5ydfEfO55Y', 143085, ['クッパじょう', 'クッパ城', 'クッパ城3', 'クッパじょう3', 'BC3']),
   bRRw: makeTrack('Wii レインボーロード', 'bRRw', 234834, 'https://www.youtube.com/watch?v=5i2H4fu-0ZA', 233363, ['Wiiレインボーロード', 'Wii虹', 'Wiiにじ', 'Wiiレインボー', 'RRw']),
 });
 
