@@ -34,7 +34,7 @@ const trackDict = Object.freeze({
   TM: makeTrack('ねじれマンション', 'TM', 158644, 'https://youtu.be/uZ-2vRgeDZI?si=7GYGKwhDVYnNVcbF', 158425, ['ねじマン', 'ねじれ']),
   SGF: makeTrack('ヘイホーこうざん', 'SGF', 157956, 'https://www.youtube.com/watch?v=bYNQNHqjs_c', 157956, ['ヘイホー鉱山', 'ヘイこう', 'こうざん']),
   SA: makeTrack('サンシャインくうこう', 'SA', 200357, 'https://youtu.be/wqJecs3OU6M?feature=shared', 200357, ['サンシャイン空港', '空港', 'くうこう', 'サンシャイン']),
-  DS: makeTrack('ドルフィンみさき', 'DS', 156736, 'https://www.youtube.com/watch?v=K_NLHMKKoQo', 156408, ['ドルミ']),
+  DS: makeTrack('ドルフィンみさき', 'DS', 156736, 'https://www.youtube.com/watch?v=K_NLHMKKoQo', 155812, ['ドルミ']),
   Ed: makeTrack('エレクトロドリーム', 'Ed', 200429, 'https://youtu.be/umy1WwRb28g?feature=shared', 200429, ['エレドリ']),
   MW: makeTrack('ワリオスノーマウンテン', 'MW', 143362, 'https://youtu.be/EtZ8T3wi4M0?si=5i1VOGxDkFXTp_id', 143362, ['ワリスノ', '雪山']),
   CC: makeTrack('スカイガーデン', 'CC', 201587, 'https://youtu.be/IKdqhZV-cdA', 201587, ['スカガ', '新スカガ']),
