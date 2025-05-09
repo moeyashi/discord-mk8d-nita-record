@@ -45,7 +45,7 @@ const trackDict = Object.freeze({
   rMC: makeTrack('GBA マリオサーキット', 'rMC', 127146, 'https://www.youtube.com/watch?v=BzB5PrrhhTE', 127146, ['GBAマリオサーキット', 'グバマリ', 'GBAマリサ']),
   rCCB: makeTrack('DS プクプクビーチ', 'rCCB', 149335, 'https://youtu.be/JitQKJc2giU?si=Yqp0Ug2niGQ7Tgoe', 149335, ['プクプクビーチ', 'プクビ', 'プクプク', 'CCB']),
   rTT: makeTrack('N64 キノピオハイウェイ', 'rTT', 147588, 'https://youtu.be/ZBwf-b492C4', 146936, ['ハイウェイ', 'キノピオハイウェイ', 'TT']),
-  rDDD: makeTrack('GC カラカラさばく', 'rDDD', 200486, 'https://www.youtube.com/watch?v=zel3p5VK1jA', 200486, ['GCカラカラさばく', 'カラカラさばく', 'カラカラ砂漠', 'カラサバ']),
+  rDDD: makeTrack('GC カラカラさばく', 'rDDD', 200486, 'https://www.youtube.com/watch?v=zel3p5VK1jA', 200166, ['GCカラカラさばく', 'カラカラさばく', 'カラカラ砂漠', 'カラサバ']),
   rDP3: makeTrack('SFC ドーナツへいや3', 'rDP3', 117180, 'https://www.youtube.com/watch?v=ncj3YGdrD_Y', 117001, ['ドーナツへいや3', '平野', 'へいや', 'SFCドーナツへいや3', 'ドーナツへいや', 'ドーナツ平野', 'DP3']),
   rRRy: makeTrack('N64 ピーチサーキット', 'rRRy', 158752, 'https://youtu.be/eb-yJ5vDZf8?feature=shared', 158752, ['ピチサ', 'ピーチサーキット', 'RRy']),
   rDKJ: makeTrack('3DS DKジャングル', 'rDKJ', 203342, 'https://www.youtube.com/watch?v=zpyzZRW6oTk', 203342, ['ジャングル', 'DKジャングル', 'DKJ', 'DK じゃんぐる']),
