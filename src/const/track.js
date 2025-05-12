@@ -71,7 +71,7 @@ const trackDict = Object.freeze({
   dAC: makeTrack('どうぶつの森', 'dAC', 141131, 'https://www.youtube.com/watch?v=N4xZSCt6S6g', 140935, ['どうぶつのもり', 'どうもり', 'どう森', 'AC']),
   dNBC: makeTrack('3DS ネオクッパシティ', 'dNBC', 146187, 'https://www.youtube.com/watch?v=J2JJ2p6qjy8', 146187, ['ネオパ', 'ネオクッパ', 'ネオクッパシティ', 'NBC']),
   dRiR: makeTrack('GBA リボンロード', 'dRiR', 150701, 'https://youtu.be/J029EQKelFU?si=cleo5lmtfYWU_bEP', 150681, ['リボン', 'リボロ', 'リボンロード', 'RiR']),
-  dSBS: makeTrack('リンリンメトロ', 'dSBS', 144297, 'https://youtu.be/zKrerSvMB0I', 144108, ['リンメト', 'SBS']),
+  dSBS: makeTrack('リンリンメトロ', 'dSBS', 144297, 'https://youtu.be/zKrerSvMB0I', 143997, ['リンメト', 'SBS']),
   dBB: makeTrack('ビッグブルー', 'dBB', 126146, 'https://youtu.be/LF9VanxJo2k?si=J1MIZqposH444_vk', 125869, ['BB', 'ビックブルー']),
   bPP: makeTrack('Tour パリプロムナード', 'bPP', 151756, 'https://www.youtube.com/watch?v=KWsuSpC-VMA', 151539, ['パリ', 'パリプロムナード', 'PP']),
   bTC: makeTrack('3DS キノピオサーキット', 'bTC', 123940, 'https://youtu.be/XBcW6S27JYc?si=dBYLUDOS2pMR9dMC', 123940, ['キノサ', 'キノピオサーキット', 'TC']),
