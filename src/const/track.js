@@ -120,7 +120,7 @@ const trackDict = Object.freeze({
   bMD: makeTrack('Tour マドリードグランデ', 'bMD', 159913, 'https://youtu.be/5Bn6Tyit3a4?feature=shared', 159913, ['マドリード', 'マドリードグランデ', 'MD']),
   bRIW: makeTrack('3DS ロゼッタプラネット', 'bRIW', 159866, 'https://youtu.be/ENIvSOTo9iY?si=IR2YqvCs8QALqmlk', 159739, ['ロゼプラ', 'ロゼッタプラネット', 'RIW']),
   bBC3: makeTrack('SFC クッパじょう3', 'bBC3', 143114, 'https://www.youtube.com/watch?v=d5ydfEfO55Y', 142796, ['クッパじょう', 'クッパ城', 'クッパ城3', 'クッパじょう3', 'BC3']),
-  bRRw: makeTrack('Wii レインボーロード', 'bRRw', 234834, 'https://www.youtube.com/watch?v=5i2H4fu-0ZA', 233363, ['Wiiレインボーロード', 'Wii虹', 'Wiiにじ', 'Wiiレインボー', 'RRw']),
+  bRRw: makeTrack('Wii レインボーロード', 'bRRw', 234668, 'https://youtu.be/OtwxgpFGcNM?si=mF28hZwYUuHhDD_S', 233363, ['Wiiレインボーロード', 'Wii虹', 'Wiiにじ', 'Wiiレインボー', 'RRw']),
 });
 
 export const trackCodeSet = new Set(Object.keys(trackDict));
