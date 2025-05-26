@@ -29,7 +29,7 @@ const trackDict = Object.freeze({
   WP: makeTrack('ウォーターパーク', 'WP', 141327, 'https://youtu.be/EBg0Zw73qak?si=hkdsMaJ9677jteIl', 141062, ['ウォタパ']),
   SSC: makeTrack('スイーツキャニオン', 'SSC', 153826, 'https://youtu.be/o1tcOkob-1Q?si=OP8qqn-G2cZdkzlo', 153640, ['スイキャニ']),
   TR: makeTrack('ドッスンいせき', 'TR', 151820, 'https://youtu.be/_ekFsiz841I?si=lUGFeZlUfUR79Htd', 150410, ['遺跡', 'ドッスン', 'いせき', 'ドッスン遺跡']),
-  MC: makeTrack('マリオサーキット', 'MC', 147911, 'https://youtu.be/GtzbC25DPKg?si=AFxXQ0NsX6MFkc-p', 147911, ['新マリサ', 'しんマリサ']),
+  MC: makeTrack('マリオサーキット', 'MC', 147911, 'https://youtu.be/GtzbC25DPKg?si=AFxXQ0NsX6MFkc-p', 147859, ['新マリサ', 'しんマリサ']),
   TH: makeTrack('キノピオハーバー', 'TH', 204610, 'https://youtu.be/Z5QIjnNkWMU', 204610, ['ハーバー']),
   TM: makeTrack('ねじれマンション', 'TM', 158644, 'https://youtu.be/uZ-2vRgeDZI?si=7GYGKwhDVYnNVcbF', 158425, ['ねじマン', 'ねじれ']),
   SGF: makeTrack('ヘイホーこうざん', 'SGF', 157956, 'https://www.youtube.com/watch?v=bYNQNHqjs_c', 157956, ['ヘイホー鉱山', 'ヘイこう', 'こうざん']),
