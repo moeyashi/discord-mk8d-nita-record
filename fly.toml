@@ -6,7 +6,7 @@ processes = []
 
 [build]
   builder = "paketobuildpacks/builder-jammy-base"
-  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
+  buildpacks = ["paketo-buildpacks/nodejs"]
 
 [[vm]]
   cpu_kind = "shared"
