@@ -38,7 +38,7 @@ const trackDict = Object.freeze({
   Ed: makeTrack('エレクトロドリーム', 'Ed', 200429, 'https://youtu.be/umy1WwRb28g?feature=shared', 200429, ['エレドリ']),
   MW: makeTrack('ワリオスノーマウンテン', 'MW', 143262, 'https://youtu.be/f06bm_4ynYQ?si=SeOdMM2FjkCWy794', 143262, ['ワリスノ', '雪山']),
   CC: makeTrack('スカイガーデン', 'CC', 201587, 'https://youtu.be/IKdqhZV-cdA', 201587, ['スカガ', '新スカガ']),
-  BDD: makeTrack('ホネホネさばく', 'BDD', 151413, 'https://youtu.be/431YVpaHOao?si=12yb2Wl6KVmcTRuj', 151413, ['ホネサバ', 'ホネホネ', 'ホネホネ砂漠']),
+  BDD: makeTrack('ホネホネさばく', 'BDD', 151278, 'https://youtu.be/lVlF1ov0uYo?feature=shared', 151278, ['ホネサバ', 'ホネホネ', 'ホネホネ砂漠']),
   BC: makeTrack('クッパキャッスル', 'BC', 202470, 'https://youtu.be/W0Pf86x2ELo?si=a0iMb3h7hmey8kiv', 202250, ['クパキャ']),
   RR: makeTrack('レインボーロード', 'RR', 200960, 'https://youtu.be/sIuzDGCYE4U?feature=shared', 200865, ['新虹', 'しんにじ', 'しん虹', '新にじ']),
   rMMM: makeTrack('Wii モーモーカントリー', 'rMMM', 126780, 'https://youtu.be/g7bVEkfHZmc?si=9IvV5iN6AntQwKZH', 126731, ['Wiiモーモーカントリー', 'モモカン', 'モーモーカントリー', 'MMM']),
