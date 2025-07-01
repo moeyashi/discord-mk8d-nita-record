@@ -57,7 +57,7 @@ const trackDict = Object.freeze({
   rPPS: makeTrack('3DS パックンスライダー', 'rPPS', 203211, 'https://youtu.be/BSoCORqLH1s?si=BQCmOowf70Sd8S8s', 202676, ['パクスラ', 'パックンスライダー', 'PPS']),
   rGV: makeTrack('Wii グラグラかざん', 'rGV', 154936, 'https://youtu.be/MnhtY7vyZvw?si=tqaOEq6dvHfWot6e', 154936, ['火山', 'かざん', 'グラグラ', 'グラグラ火山', 'グラグラかざん', 'GV']),
   rRRd: makeTrack('N64 レインボーロード', 'rRRd', 120975, 'https://youtu.be/MSYxRa7ThWY?si=QV-2oTdIyC1zy-Lr', 120710, ['N64レインボーロード', '64レインボーロード', 'N64レインボー', 'N64虹', 'N64にじ', '64虹', '64にじ', '64レインボー', 'RRd']),
-  dYC: makeTrack('GC ヨッシーサーキット', 'dYC', 146171, 'https://youtu.be/88OkOf_PXjQ?si=8g5ZO2jfmNj6mq85', 145992, ['ヨシサ', 'ヨッシーサーキット', 'YC']),
+  dYC: makeTrack('GC ヨッシーサーキット', 'dYC', 146164, 'https://youtu.be/X7HcI6xzNCc?si=NC8BbAi9AWde5ASL', 145992, ['ヨシサ', 'ヨッシーサーキット', 'YC']),
   dEA: makeTrack('エキサイトバイク', 'dEA', 142747, 'https://youtu.be/rOPobkqoFag?si=-7-y9SkkFXGZvHnF', 142540, ['エキバ', 'EA']),
   dDD: makeTrack('ドラゴンロード', 'dDD', 145718, 'https://youtu.be/vjKqty9Wa6k?feature=shared', 144976, ['ドラロ', 'DD']),
   dMC: makeTrack('ミュートシティ', 'dMC', 155115, 'https://youtu.be/7asKQGLchyk', 154919, ['ミュート', 'ミュートシティー']),
