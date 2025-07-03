@@ -6,7 +6,7 @@ import { nitaListResponse } from '../presenter/nita-list-response.js';
 /** @type { import('../types').SlashCommand } */
 export default {
   data: new SlashCommandBuilder().setName('nita-list').setDescription('NITAのタイムを確認します。'),
-  execute: async (interaction, nitaRepository) => {
+  execute: async (interaction, { nitaRepository }) => {
     const discordUserId = interaction.member?.user?.id || interaction.user?.id;
     if (!discordUserId) {
       throw new Error('ユーザーIDが取得できませんでした');

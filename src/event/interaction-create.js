@@ -18,7 +18,7 @@ const getCommands = async () => {
 /** @type { import('../types').Event<Events.InteractionCreate> } */
 export default {
   name: Events.InteractionCreate,
-  async execute(nitaRepository, interaction) {
+  async execute(repositories, interaction) {
     console.info('InteractionCreate event triggered!');
     if (!interaction.isChatInputCommand()) {
       return;
@@ -34,7 +34,7 @@ export default {
     }
 
     try {
-      await command.execute(interaction, nitaRepository);
+      await command.execute(interaction, repositories);
     } catch (error) {
       console.error(error);
       try {

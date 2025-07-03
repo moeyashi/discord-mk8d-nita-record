@@ -8,7 +8,7 @@ export default {
     .setName('stats')
     .setDescription('NITAの統計情報を確認します。')
     .addStringOption((option) => option.setName('track').setDescription('コース名').setRequired(true)),
-  execute: async (interaction, nitaRepository) => {
+  execute: async (interaction, { nitaRepository }) => {
     const trackQuery = interaction.options.getString('track');
 
     if (!trackQuery) {

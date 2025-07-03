@@ -8,7 +8,7 @@ export default {
     .setName('delete')
     .setDescription('自分の記録を削除します。コース名に`all`を入力することですべての記録を削除できます。')
     .addStringOption((option) => option.setName('track').setDescription('コース名').setRequired(true)),
-  execute: async (interaction, nitaRepository) => {
+  execute: async (interaction, { nitaRepository }) => {
     const trackQuery = interaction.options.getString('track');
 
     if (!trackQuery) {

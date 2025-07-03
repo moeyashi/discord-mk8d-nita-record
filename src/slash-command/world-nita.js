@@ -1,17 +1,16 @@
 // @ts-check
 import { SlashCommandBuilder } from 'discord.js';
-import { colorByTimeRank } from '../const/color.js';
-import { searchTrack } from '../const/track.js';
-import { ceilDiff, displayMilliseconds, toMilliseconds } from '../util/time.js';
+import { searchTrack } from '../const/mkwr-track.js';
+import { displayMilliseconds, toMilliseconds } from '../util/time.js';
 
 /** @type { import('../types').SlashCommand } */
 export default {
   data: new SlashCommandBuilder()
-    .setName('nita')
-    .setDescription('NITAのタイムを登録・確認します。timeを指定しない場合は確認のみします。')
+    .setName('world-nita')
+    .setDescription('マリオカートワールド（MKWR）のNITA記録を登録・表示します。')
     .addStringOption((option) => option.setName('track').setDescription('コース名').setRequired(true))
     .addIntegerOption((option) => option.setName('time').setDescription('タイム(1:53.053の場合は153053と入力)')),
-  execute: async (interaction, { nitaRepository }) => {
+  execute: async (interaction, { worldRepository }) => {
     const trackQuery = interaction.options.getString('track');
     const inputTime = interaction.options.getInteger('time');
 
@@ -21,7 +20,8 @@ export default {
 
     const track = searchTrack(trackQuery);
     if (!track) {
-      throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
+      throw new Error(`コースが見つかりませんでした。
+入力されたコース名:  ${trackQuery}`);
     }
 
     const discordUserId = interaction.member?.user?.id || interaction.user?.id;
@@ -29,7 +29,7 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    const lastRecord = await nitaRepository.selectNitaByUserAndTrack(discordUserId, track.code);
+    const lastRecord = await worldRepository.selectNitaByUserAndTrack(discordUserId, track.code);
 
     if (!inputTime) {
       await interaction.reply(doProcessGetLastRecordCommand(track, lastRecord));
@@ -54,9 +54,9 @@ export default {
       lastMilliseconds: lastRecord?.milliseconds,
     };
     if (lastRecord === null) {
-      await nitaRepository.insertNita(newNita);
+      await worldRepository.insertNita(newNita);
     } else {
-      await nitaRepository.updateNita(newNita);
+      await worldRepository.updateNita(newNita);
     }
 
     await interaction.reply({
@@ -100,44 +100,34 @@ const makeEmbed = (track, lastRecord, newMilliseconds = null) => {
   if (newMilliseconds !== null) {
     if (lastRecord) {
       if (lastRecord.milliseconds > newMilliseconds) {
-        const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
-        ret.color = colorByTimeRank(timeRank);
         ret.fields?.push({
-          name: `${timeRank}落ち`,
+          name: '更新',
           value: `${(lastRecord.milliseconds - newMilliseconds) / 1000}秒更新!`,
         });
       }
     } else {
-      const timeRank = ceilDiff(track.nitaVSWRMilliseconds, newMilliseconds);
-      ret.color = colorByTimeRank(timeRank);
       ret.fields?.push({
-        name: `${timeRank}落ち`,
+        name: 'new record!',
         value: 'new record!',
       });
     }
     ret.fields?.push({
       name: '今回のタイム',
-      value: `${displayMilliseconds(newMilliseconds)} WR + ${(newMilliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+      value: `${displayMilliseconds(newMilliseconds)}`,
     });
   }
   if (lastRecord) {
     if (newMilliseconds) {
       ret.fields?.push({
         name: '前回のタイム',
-        value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+        value: `${displayMilliseconds(lastRecord.milliseconds)}`,
       });
     } else {
-      const timeRank = ceilDiff(track.nitaVSWRMilliseconds, lastRecord.milliseconds);
-      ret.color = colorByTimeRank(timeRank);
       ret.fields?.push({
-        name: `${timeRank}落ち`,
-        value: `${displayMilliseconds(lastRecord.milliseconds)} WR + ${(lastRecord.milliseconds - track.nitaVSWRMilliseconds) / 1000}秒`,
+        name: 'time',
+        value: `${displayMilliseconds(lastRecord.milliseconds)}`,
       });
     }
   }
-  ret.fields?.push({
-    name: 'WR',
-    value: displayMilliseconds(track.nitaVSWRMilliseconds),
-  });
   return ret;
 };
