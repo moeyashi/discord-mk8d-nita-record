@@ -8,7 +8,7 @@ export default {
     .setName('rival')
     .setDescription('サーバー内のユーザーと記録を比較します')
     .addUserOption((option) => option.setName('rival').setDescription('比較対象').setRequired(true)),
-  execute: async (interaction, nitaRepository) => {
+  execute: async (interaction, { nitaRepository }) => {
     if (!interaction.guild) {
       if (!interaction.inGuild()) {
         throw new Error('サーバー内で実行してください。rivalコマンドはDMやグループDMでは実行できません。');

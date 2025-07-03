@@ -1,13 +1,23 @@
-import { readdir } from 'node:fs/promises';
 // @ts-check
+import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 import { postgresNitaRepository } from './infra/repository/nita.js';
+import { postgresWorldNitaRepository } from './infra/repository/world-nita-repository.js';
+import { makePostgresConnection } from './lib.js';
 
 dotenv.config();
 
-const nitaRepository = postgresNitaRepository();
+const sql = makePostgresConnection();
+
+const nitaRepository = postgresNitaRepository(sql);
+const worldNitaRepository = postgresWorldNitaRepository(sql);
+
+const repositories = {
+  nitaRepository,
+  worldRepository: worldNitaRepository,
+};
 
 const main = async () => {
   // Create a new client instance
@@ -28,9 +38,9 @@ const main = async () => {
       continue;
     }
     if (event.once) {
-      client.once(event.name, (...args) => event.execute(nitaRepository, ...args));
+      client.once(event.name, (...args) => event.execute(repositories, ...args));
     } else {
-      client.on(event.name, (...args) => event.execute(nitaRepository, ...args));
+      client.on(event.name, (...args) => event.execute(repositories, ...args));
     }
   }
   console.info('Loaded events!');

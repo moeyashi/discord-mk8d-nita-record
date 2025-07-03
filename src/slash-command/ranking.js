@@ -12,7 +12,7 @@ export default {
     .addIntegerOption((option) =>
       option.setName('page').setDescription('1の場合1位から20位を、2の場合21位から40位を出力します'),
     ),
-  execute: async (interaction, nitaRepository) => {
+  execute: async (interaction, { nitaRepository }) => {
     if (!interaction.guild) {
       if (!interaction.inGuild()) {
         throw new Error('サーバー内で実行してください。rankingコマンドはDMやグループDMでは実行できません。');

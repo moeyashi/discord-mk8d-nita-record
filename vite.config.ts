@@ -8,5 +8,6 @@ export default defineConfig({
       DATABASE_USERNAME: 'postgres',
       DATABASE_PASSWORD: 'postgres',
     },
+    globalSetup: './vitest.setup.ts',
   },
 });
