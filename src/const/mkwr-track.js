@@ -9,7 +9,7 @@ const trackDict = Object.freeze({
     trackName: 'マリオブラザーズサーキット',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['マリブラ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   トロフィーシティ: {
@@ -17,7 +17,7 @@ const trackDict = Object.freeze({
     trackName: 'トロフィーシティ',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['トロフィー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   シュポポコースター: {
@@ -25,7 +25,7 @@ const trackDict = Object.freeze({
     trackName: 'シュポポコースター',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['シュポポ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   // biome-ignore lint/style/useNamingConvention: <explanation>
@@ -34,7 +34,7 @@ const trackDict = Object.freeze({
     trackName: 'DKうちゅうセンター',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['うちゅう'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   サンサンさばく: {
@@ -42,7 +42,7 @@ const trackDict = Object.freeze({
     trackName: 'サンサンさばく',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['サンサン'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ヘイホーカーニバル: {
@@ -50,7 +50,7 @@ const trackDict = Object.freeze({
     trackName: 'ヘイホーカーニバル',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ヘイホー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ワリオスタジアム: {
@@ -58,7 +58,7 @@ const trackDict = Object.freeze({
     trackName: 'ワリオスタジアム',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ワリスタ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   キラーシップ: {
@@ -66,7 +66,7 @@ const trackDict = Object.freeze({
     trackName: 'キラーシップ',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['キラー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   // biome-ignore lint/style/useNamingConvention: <explanation>
@@ -75,7 +75,7 @@ const trackDict = Object.freeze({
     trackName: 'DKスノーマウンテン',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['DKS'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ロゼッタてんもんだい: {
@@ -83,7 +83,7 @@ const trackDict = Object.freeze({
     trackName: 'ロゼッタてんもんだい',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ロゼッタ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   アイスビルディング: {
@@ -91,7 +91,7 @@ const trackDict = Object.freeze({
     trackName: 'アイスビルディング',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['アイス', 'アイビル'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ワリオシップ: {
@@ -107,7 +107,7 @@ const trackDict = Object.freeze({
     trackName: 'ノコノコビーチ',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ノコノコ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   リバーサイドサファリ: {
@@ -115,7 +115,7 @@ const trackDict = Object.freeze({
     trackName: 'リバーサイドサファリ',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['リバーサイド', 'リバサ', 'サファリ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ピーチスタジアム: {
@@ -123,7 +123,7 @@ const trackDict = Object.freeze({
     trackName: 'ピーチスタジアム',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ピチスタ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ピーチビーチ: {
@@ -139,7 +139,7 @@ const trackDict = Object.freeze({
     trackName: 'ソルティータウン',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ソルティー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ディノディノジャングル: {
@@ -147,7 +147,7 @@ const trackDict = Object.freeze({
     trackName: 'ディノディノジャングル',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ディノディノ', 'ジャングル', 'ディノ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ハテナしんでん: {
@@ -155,7 +155,7 @@ const trackDict = Object.freeze({
     trackName: 'ハテナしんでん',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ハテナ', 'しんでん', 'ハテナ神殿'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   プクプクフォールズ: {
@@ -163,7 +163,7 @@ const trackDict = Object.freeze({
     trackName: 'プクプクフォールズ',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['プクプク'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ショーニューロード: {
@@ -171,7 +171,7 @@ const trackDict = Object.freeze({
     trackName: 'ショーニューロード',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ショーニュー', '鍾乳', 'しょうにゅう'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   おばけシネマ: {
@@ -179,7 +179,7 @@ const trackDict = Object.freeze({
     trackName: 'おばけシネマ',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['おばけ', 'シネマ', '映画館'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ホネホネツイスター: {
@@ -187,7 +187,7 @@ const trackDict = Object.freeze({
     trackName: 'ホネホネツイスター',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['ホネホネ', 'ツイスター'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   モーモーカントリー: {
@@ -195,7 +195,7 @@ const trackDict = Object.freeze({
     trackName: 'モーモーカントリー',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['モモカン'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   チョコマウンテン: {
@@ -203,7 +203,7 @@ const trackDict = Object.freeze({
     trackName: 'チョコマウンテン',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['チョコマ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   キノピオファクトリー: {
@@ -211,7 +211,7 @@ const trackDict = Object.freeze({
     trackName: 'キノピオファクトリー',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['キノピオ', 'ファクトリー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   クッパキャッスル: {
@@ -219,7 +219,7 @@ const trackDict = Object.freeze({
     trackName: 'クッパキャッスル',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['クバキャ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   どんぐりツリーハウス: {
@@ -227,7 +227,7 @@ const trackDict = Object.freeze({
     trackName: 'どんぐりツリーハウス',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['どんぐり'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   マリオサーキット: {
@@ -235,7 +235,7 @@ const trackDict = Object.freeze({
     trackName: 'マリオサーキット',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['マリサ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   レインボーロード: {
@@ -243,7 +243,7 @@ const trackDict = Object.freeze({
     trackName: 'レインボーロード',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: [],
+    aliases: ['虹', 'レインボー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
 });
