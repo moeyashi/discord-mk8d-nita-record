@@ -50,7 +50,7 @@ const trackDict = Object.freeze({
     trackName: 'ヘイホーカーニバル',
     nitaVSWRMilliseconds: 0,
     nitaVSWRUrl: '',
-    aliases: ['ヘイホー'],
+    aliases: ['ヘイホー', 'ヘイカニ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
   ワリオスタジアム: {
