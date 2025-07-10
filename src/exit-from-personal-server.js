@@ -1,8 +1,8 @@
 import { REST, Routes } from 'discord.js';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 const main = async () => {
   const token = process.env.DISCORD_BOT_TOKEN || '';
   const excludeGuildIds = process.env.EXCLUDE_GUILD_IDS?.split(',') || [];
@@ -14,7 +14,7 @@ const main = async () => {
     /** @type {import('discord.js').RESTGetAPICurrentUserGuildsQuery} */
     const userGuildsQuery = {
       limit: 100,
-      // biome-ignore lint/style/useNamingConvention: <explanation>
+      // biome-ignore lint/style/useNamingConvention: Discord API の仕様に従う
       with_counts: true,
     };
     if (after) {

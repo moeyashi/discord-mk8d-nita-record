@@ -4,6 +4,7 @@
  * @type {Record<string, import('../types').Track>}
  */
 const trackDict = Object.freeze({
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   マリオブラザーズサーキット: {
     code: 'マリオブラザーズサーキット',
     trackName: 'マリオブラザーズサーキット',
@@ -12,6 +13,7 @@ const trackDict = Object.freeze({
     aliases: ['マリブラ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   トロフィーシティ: {
     code: 'トロフィーシティ',
     trackName: 'トロフィーシティ',
@@ -20,6 +22,7 @@ const trackDict = Object.freeze({
     aliases: ['トロフィー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   シュポポコースター: {
     code: 'シュポポコースター',
     trackName: 'シュポポコースター',
@@ -28,7 +31,7 @@ const trackDict = Object.freeze({
     aliases: ['シュポポ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   DKうちゅうセンター: {
     code: 'DKうちゅうセンター',
     trackName: 'DKうちゅうセンター',
@@ -37,6 +40,7 @@ const trackDict = Object.freeze({
     aliases: ['うちゅう'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   サンサンさばく: {
     code: 'サンサンさばく',
     trackName: 'サンサンさばく',
@@ -45,6 +49,7 @@ const trackDict = Object.freeze({
     aliases: ['サンサン'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ヘイホーカーニバル: {
     code: 'ヘイホーカーニバル',
     trackName: 'ヘイホーカーニバル',
@@ -53,6 +58,7 @@ const trackDict = Object.freeze({
     aliases: ['ヘイホー', 'ヘイカニ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ワリオスタジアム: {
     code: 'ワリオスタジアム',
     trackName: 'ワリオスタジアム',
@@ -61,6 +67,7 @@ const trackDict = Object.freeze({
     aliases: ['ワリスタ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   キラーシップ: {
     code: 'キラーシップ',
     trackName: 'キラーシップ',
@@ -69,7 +76,7 @@ const trackDict = Object.freeze({
     aliases: ['キラー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   DKスノーマウンテン: {
     code: 'DKスノーマウンテン',
     trackName: 'DKスノーマウンテン',
@@ -78,6 +85,7 @@ const trackDict = Object.freeze({
     aliases: ['DKS'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ロゼッタてんもんだい: {
     code: 'ロゼッタてんもんだい',
     trackName: 'ロゼッタてんもんだい',
@@ -86,6 +94,7 @@ const trackDict = Object.freeze({
     aliases: ['ロゼッタ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   アイスビルディング: {
     code: 'アイスビルディング',
     trackName: 'アイスビルディング',
@@ -94,6 +103,7 @@ const trackDict = Object.freeze({
     aliases: ['アイス', 'アイビル'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ワリオシップ: {
     code: 'ワリオシップ',
     trackName: 'ワリオシップ',
@@ -102,6 +112,7 @@ const trackDict = Object.freeze({
     aliases: [],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ノコノコビーチ: {
     code: 'ノコノコビーチ',
     trackName: 'ノコノコビーチ',
@@ -110,6 +121,7 @@ const trackDict = Object.freeze({
     aliases: ['ノコノコ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   リバーサイドサファリ: {
     code: 'リバーサイドサファリ',
     trackName: 'リバーサイドサファリ',
@@ -118,6 +130,7 @@ const trackDict = Object.freeze({
     aliases: ['リバーサイド', 'リバサ', 'サファリ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ピーチスタジアム: {
     code: 'ピーチスタジアム',
     trackName: 'ピーチスタジアム',
@@ -126,6 +139,7 @@ const trackDict = Object.freeze({
     aliases: ['ピチスタ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ピーチビーチ: {
     code: 'ピーチビーチ',
     trackName: 'ピーチビーチ',
@@ -134,6 +148,7 @@ const trackDict = Object.freeze({
     aliases: [],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ソルティータウン: {
     code: 'ソルティータウン',
     trackName: 'ソルティータウン',
@@ -142,6 +157,7 @@ const trackDict = Object.freeze({
     aliases: ['ソルティー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ディノディノジャングル: {
     code: 'ディノディノジャングル',
     trackName: 'ディノディノジャングル',
@@ -150,6 +166,7 @@ const trackDict = Object.freeze({
     aliases: ['ディノディノ', 'ジャングル', 'ディノ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ハテナしんでん: {
     code: 'ハテナしんでん',
     trackName: 'ハテナしんでん',
@@ -158,6 +175,7 @@ const trackDict = Object.freeze({
     aliases: ['ハテナ', 'しんでん', 'ハテナ神殿'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   プクプクフォールズ: {
     code: 'プクプクフォールズ',
     trackName: 'プクプクフォールズ',
@@ -166,6 +184,7 @@ const trackDict = Object.freeze({
     aliases: ['プクプク'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ショーニューロード: {
     code: 'ショーニューロード',
     trackName: 'ショーニューロード',
@@ -174,6 +193,7 @@ const trackDict = Object.freeze({
     aliases: ['ショーニュー', '鍾乳', 'しょうにゅう'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   おばけシネマ: {
     code: 'おばけシネマ',
     trackName: 'おばけシネマ',
@@ -182,6 +202,7 @@ const trackDict = Object.freeze({
     aliases: ['おばけ', 'シネマ', '映画館'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   ホネホネツイスター: {
     code: 'ホネホネツイスター',
     trackName: 'ホネホネツイスター',
@@ -190,6 +211,7 @@ const trackDict = Object.freeze({
     aliases: ['ホネホネ', 'ツイスター'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   モーモーカントリー: {
     code: 'モーモーカントリー',
     trackName: 'モーモーカントリー',
@@ -198,6 +220,7 @@ const trackDict = Object.freeze({
     aliases: ['モモカン'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   チョコマウンテン: {
     code: 'チョコマウンテン',
     trackName: 'チョコマウンテン',
@@ -206,6 +229,7 @@ const trackDict = Object.freeze({
     aliases: ['チョコマ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   キノピオファクトリー: {
     code: 'キノピオファクトリー',
     trackName: 'キノピオファクトリー',
@@ -214,6 +238,7 @@ const trackDict = Object.freeze({
     aliases: ['キノピオ', 'ファクトリー'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   クッパキャッスル: {
     code: 'クッパキャッスル',
     trackName: 'クッパキャッスル',
@@ -222,6 +247,7 @@ const trackDict = Object.freeze({
     aliases: ['クバキャ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   どんぐりツリーハウス: {
     code: 'どんぐりツリーハウス',
     trackName: 'どんぐりツリーハウス',
@@ -230,6 +256,7 @@ const trackDict = Object.freeze({
     aliases: ['どんぐり'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   マリオサーキット: {
     code: 'マリオサーキット',
     trackName: 'マリオサーキット',
@@ -238,6 +265,7 @@ const trackDict = Object.freeze({
     aliases: ['マリサ'],
     nitaAllCombinationWRMilliseconds: 0,
   },
+  // biome-ignore lint/style/useNamingConvention: コース名は許容
   レインボーロード: {
     code: 'レインボーロード',
     trackName: 'レインボーロード',

@@ -1,10 +1,8 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "files": {
-    "ignore": ["wr-python/**/*", "src/const/track.js"]
+    "includes": ["**", "!**/wr-python/**/*", "!**/src/const/track.js"]
   },
   "formatter": {
     "enabled": true,
@@ -14,9 +12,8 @@
   },
   "linter": {
     "enabled": true,
-    "ignore": ["vite.config.ts"],
+    "includes": ["**", "!**/vite.config.ts"],
     "rules": {
-      "all": true,
       "complexity": {
         "noForEach": "off",
         "useSimplifiedLogicExpression": "off"
@@ -32,7 +29,17 @@
             "strictCase": false
           },
           "level": "error"
-        }
+        },
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       },
       "suspicious": {
         "noMisplacedAssertion": "off"
