@@ -23,7 +23,7 @@
     "postgres": "^3.4.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.2",
+    "@biomejs/biome": "2.2.3",
     "vitest": "^3.2.4"
   }
 }
