@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: main
       # GITHUB_TOKENを使ってPull Requestを作成するとtest-track.jsのworkflowが動かないので、GitHub Appのトークンを使うように。
