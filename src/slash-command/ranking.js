@@ -13,18 +13,12 @@ export default {
       option.setName('page').setDescription('1の場合1位から20位を、2の場合21位から40位を出力します'),
     ),
   execute: async (interaction, { nitaRepository }) => {
-    if (!interaction.guild) {
-      if (!interaction.inGuild()) {
-        throw new Error('サーバー内で実行してください。rankingコマンドはDMやグループDMでは実行できません。');
-      }
-      // https://github.com/discordjs/discord.js/blob/main/packages/discord.js/src/structures/BaseInteraction.js#L180-L182
-      // https://github.com/moeyashi/discord-mk8d-nita-record/issues/78
-      // https://scrapbox.io/discordjs-japan/%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%8B%E3%82%89%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
-      // interaction.guildはキャッシュから取得しているしているため、interaction.guildがfalsyでinteraction.guildIdがtruthyの場合はfetchして取得する
-      await interaction.client.guilds.fetch(interaction.guildId);
-      if (!interaction.guild) {
-        throw new Error('不明なエラー：サーバーが見つかりませんでした。スクショして連絡してもらえたらありがたいです！');
-      }
+    if (!interaction.inGuild()) {
+      await interaction.reply({
+        content: 'サーバー内で実行してください。rankingコマンドはDMやグループDMでは実行できません。',
+        ephemeral: true,
+      });
+      return;
     }
 
     const trackQuery = interaction.options.getString('track');
@@ -36,13 +30,28 @@ export default {
 
     const track = searchTrack(trackQuery);
     if (!track) {
-      interaction.reply({
+      await interaction.reply({
         content: `コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`,
       });
       return;
     }
 
     await interaction.deferReply();
+
+    // https://github.com/discordjs/discord.js/blob/main/packages/discord.js/src/structures/BaseInteraction.js#L180-L182
+    // https://github.com/moeyashi/discord-mk8d-nita-record/issues/78
+    // https://scrapbox.io/discordjs-japan/%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%8B%E3%82%89%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
+    // interaction.guildはキャッシュから取得しているため、interaction.guildがfalsyでinteraction.guildIdがtruthyの場合はfetchして取得する
+    if (!interaction.guild) {
+      await interaction.client.guilds.fetch(interaction.guildId);
+      if (!interaction.guild) {
+        await interaction.followUp({
+          content: '不明なエラー：サーバーが見つかりませんでした。スクショして連絡してもらえたらありがたいです！',
+          ephemeral: true,
+        });
+        return;
+      }
+    }
 
     const serverMembers = Array.from((await interaction.guild.members.fetch()).values());
     const ranking = await nitaRepository.selectRanking(track.code, serverMembers, 20, (page - 1) * 20);

@@ -21,7 +21,7 @@ const repositories = {
 
 const main = async () => {
   // Create a new client instance
-  const client = new Client({ intents: [GatewayIntentBits.GuildMembers] });
+  const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 
   // Handle Events
   console.info('Loading events...');

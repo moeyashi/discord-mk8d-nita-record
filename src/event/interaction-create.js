@@ -21,11 +21,13 @@ export default {
   async execute(repositories, interaction) {
     console.info('InteractionCreate event triggered!');
     if (!interaction.isChatInputCommand()) {
+      console.info(`InteractionCreate: not a chat input command (type: ${interaction.type})`);
       return;
     }
 
+    console.info(`InteractionCreate: command=${interaction.commandName}`);
+
     const commands = await getCommands();
-    // console.log(commands);
     const command = commands.get(interaction.commandName);
 
     if (!command) {
@@ -33,10 +35,12 @@ export default {
       return;
     }
 
+    console.info(`InteractionCreate: executing command=${interaction.commandName}`);
     try {
       await command.execute(interaction, repositories);
+      console.info(`InteractionCreate: command=${interaction.commandName} executed successfully`);
     } catch (error) {
-      console.error(error);
+      console.error(`InteractionCreate: command=${interaction.commandName} threw an error:`, error);
       try {
         if (interaction.replied || interaction.deferred) {
           await interaction.followUp({
