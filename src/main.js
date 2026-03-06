@@ -9,6 +9,16 @@ import { makePostgresConnection } from './lib.js';
 
 dotenv.config();
 
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled promise rejection:', reason);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught exception:', error);
+  process.exit(1);
+});
+
 const sql = makePostgresConnection();
 
 const nitaRepository = postgresNitaRepository(sql);
@@ -54,4 +64,7 @@ const main = async () => {
   }
 };
 
-main();
+main().catch((error) => {
+  console.error('Fatal error in main():', error);
+  process.exit(1);
+});

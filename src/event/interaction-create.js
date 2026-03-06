@@ -27,16 +27,16 @@ export default {
 
     console.info(`InteractionCreate: command=${interaction.commandName}`);
 
-    const commands = await getCommands();
-    const command = commands.get(interaction.commandName);
-
-    if (!command) {
-      console.error(`No command matching ${interaction.commandName} was found.`);
-      return;
-    }
-
-    console.info(`InteractionCreate: executing command=${interaction.commandName}`);
     try {
+      const commands = await getCommands();
+      const command = commands.get(interaction.commandName);
+
+      if (!command) {
+        console.error(`No command matching ${interaction.commandName} was found.`);
+        return;
+      }
+
+      console.info(`InteractionCreate: executing command=${interaction.commandName}`);
       await command.execute(interaction, repositories);
       console.info(`InteractionCreate: command=${interaction.commandName} executed successfully`);
     } catch (error) {
