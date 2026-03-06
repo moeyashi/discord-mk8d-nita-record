@@ -12,9 +12,11 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
+    await interaction.deferReply();
+
     const nitaList = await nitaRepository.selectNitaByUser(discordUserId);
     const nitaTrackList = joinTrack(nitaList);
-    await interaction.reply(nitaListResponse(nitaTrackList));
+    await interaction.followUp(nitaListResponse(nitaTrackList));
   },
 };
 

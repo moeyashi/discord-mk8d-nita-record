@@ -9,6 +9,16 @@ import { makePostgresConnection } from './lib.js';
 
 dotenv.config();
 
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled promise rejection:', reason);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught exception:', error);
+  process.exit(1);
+});
+
 const sql = makePostgresConnection();
 
 const nitaRepository = postgresNitaRepository(sql);
@@ -21,7 +31,7 @@ const repositories = {
 
 const main = async () => {
   // Create a new client instance
-  const client = new Client({ intents: [GatewayIntentBits.GuildMembers] });
+  const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 
   // Handle Events
   console.info('Loading events...');
@@ -54,4 +64,7 @@ const main = async () => {
   }
 };
 
-main();
+main().catch((error) => {
+  console.error('Fatal error in main():', error);
+  process.exit(1);
+});
