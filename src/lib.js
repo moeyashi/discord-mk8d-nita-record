@@ -11,6 +11,7 @@ export const makePostgresConnection = () => {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     port: Number(process.env.DATABASE_PORT || '5432'),
+    connect_timeout: 2, // fail fast if DB is unreachable; Discord interaction timeout is 3s
   };
 
   /**
