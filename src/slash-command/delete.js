@@ -21,8 +21,9 @@ export default {
     }
 
     if (trackQuery === 'all') {
+      await interaction.deferReply();
       await nitaRepository.deleteAllNita(discordUserId);
-      await interaction.reply({
+      await interaction.editReply({
         content: '全てのタイムを削除しました。',
       });
       return;
@@ -33,8 +34,9 @@ export default {
       throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
+    await interaction.deferReply();
     await nitaRepository.deleteNita(discordUserId, track.code);
-    await interaction.reply({
+    await interaction.editReply({
       content: `${track.trackName}のタイムを削除しました。`,
     });
     return;

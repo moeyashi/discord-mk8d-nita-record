@@ -20,10 +20,11 @@ export default {
       throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
+    await interaction.deferReply();
     const stats = await nitaRepository.selectStats(track.code, track.nitaVSWRMilliseconds);
     console.info(stats);
 
-    await interaction.reply({
+    await interaction.editReply({
       embeds: [
         {
           title: `${track.trackName}のstats`,
