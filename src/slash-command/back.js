@@ -26,12 +26,10 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    await interaction.deferReply();
-
     const lastRecord = await nitaRepository.selectNitaByUserAndTrack(discordUserId, track.code);
 
     if (!lastRecord) {
-      await interaction.editReply({
+      await interaction.reply({
         content: `タイムが登録されていません。\n\n${makeMetaMessage(track, lastRecord)}`,
       });
       return;
@@ -43,14 +41,14 @@ export default {
       lastRecord.lastMilliseconds = undefined;
       lastRecord.milliseconds = newMilliseconds;
       await nitaRepository.updateNita(lastRecord);
-      await interaction.editReply({
+      await interaction.reply({
         content: `タイムを戻しました。\n\n${makeMetaMessage(track, lastRecord)}`,
       });
       return;
     }
     // 履歴がない場合は削除する
     await nitaRepository.deleteNita(discordUserId, track.code);
-    await interaction.editReply({
+    await interaction.reply({
       content: `${track.trackName}のタイムを削除しました。`,
     });
     return;

@@ -29,19 +29,17 @@ export default {
       throw new Error('ユーザーIDが取得できませんでした');
     }
 
-    await interaction.deferReply();
-
     const lastRecord = await nitaRepository.selectNitaByUserAndTrack(discordUserId, track.code);
 
     if (!inputTime) {
-      await interaction.editReply(doProcessGetLastRecordCommand(track, lastRecord));
+      await interaction.reply(doProcessGetLastRecordCommand(track, lastRecord));
       return;
     }
 
     const newMilliseconds = toMilliseconds(inputTime);
 
     if (lastRecord && lastRecord.milliseconds <= newMilliseconds) {
-      await interaction.editReply({
+      await interaction.reply({
         content: '前回のタイムより遅いです。',
         embeds: [makeEmbed(track, lastRecord, newMilliseconds)],
       });
@@ -61,7 +59,7 @@ export default {
       await nitaRepository.updateNita(newNita);
     }
 
-    await interaction.editReply({
+    await interaction.reply({
       content: 'タイムを登録しました。',
       embeds: [makeEmbed(track, lastRecord, newMilliseconds)],
     });

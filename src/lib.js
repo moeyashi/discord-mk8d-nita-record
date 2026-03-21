@@ -11,6 +11,8 @@ export const makePostgresConnection = () => {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     port: Number(process.env.DATABASE_PORT || '5432'),
+    // biome-ignore lint/style/useNamingConvention: postgres library option uses snake_case
+    idle_timeout: 20,
   };
 
   /**
