@@ -8,9 +8,9 @@ const main = async () => {
   const excludeGuildIds = process.env.EXCLUDE_GUILD_IDS?.split(',') || [];
   const rest = new REST().setToken(token);
 
-  // 250 guilds あるので 100 ずつ 3 回に分けて取得する
+  // 2600 guilds あるので 100 ずつ 26 回に分けて取得する
   let after = null;
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 26; i++) {
     /** @type {import('discord.js').RESTGetAPICurrentUserGuildsQuery} */
     const userGuildsQuery = {
       limit: 100,
@@ -41,7 +41,7 @@ const main = async () => {
         query: new URLSearchParams(guildMembersQuery),
       });
       if (members.filter((member) => !member.user?.bot).length < 5) {
-        console.info('Leaving guild\n');
+        console.info('Leaving guild. non bot member: ', members.filter((member) => !member.user?.bot).length, '\n');
         await rest.delete(Routes.userGuild(guild.id));
       }
     }
