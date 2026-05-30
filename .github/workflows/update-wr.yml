@@ -30,19 +30,17 @@ jobs:
         with:
           client-id: ${{ secrets.WR_UPDATE_GITHUB_APP_ID }}
           private-key: ${{ secrets.WR_UPDATE_GITHUB_APP_PRIVATE_KEY }}
-      - uses: eifinger/setup-rye@v4
-        id: setup-rye
+      - uses: jdx/mise-action@v4
         with:
-          enable-cache: true
-          working-directory: wr-python
+          cache: true
       - name: Install dependencies
-        if: steps.setup-rye.outputs.cache-hit != 'true'
         working-directory: wr-python
         run: |
-          rye sync --no-lock
+          mise install
+          uv sync --locked
       - name: Create track.js
         working-directory: wr-python
-        run: rye run python ./src/wr_python/make_track_js.py
+        run: uv run python ./src/wr_python/make_track_js.py
       - uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.generate-token.outputs.token }}
