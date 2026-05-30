@@ -107,7 +107,12 @@ trackList = [
     "bRRw",
 ]
 
-lb = LeaderBoard()
+try:
+    lb = LeaderBoard()
+except Exception as e:
+    print(f"Failed to initialize LeaderBoard: {e}")
+    print("Using default values for all tracks...")
+    lb = None
 
 trackList.insert(0, "")
 # WRList = ["VSWR"]
@@ -118,16 +123,35 @@ trackList.insert(0, "")
 wr = dict()
 for i in range(1, 97):
     track_id = i
-
-    vs = lb.getVSWR(track_id)
-    vs_url = lb.get_vswr_url(track_id)
-    all = lb.getAllWR(track_id)
-
-    wr[trackList[i]] = {
-        "vs": vs,
-        "vs_url": vs_url,
-        "all": all,
-    }
+    track_code = trackList[i]
+    
+    try:
+        print(f"Processing track {track_id}: {track_code}")
+        
+        if lb is None:
+            # Use default values when LeaderBoard failed to initialize
+            vs = "0"
+            vs_url = ""
+            all = "0"
+        else:
+            vs = lb.getVSWR(track_id)
+            vs_url = lb.get_vswr_url(track_id)
+            all = lb.getAllWR(track_id)
+        
+        wr[track_code] = {
+            "vs": vs,
+            "vs_url": vs_url,
+            "all": all,
+        }
+        print(f"  VS: {vs}, All: {all}")
+    except Exception as e:
+        print(f"Error processing track {track_id} ({track_code}): {e}")
+        # Use default values when data is unavailable
+        wr[track_code] = {
+            "vs": "0",
+            "vs_url": "",
+            "all": "0",
+        }
 
 
 track_js = template.render(wr=wr)
