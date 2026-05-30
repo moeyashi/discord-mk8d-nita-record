@@ -26,7 +26,7 @@ jobs:
           flyctl machine list --app "$FLY_APP_NAME" --json > machines-before.json
           python .github/scripts/check_machine_state.py --mode pre --json-path machines-before.json
       - name: Restart DB app
-        run: flyctl apps restart "$FLY_APP_NAME"
+        run: flyctl pg restart "$FLY_APP_NAME"
       - name: Post-check (wait for recovery)
         run: |
           set -euo pipefail
