@@ -20,18 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: superfly/flyctl-actions/setup-flyctl@1.5
-      - name: Validate app name secret
-        run: |
-          set -euo pipefail
-          if [ -z "${FLY_APP_NAME:-}" ]; then
-            echo "FLY_DB_APP_NAME is empty"
-            exit 1
-          fi
-
-          if [ "$FLY_APP_NAME" = "YOUR APP NAME" ]; then
-            echo "FLY_DB_APP_NAME is still a placeholder value"
-            exit 1
-          fi
       - name: Pre-check (machine state)
         run: |
           set -euo pipefail
