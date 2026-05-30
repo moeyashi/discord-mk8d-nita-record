@@ -36,10 +36,7 @@ export default {
 
     const track = searchTrack(trackQuery);
     if (!track) {
-      interaction.reply({
-        content: `コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`,
-      });
-      return;
+      throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
     await interaction.deferReply();
