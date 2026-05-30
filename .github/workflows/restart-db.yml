@@ -1,0 +1,47 @@
+name: Restart Fly DB Daily
+
+on:
+  schedule:
+    # UTC 19:00 = JST 04:00
+    - cron: '0 19 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+
+jobs:
+  restart-db:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      FLY_APP_NAME: ${{ secrets.FLY_DB_APP_NAME }}
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: superfly/flyctl-actions/setup-flyctl@1.5
+      - name: Pre-check (machine state)
+        run: |
+          set -euo pipefail
+          flyctl machine list --app "$FLY_APP_NAME" --json > machines-before.json
+          python .github/scripts/check_machine_state.py --mode pre --json-path machines-before.json
+      - name: Restart DB app
+        run: flyctl apps restart "$FLY_APP_NAME"
+      - name: Post-check (wait for recovery)
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 24); do
+            flyctl machine list --app "$FLY_APP_NAME" --json > machines-after.json
+            if python .github/scripts/check_machine_state.py --mode post --json-path machines-after.json
+            then
+              echo "Post-check OK: all machines are started"
+              exit 0
+            fi
+
+            echo "Waiting for recovery... ($i/24)"
+            sleep 10
+          done
+
+          echo "Post-check failed: machines did not recover in time"
+          flyctl status --app "$FLY_APP_NAME"
+          exit 1
