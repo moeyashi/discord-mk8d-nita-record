@@ -59,6 +59,12 @@ export const postgresWorldNitaRepository = (sql) => {
         lastMilliseconds: row.last_milliseconds,
       }));
     },
+    async selectDiscordUserIdsByTrack(trackCode) {
+      const results = await sql`
+        SELECT discord_user_id FROM world_nita_records WHERE track_code = ${trackCode}
+      `;
+      return results.map((row) => row.discord_user_id);
+    },
     async selectRanking(trackCode, discordMembers, limit = 20, offset = 0) {
       const discordUserIds = discordMembers.map((member) => member.user.id);
       const results = await sql`
