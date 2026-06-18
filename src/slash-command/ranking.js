@@ -41,7 +41,19 @@ export default {
 
     await interaction.deferReply();
 
-    const serverMembers = Array.from((await interaction.guild.members.fetch()).values());
+    const userIdsWithRecords = await nitaRepository.selectDiscordUserIdsByTrack(track.code);
+    if (userIdsWithRecords.length === 0) {
+      await interaction.followUp(rankingResponse(track, page, [], null, 0));
+      return;
+    }
+
+    const fetchedMembers = await interaction.guild.members.fetch({ user: userIdsWithRecords });
+    const serverMembers = Array.from(fetchedMembers.values());
+    if (serverMembers.length === 0) {
+      await interaction.followUp(rankingResponse(track, page, [], null, 0));
+      return;
+    }
+
     const ranking = await nitaRepository.selectRanking(track.code, serverMembers, 20, (page - 1) * 20);
     const myRank = await nitaRepository.selectRankByUser(track.code, interaction.user.id, serverMembers);
     const rankingSize = await nitaRepository.countExistsNita(track.code, serverMembers);

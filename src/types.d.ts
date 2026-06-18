@@ -21,6 +21,7 @@ export type NitaRepository = {
   deleteAllNita: (discordUserId: string) => Promise<void>;
   selectNitaByUserAndTrack: (discordUserId: string, trackCode: string) => Promise<Nita | null>;
   selectNitaByUser: (discordUserId: string) => Promise<Nita[]>;
+  selectDiscordUserIdsByTrack: (trackCode: string) => Promise<string[]>;
   selectRanking: (
     trackCode: string,
     discordMembers: GuildMember[],
