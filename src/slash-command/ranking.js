@@ -41,18 +41,15 @@ export default {
 
     await interaction.deferReply();
 
-    const userIdsWithRecords = await nitaRepository.selectDiscordUserIdsByTrack(track.code);
-    if (userIdsWithRecords.length === 0) {
-      await interaction.followUp(rankingResponse(track, page, [], null, 0));
-      return;
-    }
-
-    const fetchedMembers = await interaction.guild.members.fetch({ user: userIdsWithRecords });
-    const serverMembers = Array.from(fetchedMembers.values());
-    if (serverMembers.length === 0) {
-      await interaction.followUp(rankingResponse(track, page, [], null, 0));
-      return;
-    }
+    // Get all guild members via REST pagination (guild.members.fetch() uses the gateway and causes GuildMembersTimeout on large servers)
+    /** @type {import('discord.js').GuildMember[]} */
+    const serverMembers = [];
+    let after;
+    do {
+      const memberPage = await interaction.guild.members.list({ limit: 1000, after });
+      serverMembers.push(...memberPage.values());
+      after = memberPage.size === 1000 ? [...memberPage.keys()].at(-1) : undefined;
+    } while (after);
 
     const ranking = await nitaRepository.selectRanking(track.code, serverMembers, 20, (page - 1) * 20);
     const myRank = await nitaRepository.selectRankByUser(track.code, interaction.user.id, serverMembers);
