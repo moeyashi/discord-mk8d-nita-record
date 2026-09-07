@@ -18,7 +18,7 @@ jobs:
       FLY_APP_NAME: ${{ secrets.FLY_DB_APP_NAME }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: superfly/flyctl-actions/setup-flyctl@1.5
       - name: Pre-check (machine state)
         run: |
