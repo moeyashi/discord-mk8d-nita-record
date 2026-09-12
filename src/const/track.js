@@ -106,7 +106,7 @@ const trackDict = Object.freeze({
   bWS: makeTrack('GC ワルイージスタジアム', 'bWS', 157407, 'https://youtu.be/w-OG8SLyMa8?si=hNd7d_bpBG1CP17a', 156748, ['ワルスタ', 'ワルイージスタジアム']),
   bSSy: makeTrack('Tour シンガポールスプラッシュ', 'bSSy', 157759, 'https://www.youtube.com/watch?v=HSYCPxmnIiA', 157759, ['シンガポール', 'シンガポールスプラッシュ', 'SSy']),
   bAtD: makeTrack('Tour アテネポリス', 'bAtD', 140813, 'https://www.youtube.com/watch?v=zqVVRQ37bxc', 140382, ['アテネ', 'アテネポリス', 'AtD']),
-  bDC: makeTrack('GC デイジークルーザー', 'bDC', 135620, 'https://youtu.be/IDWBUSF6hwQ', 135404, ['デイクル', 'デイジークルーザー', 'DC']),
+  bDC: makeTrack('GC デイジークルーザー', 'bDC', 135620, 'https://youtu.be/IDWBUSF6hwQ', 135303, ['デイクル', 'デイジークルーザー', 'DC']),
   bMH: makeTrack('Wii ムーンリッジ＆ハイウェイ', 'bMH', 144315, 'https://youtu.be/4pVWLax_K8U?si=ivETdXPKf-LWdQ9T', 144315, ['ムーンリッジ＆ハイウェイ', 'ムーンリッジ', 'ムーンリッジハイウェイ', 'ムンリ', 'MH', '月']),
   bSCS: makeTrack('シャボンロード', 'bSCS', 203403, 'https://youtu.be/dx1JVopx0Pk?si=S6QZDWXXaSgSG4_o', 203121, ['シャボン', 'SCS']),
   bLAL: makeTrack('Tour ロサンゼルスコースト', 'bLAL', 149170, 'https://youtu.be/gTbOaUJhPYg?si=swPV0p5f_8vkDMlQ', 149170, ['ロス', 'ロサンゼルス', 'LA', 'ロサンゼルスコースト', 'LAL']),
