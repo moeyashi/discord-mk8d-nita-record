@@ -36,19 +36,34 @@ export default {
 
     const track = searchTrack(trackQuery);
     if (!track) {
-      interaction.reply({
-        content: `コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`,
-      });
-      return;
+      throw new Error(`コースが見つかりませんでした。\n入力されたコース名:  ${trackQuery}`);
     }
 
     await interaction.deferReply();
 
-    const serverMembers = Array.from((await interaction.guild.members.fetch()).values());
+    const serverMembers = await fetchAllGuildMembers(interaction.guild);
     const ranking = await nitaRepository.selectRanking(track.code, serverMembers, 20, (page - 1) * 20);
     const myRank = await nitaRepository.selectRankByUser(track.code, interaction.user.id, serverMembers);
     const rankingSize = await nitaRepository.countExistsNita(track.code, serverMembers);
 
     await interaction.followUp(rankingResponse(track, page, ranking, myRank, rankingSize));
   },
+};
+
+/**
+ * guild.members.fetch() はゲートウェイを使用するため GuildMembersTimeout が発生する場合がある。
+ * REST API (guild.members.list) でページネーションして全メンバーを取得する。
+ * @param {import('discord.js').Guild} guild
+ * @returns {Promise<import('discord.js').GuildMember[]>}
+ */
+const fetchAllGuildMembers = async (guild) => {
+  /** @type {import('discord.js').GuildMember[]} */
+  const members = [];
+  let after;
+  do {
+    const page = await guild.members.list({ limit: 1000, after });
+    members.push(...page.values());
+    after = page.size === 1000 ? [...page.keys()].at(-1) : undefined;
+  } while (after);
+  return members;
 };

@@ -1,5 +1,5 @@
 // @ts-check
-import { Events } from 'discord.js';
+import { Events, MessageFlags } from 'discord.js';
 import { loadCommands } from '../util/load-commands.js';
 
 let cachedCommands = false;
@@ -41,12 +41,12 @@ export default {
         if (interaction.replied || interaction.deferred) {
           await interaction.followUp({
             content: `エラーが発生しました。${error}`,
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
           });
         } else {
           await interaction.reply({
             content: `エラーが発生しました。${error}`,
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
           });
         }
       } catch (e) {
